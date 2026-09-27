@@ -12,20 +12,6 @@
       body * { visibility: hidden; }
       #resume-preview, #resume-preview * { visibility: visible; }
       #resume-preview { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; }
-      .watermark { display: none !important; }
-    }
-    .watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      font-size: 4rem;
-      font-weight: 900;
-      color: rgba(239, 68, 68, 0.15);
-      pointer-events: none;
-      white-space: nowrap;
-      user-select: none;
-      z-index: 10;
     }
   </style>
 </head>
@@ -100,21 +86,39 @@
         <textarea id="summary" rows="4" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">Dedicated and results-driven Customer Service Representative with 3+ years of experience handling inbound call resolution, technical troubleshooting, and account management for US telecommunications clients. Proven track record of maintaining a 95%+ Customer Satisfaction (CSAT) score.</textarea>
       </div>
 
-      <!-- Work Experience -->
+      <!-- Work Experience (Dynamic) -->
       <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="font-bold text-slate-800 text-lg mb-4 flex items-center">
-          <i class="fa-solid fa-briefcase text-blue-600 mr-2"></i> Work Experience
-        </h2>
-        <div class="space-y-3">
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" id="expCompany" value="Concentrix Philippines" oninput="updatePreview()" placeholder="Company Name" class="text-sm p-2 border border-slate-300 rounded">
-            <input type="text" id="expRole" value="Senior CSR Agent" oninput="updatePreview()" placeholder="Role / Position" class="text-sm p-2 border border-slate-300 rounded">
-          </div>
-          <input type="text" id="expDates" value="2021 - Present" oninput="updatePreview()" placeholder="Employment Dates (e.g. 2021 - Present)" class="w-full text-sm p-2 border border-slate-300 rounded">
-          <textarea id="expBullets" rows="3" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded">Managed over 60+ customer inquiries daily via phone and live chat with high efficiency.
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-bold text-slate-800 text-lg flex items-center">
+            <i class="fa-solid fa-briefcase text-blue-600 mr-2"></i> Work Experience
+          </h2>
+          <button onclick="addExperienceBlock()" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-3 py-1.5 rounded-lg border border-blue-200 transition">
+            <i class="fa-solid fa-plus mr-1"></i> Add Experience
+          </button>
+        </div>
+
+        <div id="experience-container" class="space-y-4">
+          <!-- Default Experience Entry 1 -->
+          <div class="exp-card border border-slate-200 p-4 rounded-lg bg-slate-50 relative space-y-3">
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" class="exp-company text-sm p-2 border border-slate-300 rounded" value="Concentrix Philippines" placeholder="Company Name" oninput="updatePreview()">
+              <input type="text" class="exp-role text-sm p-2 border border-slate-300 rounded" value="Senior CSR Agent" placeholder="Role / Position" oninput="updatePreview()">
+            </div>
+            <input type="text" class="exp-dates text-sm p-2 border border-slate-300 rounded w-full" value="2021 - Present" placeholder="Dates (e.g. 2021 - Present)" oninput="updatePreview()">
+            <textarea class="exp-bullets text-sm p-2 border border-slate-300 rounded w-full" rows="3" placeholder="Key responsibilities (1 per line)" oninput="updatePreview()">Managed over 60+ customer inquiries daily via phone and live chat.
 Resolved complex billing inquiries and escalated technical issues promptly.
 Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
+          </div>
         </div>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="font-bold text-slate-800 text-lg mb-3 flex items-center">
+          <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Expertise
+        </h2>
+        <input type="text" id="skillsInput" value="Customer Service, Inbound Calls, Zendesk, Technical Support, Escalation Management, Active Listening" oninput="updatePreview()" placeholder="Separate skills with commas" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <p class="text-[11px] text-slate-400 mt-1">Separate skills with commas (e.g. Communication, MS Excel, CRM)</p>
       </div>
 
     </div>
@@ -155,12 +159,13 @@ Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
           <!-- Experience Section -->
           <div class="mb-5">
             <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Work Experience</h3>
-            <div class="flex justify-between items-baseline">
-              <h4 id="pv-role" class="text-xs font-bold text-slate-800">Senior CSR Agent</h4>
-              <span id="pv-dates" class="text-[11px] text-slate-500 font-medium">2021 - Present</span>
-            </div>
-            <p id="pv-company" class="text-xs font-semibold text-blue-800 mb-1">Concentrix Philippines</p>
-            <ul id="pv-bullets" class="list-disc list-inside text-xs text-slate-700 space-y-1 pl-1"></ul>
+            <div id="pv-experience-list" class="space-y-3"></div>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="mb-5">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Skills</h3>
+            <div id="pv-skills-list" class="flex flex-wrap gap-1.5 text-xs text-slate-700"></div>
           </div>
 
         </div>
@@ -172,25 +177,79 @@ Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
 
   <script>
     function updatePreview() {
+      // Header Info
       document.getElementById('pv-name').innerText = document.getElementById('fullName').value || 'Your Name';
       document.getElementById('pv-title').innerText = document.getElementById('jobTitle').value || 'Target Job Title';
       document.getElementById('pv-email').innerText = document.getElementById('email').value || 'email@domain.com';
       document.getElementById('pv-phone').innerText = document.getElementById('phone').value || '+63 900 000 0000';
       document.getElementById('pv-address').innerText = document.getElementById('address').value || 'City, Province';
       document.getElementById('pv-summary').innerText = document.getElementById('summary').value;
-      document.getElementById('pv-company').innerText = document.getElementById('expCompany').value;
-      document.getElementById('pv-role').innerText = document.getElementById('expRole').value;
-      document.getElementById('pv-dates').innerText = document.getElementById('expDates').value;
 
-      const bulletsText = document.getElementById('expBullets').value;
-      const bulletsArray = bulletsText.split('\n').filter(b => b.trim() !== '');
-      const bulletsList = document.getElementById('pv-bullets');
-      bulletsList.innerHTML = '';
-      bulletsArray.forEach(b => {
-        const li = document.createElement('li');
-        li.innerText = b;
-        bulletsList.appendChild(li);
+      // Work Experience List
+      const expContainer = document.getElementById('pv-experience-list');
+      expContainer.innerHTML = '';
+      
+      const expCards = document.querySelectorAll('.exp-card');
+      expCards.forEach(card => {
+        const company = card.querySelector('.exp-company').value;
+        const role = card.querySelector('.exp-role').value;
+        const dates = card.querySelector('.exp-dates').value;
+        const bulletsText = card.querySelector('.exp-bullets').value;
+
+        if (company || role) {
+          const item = document.createElement('div');
+          
+          let bulletsHTML = '';
+          if (bulletsText.trim() !== '') {
+            const arr = bulletsText.split('\n').filter(b => b.trim() !== '');
+            bulletsHTML = '<ul class="list-disc list-inside text-xs text-slate-700 space-y-0.5 pl-1 mt-1">' + 
+              arr.map(b => `<li>${b}</li>`).join('') + '</ul>';
+          }
+
+          item.innerHTML = `
+            <div class="flex justify-between items-baseline">
+              <h4 class="text-xs font-bold text-slate-800">${role || 'Position'}</h4>
+              <span class="text-[11px] text-slate-500 font-medium">${dates || ''}</span>
+            </div>
+            <p class="text-xs font-semibold text-blue-800">${company || ''}</p>
+            ${bulletsHTML}
+          `;
+          expContainer.appendChild(item);
+        }
       });
+
+      // Skills List
+      const skillsContainer = document.getElementById('pv-skills-list');
+      skillsContainer.innerHTML = '';
+      const skillsRaw = document.getElementById('skillsInput').value;
+      if (skillsRaw) {
+        const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
+        skillsArr.forEach(skill => {
+          const span = document.createElement('span');
+          span.className = 'bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 rounded text-[11px] font-medium';
+          span.innerText = skill.trim();
+          skillsContainer.appendChild(span);
+        });
+      }
+    }
+
+    function addExperienceBlock() {
+      const container = document.getElementById('experience-container');
+      const div = document.createElement('div');
+      div.className = 'exp-card border border-slate-200 p-4 rounded-lg bg-slate-50 relative space-y-3';
+      div.innerHTML = `
+        <button onclick="this.parentElement.remove(); updatePreview();" class="absolute top-2 right-2 text-xs text-red-500 hover:text-red-700 font-bold px-2 py-1">
+          <i class="fa-solid fa-trash mr-1"></i> Remove
+        </button>
+        <div class="grid grid-cols-2 gap-2 pt-2">
+          <input type="text" class="exp-company text-sm p-2 border border-slate-300 rounded" placeholder="Company Name" oninput="updatePreview()">
+          <input type="text" class="exp-role text-sm p-2 border border-slate-300 rounded" placeholder="Role / Position" oninput="updatePreview()">
+        </div>
+        <input type="text" class="exp-dates text-sm p-2 border border-slate-300 rounded w-full" placeholder="Dates (e.g. 2019 - 2021)" oninput="updatePreview()">
+        <textarea class="exp-bullets text-sm p-2 border border-slate-300 rounded w-full" rows="3" placeholder="Key responsibilities (1 per line)" oninput="updatePreview()"></textarea>
+      `;
+      container.appendChild(div);
+      updatePreview();
     }
 
     function aiPolishSummary() {
@@ -213,7 +272,6 @@ Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
       html2pdf().set(opt).from(element).save();
     }
 
-    // Initialize on page load
     window.onload = updatePreview;
   </script>
 </body>
