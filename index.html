@@ -28,9 +28,6 @@
         </div>
       </div>
       <div class="flex items-center space-x-3">
-        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold px-2.5 py-1 rounded-full">
-          <i class="fa-solid fa-gift mr-1"></i> FREE BETA
-        </span>
         <button onclick="triggerDownload()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg text-sm transition flex items-center shadow-md">
           <i class="fa-solid fa-download mr-2"></i> Download PDF
         </button>
@@ -52,63 +49,39 @@
         <div class="space-y-3">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
-            <input type="text" id="fullName" value="Juan Dela Cruz" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="fullName" value="Michael Johnson" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Target Job Title</label>
-            <input type="text" id="jobTitle" value="Customer Service Representative" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="jobTitle" value="Sales Associate" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Email</label>
-              <input type="email" id="email" value="juan.delacruz@gmail.com" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+              <input type="email" id="email" value="michael@example.com" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Phone</label>
-              <input type="text" id="phone" value="+63 917 123 4567" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+              <input type="text" id="phone" value="(555) 555-5555" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
             </div>
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Location</label>
-            <input type="text" id="address" value="Quezon City, Metro Manila" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="address" value="Lincoln, CA 95648" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
-        </div>
-
-        <!-- Bio-Data Extra Fields -->
-        <div id="biodata-extra-fields" class="mt-4 pt-4 border-t border-slate-200 hidden">
-          <p class="text-xs font-bold text-amber-700 mb-2">Photo & Extra Details:</p>
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-[11px] font-semibold text-slate-600">Civil Status</label>
-              <input type="text" id="civilStatus" value="Single" oninput="updatePreview()" class="w-full text-sm p-1.5 border border-slate-300 rounded">
-            </div>
-            <div>
-              <label class="block text-[11px] font-semibold text-slate-600">Date of Birth</label>
-              <input type="text" id="dob" value="Jan 15, 1998" oninput="updatePreview()" class="w-full text-sm p-1.5 border border-slate-300 rounded">
-            </div>
-            <div class="col-span-2">
-              <label class="block text-[11px] font-semibold text-slate-600">Religion</label>
-              <input type="text" id="religion" value="Roman Catholic" oninput="updatePreview()" class="w-full text-sm p-1.5 border border-slate-300 rounded">
-            </div>
-            <div class="col-span-2">
-              <label class="block text-[11px] font-semibold text-slate-600">Photo Upload</label>
-              <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)" class="text-xs w-full p-1 border border-slate-300 rounded">
-            </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Profile Photo</label>
+            <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)" class="text-xs w-full p-1.5 border border-slate-300 rounded">
           </div>
         </div>
       </div>
 
       <!-- Professional Summary -->
       <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-        <div class="flex justify-between items-center mb-2">
-          <h2 class="font-bold text-slate-800 text-base flex items-center">
-            <i class="fa-solid fa-pen-nib text-blue-600 mr-2"></i> Professional Summary
-          </h2>
-          <button onclick="aiPolishSummary()" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold px-2 py-1 rounded border border-indigo-200 transition">
-            <i class="fa-solid fa-wand-magic-sparkles mr-1 text-indigo-500"></i> Polish
-          </button>
-        </div>
-        <textarea id="summary" rows="3" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">Dedicated and results-driven Customer Service Representative with 3+ years of experience in BPO voice and non-voice operations. CSAT rating consistently above 95%.</textarea>
+        <h2 class="font-bold text-slate-800 text-base mb-2 flex items-center">
+          <i class="fa-solid fa-pen-nib text-blue-600 mr-2"></i> Executive Summary / Objective
+        </h2>
+        <textarea id="summary" rows="3" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">Dynamic Sales Associate with a proven track record of boosting sales by 15%, enhancing customer satisfaction, and leading teams using premium CRM solutions.</textarea>
       </div>
 
       <!-- Work Experience -->
@@ -125,22 +98,32 @@
         <div id="experience-container" class="space-y-4">
           <div class="exp-card border border-slate-200 p-3 rounded-lg bg-slate-50 space-y-2">
             <div class="grid grid-cols-2 gap-2">
-              <input type="text" class="exp-company text-sm p-1.5 border border-slate-300 rounded" value="Concentrix Philippines" placeholder="Company Name" oninput="updatePreview()">
-              <input type="text" class="exp-role text-sm p-1.5 border border-slate-300 rounded" value="Senior CSR Agent" placeholder="Role" oninput="updatePreview()">
+              <input type="text" class="exp-company text-sm p-1.5 border border-slate-300 rounded" value="Retail Traders Co." placeholder="Company" oninput="updatePreview()">
+              <input type="text" class="exp-role text-sm p-1.5 border border-slate-300 rounded" value="Sales Associate" placeholder="Role" oninput="updatePreview()">
             </div>
-            <input type="text" class="exp-dates text-sm p-1.5 border border-slate-300 rounded w-full" value="2021 - Present" placeholder="Dates" oninput="updatePreview()">
-            <textarea class="exp-bullets text-sm p-1.5 border border-slate-300 rounded w-full" rows="3" placeholder="Key responsibilities (1 per line)" oninput="updatePreview()">Managed over 60+ customer inquiries daily via phone and live chat.
-Resolved complex billing inquiries and escalated technical issues promptly.</textarea>
+            <input type="text" class="exp-dates text-sm p-1.5 border border-slate-300 rounded w-full" value="2020-10 - 2022-12" placeholder="Dates" oninput="updatePreview()">
+            <textarea class="exp-bullets text-sm p-1.5 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities (1 per line)" oninput="updatePreview()">Increased sales by 15% in two quarters.
+Managed and trained a team of 3 associates.
+Implemented CRM software, boosting efficiency.</textarea>
           </div>
         </div>
       </div>
 
-      <!-- Skills -->
+      <!-- Skills & Languages -->
       <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
         <h2 class="font-bold text-slate-800 text-base mb-2 flex items-center">
-          <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Expertise
+          <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Languages
         </h2>
-        <input type="text" id="skillsInput" value="Customer Support, Technical Troubleshooting, Zendesk, Inbound Calls, Active Listening" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded">
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Skills (Comma Separated)</label>
+            <input type="text" id="skillsInput" value="Negotiation Techniques, Customer Relationship, Team Leadership, Sales Strategy, Account Analysis" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Languages</label>
+            <input type="text" id="languagesInput" value="Spanish, French, German" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
+          </div>
+        </div>
       </div>
 
     </div>
@@ -151,16 +134,16 @@ Resolved complex billing inquiries and escalated technical issues promptly.</tex
         
         <div class="flex justify-between items-center mb-3">
           <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">
-            <i class="fa-solid fa-eye mr-1"></i> Live Paper Preview
+            <i class="fa-solid fa-eye mr-1"></i> Live Resume Canvas
           </span>
           <span class="text-xs bg-emerald-100 text-emerald-800 font-medium px-2 py-0.5 rounded-full">
-            Print Ready (A4)
+            Ready to Export
           </span>
         </div>
 
         <!-- Live Document Paper -->
-        <div id="resume-preview" class="bg-white shadow-2xl rounded-sm p-8 border border-slate-200 min-h-[750px] relative text-slate-800">
-          <!-- Populated dynamically via JS -->
+        <div id="resume-preview" class="bg-white shadow-2xl rounded-sm border border-slate-200 min-h-[750px] relative text-slate-800 overflow-hidden">
+          <!-- Dynamically Rendered -->
         </div>
 
       </div>
@@ -170,78 +153,43 @@ Resolved complex billing inquiries and escalated technical issues promptly.</tex
     <div class="lg:col-span-3">
       <div class="sticky top-20 bg-white p-4 rounded-xl shadow-sm border border-slate-200 max-h-[calc(100vh-100px)] flex flex-col">
         <h2 class="font-bold text-slate-800 text-sm mb-3 flex items-center border-b border-slate-200 pb-2">
-          <i class="fa-solid fa-palette text-blue-600 mr-2"></i> Select Template (10)
+          <i class="fa-solid fa-palette text-blue-600 mr-2"></i> Selected Templates
         </h2>
         
+        <!-- Scrollable Vertical Menu -->
         <div class="overflow-y-auto space-y-3 pr-1 flex-1">
           
-          <!-- Template Card 1 -->
-          <div onclick="switchTemplate('modern')" id="card-modern" class="tpl-card cursor-pointer border-2 border-blue-600 p-2.5 rounded-lg bg-blue-50/40 transition hover:border-blue-500">
+          <!-- Template 1 -->
+          <div onclick="switchTemplate('green-sidebar')" id="card-green-sidebar" class="tpl-card cursor-pointer border-2 border-emerald-600 p-3 rounded-lg bg-emerald-50/50 transition hover:shadow">
             <div class="flex justify-between items-center">
-              <span class="font-bold text-xs text-slate-800">1. Modern BPO</span>
-              <span class="text-[10px] bg-blue-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>
+              <span class="font-bold text-xs text-emerald-950">1. Emerald Sidebar</span>
+              <span class="text-[10px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>
             </div>
-            <p class="text-[11px] text-slate-500 mt-1">Clean corporate header layout with accent lines.</p>
+            <p class="text-[11px] text-slate-500 mt-1">Dark green sidebar with pill skills and photo badge.</p>
           </div>
 
-          <!-- Template Card 2 -->
-          <div onclick="switchTemplate('biodata')" id="card-biodata" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-xs text-slate-800">2. Pinoy Bio-Data</span>
-              <span class="text-[10px] text-slate-400">2x2 Photo</span>
-            </div>
-            <p class="text-[11px] text-slate-500 mt-1">Formal PH bio-data format with photo & civil details.</p>
+          <!-- Template 2 -->
+          <div onclick="switchTemplate('maroon-split')" id="card-maroon-split" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
+            <span class="font-bold text-xs text-slate-800">2. Maroon Executive</span>
+            <p class="text-[11px] text-slate-500 mt-1">Deep maroon sidebar with dark section header banners.</p>
           </div>
 
-          <!-- Template Card 3 -->
-          <div onclick="switchTemplate('executive')" id="card-executive" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <span class="font-bold text-xs text-slate-800">3. Executive Corporate</span>
-            <p class="text-[11px] text-slate-500 mt-1">Dark banner header designed for management positions.</p>
+          <!-- Template 3 -->
+          <div onclick="switchTemplate('nick-tech')" id="card-nick-tech" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
+            <span class="font-bold text-xs text-slate-800">3. Modern Tech Badge</span>
+            <p class="text-[11px] text-slate-500 mt-1">Cyan header lines, two-column layout with hard/soft skill chips.</p>
           </div>
 
-          <!-- Template Card 4 -->
-          <div onclick="switchTemplate('minimal')" id="card-minimal" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <span class="font-bold text-xs text-slate-800">4. Minimalist Light</span>
-            <p class="text-[11px] text-slate-500 mt-1">Centered, elegant typography for remote workers.</p>
+          <!-- Template 4 -->
+          <div onclick="switchTemplate('olivia-minimal')" id="card-olivia-minimal" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
+            <span class="font-bold text-xs text-slate-800">4. Blue Accent & Skill Bars</span>
+            <p class="text-[11px] text-slate-500 mt-1">Top photo layout with blue underline bars & progress indicators.</p>
           </div>
 
-          <!-- Template Card 5 -->
-          <div onclick="switchTemplate('tech')" id="card-tech" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <span class="font-bold text-xs text-slate-800">5. Tech & Virtual Assistant</span>
-            <p class="text-[11px] text-slate-500 mt-1">Indigo accents highlighted for SaaS & tech stacks.</p>
-          </div>
-
-          <!-- Template Card 6 -->
-          <div onclick="switchTemplate('creative')" id="card-creative" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-xs text-slate-800">6. Creative Studio</span>
-              <span class="text-[10px] text-purple-600 font-bold">Gradient</span>
-            </div>
-            <p class="text-[11px] text-slate-500 mt-1">Vibrant header with avatar photo display.</p>
-          </div>
-
-          <!-- Template Card 7 -->
-          <div onclick="switchTemplate('healthcare')" id="card-healthcare" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <span class="font-bold text-xs text-slate-800">7. Medical & Nursing</span>
-            <p class="text-[11px] text-slate-500 mt-1">Emerald styling for nurses, doctors, and medtechs.</p>
-          </div>
-
-          <!-- Template Card 8 -->
-          <div onclick="switchTemplate('trades')" id="card-trades" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <span class="font-bold text-xs text-slate-800">8. Skilled Trades</span>
-            <p class="text-[11px] text-slate-500 mt-1">High contrast Amber block for technical technicians.</p>
-          </div>
-
-          <!-- Template Card 9 -->
-          <div onclick="switchTemplate('academic')" id="card-academic" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <span class="font-bold text-xs text-slate-800">9. Fresh Graduate</span>
-            <p class="text-[11px] text-slate-500 mt-1">Tailored for OJT, internship, and first-time applicants.</p>
-          </div>
-
-          <!-- Template Card 10 -->
-          <div onclick="switchTemplate('hospitality')" id="card-hospitality" class="tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <span class="font-bold text-xs text-slate-800">10. Retail & Hotel</span>
-            <p class="text-[11px] text-slate-500 mt-1">Teal accent layout suited for service and hospitality jobs.</p>
+          <!-- Template 5 -->
+          <div onclick="switchTemplate('navy-gold')" id="card-navy-gold" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
+            <span class="font-bold text-xs text-slate-800">5. Navy & Gold Wave</span>
+            <p class="text-[11px] text-slate-500 mt-1">Slate navy background with gold ribbons & curved section pills.</p>
           </div>
 
         </div>
@@ -251,15 +199,14 @@ Resolved complex billing inquiries and escalated technical issues promptly.</tex
   </main>
 
   <script>
-    let currentTemplate = 'modern';
-    let photoURL = '';
+    let currentTemplate = 'green-sidebar';
+    let photoURL = 'https://via.placeholder.com/150';
 
     function switchTemplate(tpl) {
       currentTemplate = tpl;
       
-      // Update Right Sidebar Card Highlights
       document.querySelectorAll('.tpl-card').forEach(card => {
-        card.className = 'tpl-card cursor-pointer border border-slate-200 p-2.5 rounded-lg bg-slate-50 transition hover:border-blue-400';
+        card.className = 'tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400';
         const badge = card.querySelector('span:nth-child(2)');
         if(badge && badge.innerText === 'Active') {
           badge.remove();
@@ -268,14 +215,7 @@ Resolved complex billing inquiries and escalated technical issues promptly.</tex
 
       const activeCard = document.getElementById(`card-${tpl}`);
       if(activeCard) {
-        activeCard.className = 'tpl-card cursor-pointer border-2 border-blue-600 p-2.5 rounded-lg bg-blue-50/40 transition hover:border-blue-500';
-      }
-
-      const bioDataFields = document.getElementById('biodata-extra-fields');
-      if (tpl === 'biodata' || tpl === 'creative' || tpl === 'hospitality') {
-        bioDataFields.classList.remove('hidden');
-      } else {
-        bioDataFields.classList.add('hidden');
+        activeCard.className = 'tpl-card cursor-pointer border-2 border-emerald-600 p-3 rounded-lg bg-emerald-50/50 transition hover:shadow';
       }
 
       updatePreview();
@@ -294,13 +234,14 @@ Resolved complex billing inquiries and escalated technical issues promptly.</tex
     }
 
     function updatePreview() {
-      const name = document.getElementById('fullName').value || 'Your Name';
-      const title = document.getElementById('jobTitle').value || 'Target Position';
-      const email = document.getElementById('email').value || 'email@domain.com';
-      const phone = document.getElementById('phone').value || '+63 900 000 0000';
-      const address = document.getElementById('address').value || 'City, Province';
+      const name = document.getElementById('fullName').value || 'Michael Johnson';
+      const title = document.getElementById('jobTitle').value || 'Sales Associate';
+      const email = document.getElementById('email').value || 'michael@example.com';
+      const phone = document.getElementById('phone').value || '(555) 555-5555';
+      const address = document.getElementById('address').value || 'Lincoln, CA 95648';
       const summary = document.getElementById('summary').value;
       const skillsRaw = document.getElementById('skillsInput').value;
+      const languagesRaw = document.getElementById('languagesInput').value;
 
       let expHTML = '';
       document.querySelectorAll('.exp-card').forEach(card => {
@@ -312,279 +253,204 @@ Resolved complex billing inquiries and escalated technical issues promptly.</tex
           let bHTML = '';
           if (b.trim() !== '') {
             const arr = b.split('\n').filter(x => x.trim() !== '');
-            bHTML = `<ul class="list-disc list-inside text-xs text-slate-700 space-y-0.5 mt-1">${arr.map(item => `<li>${item}</li>`).join('')}</ul>`;
+            bHTML = `<ul class="list-disc list-inside text-[11px] text-slate-700 space-y-0.5 mt-1">${arr.map(item => `<li>${item}</li>`).join('')}</ul>`;
           }
           expHTML += `
             <div class="mb-3">
               <div class="flex justify-between items-baseline">
                 <h4 class="text-xs font-bold text-slate-800">${r}</h4>
-                <span class="text-[11px] text-slate-500 font-medium">${d}</span>
+                <span class="text-[10px] text-slate-500">${d}</span>
               </div>
-              <p class="text-xs font-semibold text-blue-800">${c}</p>
+              <p class="text-xs font-semibold text-slate-600">${c}</p>
               ${bHTML}
             </div>
           `;
         }
       });
 
-      let skillsHTML = '';
-      if (skillsRaw) {
-        const arr = skillsRaw.split(',').filter(s => s.trim() !== '');
-        skillsHTML = arr.map(s => `<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 rounded text-[11px] font-medium">${s.trim()}</span>`).join(' ');
-      }
+      const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
+      const langArr = languagesRaw.split(',').filter(s => s.trim() !== '');
 
       const previewBox = document.getElementById('resume-preview');
 
-      // Template 1: Modern BPO
-      if (currentTemplate === 'modern') {
-        previewBox.innerHTML = `
-          <div class="border-b-2 border-slate-800 pb-4 mb-5">
-            <h1 class="text-2xl font-bold uppercase text-slate-900">${name}</h1>
-            <p class="text-md font-semibold text-blue-700 mt-0.5">${title}</p>
-            <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600 mt-2">
-              <span><i class="fa-solid fa-envelope mr-1"></i> ${email}</span>
-              <span><i class="fa-solid fa-phone mr-1"></i> ${phone}</span>
-              <span><i class="fa-solid fa-location-dot mr-1"></i> ${address}</span>
-            </div>
-          </div>
-          <div class="mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Professional Summary</h3>
-            <p class="text-xs leading-relaxed text-slate-700">${summary}</p>
-          </div>
-          <div class="mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Work Experience</h3>
-            ${expHTML}
-          </div>
-          <div class="mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Skills & Expertise</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
-        `;
-      } 
-      // Template 2: Pinoy Bio-Data
-      else if (currentTemplate === 'biodata') {
-        const civil = document.getElementById('civilStatus').value;
-        const dob = document.getElementById('dob').value;
-        const religion = document.getElementById('religion').value;
-        const imgDisplay = photoURL ? `<img src="${photoURL}" class="w-full h-full object-cover">` : `<span class="text-[10px] text-slate-400 font-bold">2x2 PHOTO</span>`;
+      // 1. Emerald Green Sidebar Design
+      if (currentTemplate === 'green-sidebar') {
+        const skillsPill = skillsArr.map(s => `<span class="block border border-emerald-400 text-emerald-100 rounded-full px-2.5 py-0.5 text-[10px] text-center mb-1.5">${s.trim()}</span>`).join('');
+        const langPill = langArr.map(l => `<span class="block border border-emerald-400 text-emerald-100 rounded-full px-2.5 py-0.5 text-[10px] text-center mb-1.5">${l.trim()}</span>`).join('');
 
         previewBox.innerHTML = `
-          <div class="text-center border-b-2 border-slate-900 pb-3 mb-4 flex justify-between items-center">
-            <div class="text-left">
-              <h1 class="text-xl font-black uppercase text-slate-900 tracking-wider">PERSONAL BIO-DATA</h1>
-              <h2 class="text-lg font-bold text-slate-800 mt-1">${name}</h2>
-              <p class="text-xs text-slate-600">${title}</p>
+          <div class="grid grid-cols-12 min-h-[750px]">
+            <!-- Green Left Column -->
+            <div class="col-span-4 bg-emerald-900 text-white p-4 space-y-5">
+              <div class="text-center">
+                <img src="${photoURL}" class="w-16 h-16 rounded-full mx-auto mb-2 border-2 border-white object-cover">
+                <h2 class="font-bold text-sm leading-tight uppercase">${name}</h2>
+              </div>
+              <div>
+                <h3 class="text-[11px] font-bold uppercase border-b border-emerald-700 pb-1 mb-2 text-emerald-300">Contact</h3>
+                <div class="text-[10px] space-y-1 text-emerald-100">
+                  <p><strong>Address:</strong><br>${address}</p>
+                  <p><strong>Phone:</strong><br>${phone}</p>
+                  <p><strong>E-mail:</strong><br>${email}</p>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-[11px] font-bold uppercase border-b border-emerald-700 pb-1 mb-2 text-emerald-300">Skills</h3>
+                ${skillsPill}
+              </div>
+              <div>
+                <h3 class="text-[11px] font-bold uppercase border-b border-emerald-700 pb-1 mb-2 text-emerald-300">Languages</h3>
+                ${langPill}
+              </div>
             </div>
-            <div class="w-24 h-24 border-2 border-slate-400 flex items-center justify-center text-center bg-slate-50">
-              ${imgDisplay}
+            <!-- Right Content Area -->
+            <div class="col-span-8 p-5 space-y-4">
+              <p class="text-xs text-slate-700 leading-relaxed border-b border-slate-200 pb-3">${summary}</p>
+              <div>
+                <h3 class="text-xs font-bold uppercase text-slate-900 border-b-2 border-slate-800 pb-1 mb-3">Work History</h3>
+                ${expHTML}
+              </div>
             </div>
-          </div>
-          <div class="mb-4 bg-slate-50 p-3 rounded border border-slate-200">
-            <h3 class="text-xs font-bold uppercase text-slate-700 mb-2 border-b border-slate-300 pb-1">Personal Info</h3>
-            <div class="grid grid-cols-2 text-xs space-y-1 text-slate-700">
-              <p><strong>Mobile:</strong> ${phone}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Address:</strong> ${address}</p>
-              <p><strong>Date of Birth:</strong> ${dob}</p>
-              <p><strong>Civil Status:</strong> ${civil}</p>
-              <p><strong>Religion:</strong> ${religion}</p>
-            </div>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold uppercase text-slate-800 border-b border-slate-400 pb-1 mb-2">Employment History</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-bold uppercase text-slate-800 border-b border-slate-400 pb-1 mb-2">Skills</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
           </div>
         `;
       } 
-      // Template 3: Executive Corporate
-      else if (currentTemplate === 'executive') {
+      // 2. Maroon Split Column Design
+      else if (currentTemplate === 'maroon-split') {
+        const skillsBlock = skillsArr.map(s => `<p class="text-[10px] text-amber-100 border-b border-amber-900/40 py-0.5">• ${s.trim()}</p>`).join('');
+
         previewBox.innerHTML = `
-          <div class="bg-slate-900 text-white -m-8 p-6 mb-6">
-            <h1 class="text-2xl font-black tracking-wide">${name}</h1>
-            <p class="text-sm font-medium text-blue-400 mt-1">${title}</p>
-            <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-300 mt-3">
-              <span><i class="fa-solid fa-envelope text-blue-400 mr-1"></i> ${email}</span>
-              <span><i class="fa-solid fa-phone text-blue-400 mr-1"></i> ${phone}</span>
-              <span><i class="fa-solid fa-location-dot text-blue-400 mr-1"></i> ${address}</span>
+          <div class="grid grid-cols-12 min-h-[750px]">
+            <div class="col-span-4 bg-[#501c1d] text-white p-4 space-y-4">
+              <img src="${photoURL}" class="w-20 h-20 rounded-full mx-auto border-2 border-amber-200 object-cover">
+              <div>
+                <h3 class="text-xs font-bold uppercase bg-[#381112] text-amber-200 p-1 tracking-wider text-center mb-2">Contact Information</h3>
+                <div class="text-[10px] space-y-1 text-amber-100">
+                  <p><i class="fa-solid fa-phone mr-1"></i> ${phone}</p>
+                  <p><i class="fa-solid fa-envelope mr-1"></i> ${email}</p>
+                  <p><i class="fa-solid fa-location-dot mr-1"></i> ${address}</p>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase bg-[#381112] text-amber-200 p-1 tracking-wider text-center mb-2">Skills</h3>
+                ${skillsBlock}
+              </div>
+            </div>
+            <div class="col-span-8 p-5 space-y-4">
+              <div class="text-center border-b pb-3">
+                <h1 class="text-xl font-black uppercase tracking-wide text-slate-900">${name}</h1>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase bg-[#501c1d] text-white px-2 py-1 mb-2">About Me</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase bg-[#501c1d] text-white px-2 py-1 mb-2">Experience</h3>
+                ${expHTML}
+              </div>
             </div>
           </div>
-          <div class="pt-2 mb-5">
-            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 mb-2">About Me</h3>
-            <p class="text-xs leading-relaxed text-slate-700">${summary}</p>
-          </div>
-          <div class="mb-5">
-            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 mb-2">Work Experience</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 mb-2">Core Competencies</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
         `;
       }
-      // Template 4: Minimalist
-      else if (currentTemplate === 'minimal') {
+      // 3. Modern Tech Badge Design (Nick Koe style)
+      else if (currentTemplate === 'nick-tech') {
+        const skillsBadges = skillsArr.map(s => `<span class="bg-cyan-700 text-white font-medium px-2 py-0.5 rounded text-[10px]">${s.trim()}</span>`).join(' ');
+
         previewBox.innerHTML = `
-          <div class="text-center pb-4 mb-4 border-b border-slate-200">
-            <h1 class="text-2xl font-light tracking-widest uppercase text-slate-900">${name}</h1>
-            <p class="text-xs tracking-widest text-slate-500 uppercase mt-1">${title}</p>
-            <p class="text-[11px] text-slate-400 mt-2">${email} • ${phone} • ${address}</p>
-          </div>
-          <div class="mb-4">
-            <p class="text-xs leading-relaxed text-slate-600 italic text-center">${summary}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-1 mb-3">Experience</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-1 mb-3">Skills</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
-        `;
-      }
-      // Template 5: Tech / VA
-      else if (currentTemplate === 'tech') {
-        previewBox.innerHTML = `
-          <div class="border-l-4 border-indigo-600 pl-4 mb-5">
-            <h1 class="text-2xl font-black text-slate-900">${name}</h1>
-            <p class="text-sm font-bold text-indigo-600">${title}</p>
-            <div class="text-xs text-slate-500 mt-1 flex flex-wrap gap-3">
-              <span>${email}</span> • <span>${phone}</span> • <span>${address}</span>
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between items-start border-b-2 border-cyan-500 pb-3">
+              <div>
+                <h1 class="text-xl font-bold text-cyan-900">${name}</h1>
+                <p class="text-xs text-cyan-600 font-semibold">${title}</p>
+              </div>
+              <div class="text-right text-[10px] text-slate-500">
+                <p>${email}</p>
+                <p>${phone}</p>
+                <p>${address}</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4">
+              <div class="col-span-7 space-y-3">
+                <h3 class="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-cyan-200 pb-1">Work Experience</h3>
+                ${expHTML}
+              </div>
+              <div class="col-span-5 space-y-3">
+                <h3 class="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-cyan-200 pb-1">Skills & Tools</h3>
+                <div class="flex flex-wrap gap-1">${skillsBadges}</div>
+                <div class="pt-2">
+                  <h3 class="text-xs font-bold text-cyan-900 uppercase tracking-wider border-b border-cyan-200 pb-1 mb-1">Languages</h3>
+                  <p class="text-xs text-slate-600">${languagesRaw}</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="bg-indigo-50/50 p-3 rounded mb-5 text-xs text-slate-700 leading-relaxed border border-indigo-100">
-            ${summary}
-          </div>
-          <div class="mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-900 mb-2">Technical & Work Experience</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-900 mb-2">Tech Stack & Tools</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
         `;
       }
-      // Template 6: Creative Studio
-      else if (currentTemplate === 'creative') {
-        const imgDisplay = photoURL ? `<img src="${photoURL}" class="w-16 h-16 rounded-full object-cover border-2 border-pink-500">` : '';
+      // 4. Olivia Martinez Style (Blue & Skill Bars)
+      else if (currentTemplate === 'olivia-minimal') {
+        const skillBars = skillsArr.map(s => `
+          <div class="mb-2">
+            <div class="flex justify-between text-[10px] text-slate-700 font-semibold mb-0.5">
+              <span>${s.trim()}</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-1.5">
+              <div class="bg-blue-500 h-1.5 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+        `).join('');
+
         previewBox.innerHTML = `
-          <div class="flex justify-between items-center bg-gradient-to-r from-purple-600 to-pink-500 text-white -m-8 p-6 mb-6">
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between items-center border-b pb-4">
+              <div>
+                <h1 class="text-xl font-bold text-blue-600 tracking-wide">${name}</h1>
+                <p class="text-xs text-slate-500 mt-0.5">${address} • ${phone} • ${email}</p>
+              </div>
+              <img src="${photoURL}" class="w-14 h-14 rounded-full object-cover border border-blue-400">
+            </div>
             <div>
-              <h1 class="text-2xl font-black tracking-wide">${name}</h1>
-              <p class="text-xs font-semibold text-pink-200 mt-0.5">${title}</p>
-              <p class="text-[10px] text-purple-100 mt-2">${email} | ${phone} | ${address}</p>
+              <h3 class="text-xs font-bold uppercase text-blue-500 border-b border-blue-200 pb-1 mb-2">Resume Objective</h3>
+              <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
             </div>
-            ${imgDisplay}
-          </div>
-          <div class="pt-2 mb-4">
-            <h3 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-1">About Me</h3>
-            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-2">Experience Highlights</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-2">Creative & Soft Skills</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
-        `;
-      }
-      // Template 7: Medical & Nursing
-      else if (currentTemplate === 'healthcare') {
-        previewBox.innerHTML = `
-          <div class="border-b-2 border-emerald-600 pb-3 mb-4">
-            <h1 class="text-2xl font-bold text-emerald-900">${name}</h1>
-            <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">${title}</p>
-            <p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-hospital text-emerald-600 mr-1"></i> ${email} | ${phone} | ${address}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold text-emerald-800 uppercase border-b border-emerald-200 pb-1 mb-2">Clinical Profile</h3>
-            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold text-emerald-800 uppercase border-b border-emerald-200 pb-1 mb-2">Hospital & Clinical Experience</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-bold text-emerald-800 uppercase border-b border-emerald-200 pb-1 mb-2">Medical Skills & Competencies</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
-        `;
-      }
-      // Template 8: Skilled Trades
-      else if (currentTemplate === 'trades') {
-        previewBox.innerHTML = `
-          <div class="bg-amber-500 text-slate-900 -m-8 p-5 mb-5 font-bold">
-            <h1 class="text-2xl uppercase tracking-wider">${name}</h1>
-            <p class="text-xs uppercase text-slate-800">${title}</p>
-            <div class="text-[11px] font-normal text-slate-900 mt-1">${phone} • ${email} • ${address}</div>
-          </div>
-          <div class="pt-2 mb-4">
-            <h3 class="text-xs font-black uppercase text-slate-800 border-b-2 border-slate-800 pb-1 mb-2">Profile Overview</h3>
-            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-black uppercase text-slate-800 border-b-2 border-slate-800 pb-1 mb-2">Work & Project History</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-black uppercase text-slate-800 border-b-2 border-slate-800 pb-1 mb-2">Certifications & Trade Skills</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
-        `;
-      }
-      // Template 9: Fresh Graduate
-      else if (currentTemplate === 'academic') {
-        previewBox.innerHTML = `
-          <div class="text-center border-b-2 border-slate-300 pb-3 mb-4">
-            <h1 class="text-xl font-bold text-slate-900">${name}</h1>
-            <p class="text-xs font-semibold text-slate-600">${title}</p>
-            <p class="text-[11px] text-slate-500 mt-1">${email} | ${phone} | ${address}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold text-slate-800 uppercase border-b border-slate-300 pb-1 mb-1">Career Objective</h3>
-            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold text-slate-800 uppercase border-b border-slate-300 pb-1 mb-2">Internships & Student Experience</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-bold text-slate-800 uppercase border-b border-slate-300 pb-1 mb-2">Academic Skills & Tools</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
-          </div>
-        `;
-      }
-      // Template 10: Retail & Hotel
-      else if (currentTemplate === 'hospitality') {
-        const imgDisplay = photoURL ? `<img src="${photoURL}" class="w-16 h-16 rounded object-cover border border-slate-300">` : '';
-        previewBox.innerHTML = `
-          <div class="flex justify-between items-center border-b-2 border-teal-600 pb-3 mb-4">
             <div>
-              <h1 class="text-xl font-bold text-teal-900 uppercase">${name}</h1>
-              <p class="text-xs font-semibold text-teal-600">${title}</p>
-              <p class="text-[11px] text-slate-600 mt-1">${phone} | ${email} | ${address}</p>
+              <h3 class="text-xs font-bold uppercase text-blue-500 border-b border-blue-200 pb-1 mb-2">Skills</h3>
+              <div class="grid grid-cols-2 gap-x-4">${skillBars}</div>
             </div>
-            ${imgDisplay}
+            <div>
+              <h3 class="text-xs font-bold uppercase text-blue-500 border-b border-blue-200 pb-1 mb-2">Work History</h3>
+              ${expHTML}
+            </div>
           </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold text-teal-800 uppercase border-b border-teal-200 pb-1 mb-1">Service Profile</h3>
-            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-          </div>
-          <div class="mb-4">
-            <h3 class="text-xs font-bold text-teal-800 uppercase border-b border-teal-200 pb-1 mb-2">Hospitality & Service Experience</h3>
-            ${expHTML}
-          </div>
-          <div>
-            <h3 class="text-xs font-bold text-teal-800 uppercase border-b border-teal-200 pb-1 mb-2">Key Competencies</h3>
-            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+        `;
+      }
+      // 5. Navy & Gold Ribbon Wave (Larry Tibbetts)
+      else if (currentTemplate === 'navy-gold') {
+        const skillsList = skillsArr.map(s => `<li class="text-[10px] text-slate-200">• ${s.trim()}</li>`).join('');
+
+        previewBox.innerHTML = `
+          <div class="grid grid-cols-12 min-h-[750px]">
+            <div class="col-span-4 bg-[#1e3a47] text-white p-4 space-y-4">
+              <img src="${photoURL}" class="w-20 h-20 rounded-full mx-auto border-2 border-amber-400 object-cover">
+              <div class="text-[10px] space-y-1.5 text-slate-200">
+                <p><i class="fa-solid fa-phone text-amber-400 mr-1"></i> ${phone}</p>
+                <p><i class="fa-solid fa-envelope text-amber-400 mr-1"></i> ${email}</p>
+                <p><i class="fa-solid fa-location-dot text-amber-400 mr-1"></i> ${address}</p>
+              </div>
+              <div>
+                <div class="bg-[#ba9049] text-slate-900 font-bold text-[11px] text-center rounded-full py-0.5 uppercase mb-2">Skills</div>
+                <ul class="space-y-1">${skillsList}</ul>
+              </div>
+            </div>
+            <div class="col-span-8 p-5 space-y-4">
+              <div class="bg-[#1e3a47] text-white -m-5 p-5 mb-2">
+                <h1 class="text-xl font-bold uppercase tracking-wider text-amber-400">${name}</h1>
+                <p class="text-xs uppercase text-slate-200">${title}</p>
+                <p class="text-[11px] text-slate-300 mt-2 leading-relaxed">${summary}</p>
+              </div>
+              <div class="pt-2">
+                <div class="bg-[#ba9049] text-white font-bold text-xs text-center rounded-full py-1 uppercase mb-3 tracking-wider">Experience</div>
+                ${expHTML}
+              </div>
+            </div>
           </div>
         `;
       }
@@ -603,23 +469,17 @@ Resolved complex billing inquiries and escalated technical issues promptly.</tex
           <input type="text" class="exp-role text-sm p-1.5 border border-slate-300 rounded" placeholder="Role" oninput="updatePreview()">
         </div>
         <input type="text" class="exp-dates text-sm p-1.5 border border-slate-300 rounded w-full" placeholder="Dates" oninput="updatePreview()">
-        <textarea class="exp-bullets text-sm p-1.5 border border-slate-300 rounded w-full" rows="3" placeholder="Key responsibilities (1 per line)" oninput="updatePreview()"></textarea>
+        <textarea class="exp-bullets text-sm p-1.5 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities (1 per line)" oninput="updatePreview()"></textarea>
       `;
       container.appendChild(div);
       updatePreview();
-    }
-
-    function aiPolishSummary() {
-      document.getElementById('summary').value = "Accomplished Customer Service Professional with a strong track record of delivering exceptional client support, driving high CSAT ratings, and managing account resolutions in fast-paced environments.";
-      updatePreview();
-      alert("Summary polished!");
     }
 
     function triggerDownload() {
       const element = document.getElementById('resume-preview');
       const name = document.getElementById('fullName').value || 'Resume';
       const opt = {
-        margin: 0.4,
+        margin: 0.2,
         filename: `${name.replace(/\s+/g, '_')}_Resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
