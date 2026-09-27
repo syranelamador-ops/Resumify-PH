@@ -936,7 +936,7 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
   if (pdf.internal.getNumberOfPages() > 1) {
     pdf.deletePage(2);
   }
-  return pdf.save();
+  return pdf.save(`${document.getElementById('fullName').value || 'Resume'} - Resumify.PH.pdf`);
 }).then(() => {
         // Re-apply screen scaled viewing class
         element.classList.add('a4-screen-scaled');
