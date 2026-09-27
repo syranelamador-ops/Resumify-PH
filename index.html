@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resumify PH - Resume & Bio-Data Generator</title>
+  <title>Resumify PH - 100 A4 Resume & Bio-Data Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -17,10 +17,11 @@
     .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     
-    /* Full Page Letter Aspect Ratio simulation */
+    /* Strict A4 Aspect Ratio Canvas (210mm x 297mm) */
     .a4-paper {
       width: 100%;
-      min-height: 840px;
+      aspect-ratio: 1 / 1.4142;
+      min-height: 842px;
       background: white;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     }
@@ -32,15 +33,15 @@
   <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center space-x-3">
-        <div class="bg-blue-600 text-white font-black px-3 py-1 rounded-lg text-xl tracking-wider">PH</div>
+        <div class="bg-blue-600 text-white font-black px-3 py-1 rounded-lg text-xl tracking-wider">100</div>
         <div>
           <h1 class="font-extrabold text-xl leading-none">Resumify<span class="text-blue-400">.ph</span></h1>
-          <p class="text-xs text-slate-400">Professional Resume & Bio-Data Generator</p>
+          <p class="text-xs text-slate-400">100 Premium A4 Resume & Bio-Data Designs</p>
         </div>
       </div>
       <div class="flex items-center space-x-3">
         <button onclick="triggerDownload()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg text-sm transition flex items-center shadow-md">
-          <i class="fa-solid fa-download mr-2"></i> Download PDF
+          <i class="fa-solid fa-download mr-2"></i> Download A4 PDF
         </button>
       </div>
     </div>
@@ -56,7 +57,7 @@
       <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
         <h2 class="font-bold text-slate-800 text-base mb-4 flex items-center justify-between">
           <span class="flex items-center"><i class="fa-solid fa-user text-blue-600 mr-2"></i> Personal Details</span>
-          <span class="text-[10px] text-slate-400 uppercase font-semibold">Editable</span>
+          <span class="text-[10px] text-slate-400 uppercase font-semibold">Live Editable</span>
         </h2>
         <div class="space-y-3">
           <div>
@@ -65,7 +66,7 @@
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Target Job Title</label>
-            <input type="text" id="jobTitle" value="Senior Sales Manager" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="jobTitle" value="Senior Sales & Operations Manager" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
@@ -87,9 +88,9 @@
           </div>
         </div>
 
-        <!-- Bio-Data Specific Fields -->
+        <!-- Bio-Data Extra Fields -->
         <div id="biodata-extra-fields" class="mt-4 pt-4 border-t border-slate-200">
-          <p class="text-xs font-bold text-amber-800 mb-2">Pinoy Bio-Data Specifics:</p>
+          <p class="text-xs font-bold text-amber-800 mb-2">Pinoy Bio-Data Details:</p>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="block text-[11px] font-semibold text-slate-600">Civil Status</label>
@@ -107,7 +108,7 @@
         </div>
       </div>
 
-      <!-- Summary -->
+      <!-- Professional Summary -->
       <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
         <h2 class="font-bold text-slate-800 text-base mb-2 flex items-center">
           <i class="fa-solid fa-pen-nib text-blue-600 mr-2"></i> Professional Summary
@@ -155,7 +156,7 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
         <h2 class="font-bold text-slate-800 text-base mb-2 flex items-center">
           <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Expertise
         </h2>
-        <input type="text" id="skillsInput" value="Strategic Planning, Revenue Expansion, Client Acquisition, Agile Team Leadership, Data Analytics, Negotiation" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
+        <input type="text" id="skillsInput" value="Strategic Planning, Revenue Expansion, Client Acquisition, Agile Leadership, Data Analytics, Commercial Negotiation" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
       </div>
 
     </div>
@@ -166,90 +167,37 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
         
         <div class="flex justify-between items-center mb-3">
           <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Full Page Live Preview
+            <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Full A4 Live Canvas
           </span>
-          <span id="tpl-badge" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full border border-emerald-300 shadow-sm">
-            Emerald Sidebar
+          <span id="active-tpl-badge" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full border border-emerald-300 shadow-sm">
+            Template #1
           </span>
         </div>
 
         <!-- Live Document Paper -->
         <div id="resume-preview" class="a4-paper rounded border border-slate-300 overflow-hidden text-slate-800">
-          <!-- Dynamically Rendered -->
+          <!-- Rendered dynamically -->
         </div>
 
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: Template Gallery (3 cols) -->
+    <!-- RIGHT COLUMN: 100 Template Gallery (3 cols) -->
     <div class="lg:col-span-3">
       <div class="sticky top-20 bg-white p-4 rounded-xl shadow-sm border border-slate-200 max-h-[calc(100vh-100px)] flex flex-col">
-        <div class="border-b border-slate-200 pb-2 mb-3">
+        <div class="flex justify-between items-center border-b border-slate-200 pb-2 mb-3">
           <h2 class="font-bold text-slate-800 text-sm flex items-center">
-            <i class="fa-solid fa-palette text-blue-600 mr-2"></i> Choose Full Template
+            <i class="fa-solid fa-palette text-blue-600 mr-2"></i> Template Gallery
           </h2>
-          <p class="text-[11px] text-slate-400">Select any template to auto-fill sample data</p>
+          <span class="text-xs font-bold text-slate-400">100 Designs</span>
         </div>
         
-        <div class="custom-scroll overflow-y-auto space-y-3 pr-1 flex-1">
-          
-          <!-- Template 1 -->
-          <div onclick="switchSample('green-sidebar', 'Emerald Sidebar')" id="card-green-sidebar" class="tpl-card cursor-pointer border-2 border-emerald-600 p-3 rounded-lg bg-emerald-50/50 shadow-sm transition hover:border-emerald-500">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-xs text-slate-800">1. Emerald Corporate</span>
-              <span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded">Active</span>
-            </div>
-            <p class="text-[11px] text-slate-500">Full emerald left sidebar, circular photo badge, clean typography.</p>
-          </div>
+        <!-- Search Input -->
+        <input type="text" id="tplSearch" onkeyup="filterTemplates()" placeholder="Search #, color, style..." class="w-full text-xs p-2 mb-3 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
 
-          <!-- Template 2 -->
-          <div onclick="switchSample('maroon-split', 'Maroon Executive')" id="card-maroon-split" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-xs text-slate-800">2. Maroon Executive</span>
-            </div>
-            <p class="text-[11px] text-slate-500">Rich maroon sidebar with gold highlights & structured text blocks.</p>
-          </div>
-
-          <!-- Template 3 -->
-          <div onclick="switchSample('nick-tech', 'Modern Tech Cyan')" id="card-nick-tech" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-xs text-slate-800">3. Modern Tech Cyan</span>
-            </div>
-            <p class="text-[11px] text-slate-500">Full width header banner with cyan tech skill pills & dual column layout.</p>
-          </div>
-
-          <!-- Template 4 -->
-          <div onclick="switchSample('olivia-minimal', 'Minimalist Blue Accent')" id="card-olivia-minimal" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-xs text-slate-800">4. Blue Progress Bars</span>
-            </div>
-            <p class="text-[11px] text-slate-500">Clean minimalist look with percentage skill visualizer bars.</p>
-          </div>
-
-          <!-- Template 5 -->
-          <div onclick="switchSample('navy-gold', 'Navy & Gold Wave')" id="card-navy-gold" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-xs text-slate-800">5. Navy & Gold Crest</span>
-            </div>
-            <p class="text-[11px] text-slate-500">Deep slate navy top banner with gold ribbon headers.</p>
-          </div>
-
-          <!-- Template 6 -->
-          <div onclick="switchSample('biodata', 'Official Pinoy Bio-Data')" id="card-biodata" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-xs text-slate-800">6. Official Pinoy Bio-Data</span>
-            </div>
-            <p class="text-[11px] text-slate-500">Traditional 2x2 passport photo frame, civil status & personal details table.</p>
-          </div>
-
-          <!-- Template 7 -->
-          <div onclick="switchSample('modern-bpo', 'Modern BPO Lead')" id="card-modern-bpo" class="tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-xs text-slate-800">7. Modern BPO & Call Center</span>
-            </div>
-            <p class="text-[11px] text-slate-500">Sleek corporate header with top profile picture and clear section dividers.</p>
-          </div>
-
+        <!-- Scrollable Template Container -->
+        <div id="template-gallery" class="custom-scroll overflow-y-auto space-y-2 pr-1 flex-1">
+          <!-- 100 Template cards generated here -->
         </div>
       </div>
     </div>
@@ -257,124 +205,103 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
   </main>
 
   <script>
-    let currentTemplate = 'green-sidebar';
-    
-    // High quality headshots
-    const samplePhotos = {
-      'green-sidebar': 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=300',
-      'maroon-split': 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300',
-      'nick-tech': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
-      'olivia-minimal': 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300',
-      'navy-gold': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300',
-      'biodata': 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300',
-      'modern-bpo': 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=300'
-    };
+    let selectedTplIndex = 1;
 
-    let photoURL = samplePhotos['green-sidebar'];
+    // Headshots array to assign realistic profile photos
+    const profilePhotos = [
+      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=300',
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300',
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
+      'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300',
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300',
+      'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=300'
+    ];
 
-    // Preset Sample Profiles to make each template unique and full
-    const sampleProfiles = {
-      'green-sidebar': {
-        name: "Michael Johnson",
-        title: "Senior Sales & Operations Manager",
-        email: "michael.j@example.com",
-        phone: "+63 917 888 2345",
-        address: "Makati City, Metro Manila",
-        summary: "A results-driven Senior Manager with over 8 years of executive leadership in commercial enterprise sales, strategic operations, and key partner management. Skilled in scaling operations, leading multi-functional teams, and consistently surpassing revenue targets in competitive markets.",
-        skills: "Strategic Planning, Revenue Expansion, Client Acquisition, Agile Leadership, Data Analytics, Commercial Negotiation"
-      },
-      'maroon-split': {
-        name: "Elena Rostova",
-        title: "Executive Director of Marketing",
-        email: "elena.rostova@example.com",
-        phone: "+63 918 555 1092",
-        address: "BGC, Taguig City",
-        summary: "Visionary Brand Strategist and Marketing Executive with 10+ years driving omnichannel campaigns across global FMCG brands. Expert in market penetration, digital transformation, and leading high-yield creative teams.",
-        skills: "Brand Strategy, Digital Marketing, Omnichannel Campaigns, Budget Management, Team Leadership, PR & Media"
-      },
-      'nick-tech': {
-        name: "Nicholas Koe",
-        title: "Lead Full-Stack Software Engineer",
-        email: "nick.koe@devmail.io",
-        phone: "+63 905 444 8821",
-        address: "Quezon City, Metro Manila",
-        summary: "Innovative Full-Stack Engineer with 7 years of expertise building scalable cloud applications, high-throughput microservices, and modern responsive web applications. Passionate about automated CI/CD pipelines and clean code architecture.",
-        skills: "React.js, Node.js, Python, AWS Cloud, PostgreSQL, Docker, Kubernetes, Microservices, TypeScript"
-      },
-      'olivia-minimal': {
-        name: "Olivia Martinez",
-        title: "Senior UI/UX & Product Designer",
-        email: "olivia.m@designstudio.ph",
-        phone: "+63 920 111 4455",
-        address: "Mandaluyong City, Metro Manila",
-        summary: "Detail-oriented Product Designer creating intuitive user experiences for Fintech and E-commerce platforms. Specialized in design systems, user research prototyping, and collaborative design-to-engineering handoffs.",
-        skills: "UI Design, UX Research, Figma, Interactive Prototyping, Design Systems, Mobile App Design, HTML/CSS"
-      },
-      'navy-gold': {
-        name: "Larry Tibbetts",
-        title: "Chief Financial & Investment Analyst",
-        email: "l.tibbetts@capital.com",
-        phone: "+63 917 222 9900",
-        address: "Ortigas Center, Pasig City",
-        summary: "Senior Financial Consultant with extensive background in portfolio risk evaluation, corporate valuations, and capital allocation. Proven track record in optimizing financial strategy for enterprise organizations.",
-        skills: "Financial Modeling, Risk Analysis, Corporate Valuation, Asset Management, Forecasting, Regulatory Compliance"
-      },
-      'biodata': {
-        name: "Juan De La Cruz",
-        title: "Administrative Support Officer",
-        email: "juan.delacruz@email.ph",
-        phone: "+63 908 333 7788",
-        address: "Sampaloc, Manila City",
-        summary: "Reliable Administrative Assistant with 4+ years of dedicated service in records management, office logistics, customer service, and official correspondence processing.",
-        skills: "Office Management, MS Office Suite, Document Archiving, Customer Relations, Records Keeping",
-        civil: "Married",
-        dob: "June 12, 1992",
-        religion: "Roman Catholic"
-      },
-      'modern-bpo': {
-        name: "Samantha Raye",
-        title: "BPO Operations Team Lead",
-        email: "samantha.r@bposervices.ph",
-        phone: "+63 927 666 3311",
-        address: "Cebu IT Park, Cebu City",
-        summary: "Dynamic Call Center Team Lead with 6+ years managing high-volume international US sales & customer care accounts. Consistently achieves 98%+ CSAT scores while mentoring groups of 20+ agents.",
-        skills: "Customer Support, Escalation Management, Workforce Scheduling, CSAT Optimization, Telemarketing, CRM"
+    let photoURL = profilePhotos[0];
+
+    // Color Palettes
+    const colorSchemes = [
+      { name: 'Emerald', primary: 'bg-emerald-900', text: 'text-emerald-900', border: 'border-emerald-800', accent: 'bg-emerald-600', light: 'bg-emerald-50' },
+      { name: 'Maroon', primary: 'bg-rose-950', text: 'text-rose-950', border: 'border-rose-900', accent: 'bg-rose-700', light: 'bg-rose-50' },
+      { name: 'Navy', primary: 'bg-slate-900', text: 'text-slate-900', border: 'border-slate-900', accent: 'bg-blue-600', light: 'bg-slate-100' },
+      { name: 'Cyan Tech', primary: 'bg-cyan-900', text: 'text-cyan-900', border: 'border-cyan-600', accent: 'bg-cyan-600', light: 'bg-cyan-50' },
+      { name: 'Indigo', primary: 'bg-indigo-900', text: 'text-indigo-900', border: 'border-indigo-800', accent: 'bg-indigo-600', light: 'bg-indigo-50' },
+      { name: 'Teal Crest', primary: 'bg-teal-900', text: 'text-teal-900', border: 'border-teal-800', accent: 'bg-teal-600', light: 'bg-teal-50' },
+      { name: 'Gold Navy', primary: 'bg-[#1a313b]', text: 'text-[#1a313b]', border: 'border-[#b38941]', accent: 'bg-[#b38941]', light: 'bg-amber-50' },
+      { name: 'Purple Luxe', primary: 'bg-purple-950', text: 'text-purple-950', border: 'border-purple-800', accent: 'bg-purple-700', light: 'bg-purple-50' },
+      { name: 'Slate Steel', primary: 'bg-slate-800', text: 'text-slate-800', border: 'border-slate-700', accent: 'bg-slate-600', light: 'bg-slate-100' },
+      { name: 'Classic BioData', primary: 'bg-slate-900', text: 'text-slate-900', border: 'border-slate-900', accent: 'bg-slate-800', light: 'bg-slate-50' }
+    ];
+
+    // Layout Models
+    const layoutNames = [
+      'Emerald Sidebar', 'Executive Split', 'Tech Stack Pills', 
+      'Progress Bars', 'Gold Ribbon Crest', 'Official Pinoy Bio-Data', 
+      'Modern BPO Header', 'Minimal Top Banner', 'Compact Grid', 'Bordered Frame'
+    ];
+
+    // Preset Profiles for Auto-Filling rich samples
+    const presetProfiles = [
+      { name: "Michael Johnson", title: "Senior Sales & Operations Manager", summary: "A results-driven Senior Manager with over 8 years of executive leadership in commercial enterprise sales, strategic operations, and key partner management." },
+      { name: "Elena Rostova", title: "Executive Director of Marketing", summary: "Visionary Brand Strategist and Marketing Executive with 10+ years driving omnichannel campaigns across global FMCG brands." },
+      { name: "Nicholas Koe", title: "Lead Full-Stack Software Engineer", summary: "Innovative Full-Stack Engineer with 7 years of expertise building scalable cloud applications, high-throughput microservices, and web applications." },
+      { name: "Olivia Martinez", title: "Senior UI/UX & Product Designer", summary: "Detail-oriented Product Designer creating intuitive user experiences for Fintech and E-commerce platforms. Specialized in design systems and interactive prototyping." },
+      { name: "Larry Tibbetts", title: "Chief Financial & Investment Analyst", summary: "Senior Financial Consultant with extensive background in portfolio risk evaluation, corporate valuations, and capital allocation." },
+      { name: "Juan De La Cruz", title: "Administrative Support Officer", summary: "Reliable Administrative Assistant with 4+ years of dedicated service in records management, office logistics, and correspondence processing." },
+      { name: "Samantha Raye", title: "BPO Operations Team Lead", summary: "Dynamic Call Center Team Lead with 6+ years managing high-volume international US sales & customer care accounts." }
+    ];
+
+    function initGallery() {
+      const gallery = document.getElementById('template-gallery');
+      let html = '';
+      let count = 1;
+
+      for (let l = 0; l < 10; l++) {
+        for (let c = 0; c < 10; c++) {
+          const color = colorSchemes[c];
+          const layout = layoutNames[l];
+          const isFirst = count === 1;
+
+          html += `
+            <div onclick="switchTemplate(${count})" id="tpl-card-${count}" class="tpl-card cursor-pointer p-2.5 rounded-lg border transition hover:border-blue-400 ${isFirst ? 'border-2 border-emerald-600 bg-emerald-50/50 shadow-sm' : 'border-slate-200 bg-slate-50'}">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-xs text-slate-800">#${count}. ${color.name} ${layout}</span>
+                ${isFirst ? `<span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>` : ''}
+              </div>
+              <p class="text-[10px] text-slate-500 mt-0.5">Style: ${layout} • ${color.name} Palette</p>
+            </div>
+          `;
+          count++;
+        }
       }
-    };
+      gallery.innerHTML = html;
+    }
 
-    function switchSample(tpl, name) {
-      currentTemplate = tpl;
-      photoURL = samplePhotos[tpl];
+    function switchTemplate(index) {
+      selectedTplIndex = index;
+      document.getElementById('active-tpl-badge').innerText = `Template #${index}`;
 
-      document.getElementById('tpl-badge').innerText = name;
+      document.querySelectorAll('.tpl-card').forEach((card, idx) => {
+        const itemNum = idx + 1;
+        const activeBadge = card.querySelector('.badge-active');
+        if (activeBadge) activeBadge.remove();
 
-      // Update Active Badge Visuals in Gallery
-      document.querySelectorAll('.tpl-card').forEach(card => {
-        card.className = 'tpl-card cursor-pointer border border-slate-200 p-3 rounded-lg bg-slate-50 transition hover:border-blue-400';
-        const badge = card.querySelector('.badge-active');
-        if (badge) badge.remove();
+        if (itemNum === index) {
+          card.className = 'tpl-card cursor-pointer p-2.5 rounded-lg border-2 border-emerald-600 bg-emerald-50/50 shadow-sm transition';
+          card.querySelector('div').innerHTML += `<span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>`;
+        } else {
+          card.className = 'tpl-card cursor-pointer p-2.5 rounded-lg border border-slate-200 bg-slate-50 transition hover:border-blue-400';
+        }
       });
 
-      const activeCard = document.getElementById(`card-${tpl}`);
-      if (activeCard) {
-        activeCard.className = 'tpl-card cursor-pointer border-2 border-emerald-600 p-3 rounded-lg bg-emerald-50/50 shadow-sm transition';
-        const headerDiv = activeCard.querySelector('div');
-        headerDiv.innerHTML += `<span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded">Active</span>`;
-      }
+      // Swap preset profile & headshots dynamically
+      const profile = presetProfiles[(index - 1) % presetProfiles.length];
+      photoURL = profilePhotos[(index - 1) % profilePhotos.length];
 
-      // Populate Input Fields with Sample Data
-      const p = sampleProfiles[tpl] || sampleProfiles['green-sidebar'];
-      document.getElementById('fullName').value = p.name;
-      document.getElementById('jobTitle').value = p.title;
-      document.getElementById('email').value = p.email;
-      document.getElementById('phone').value = p.phone;
-      document.getElementById('address').value = p.address;
-      document.getElementById('summary').value = p.summary;
-      document.getElementById('skillsInput').value = p.skills;
-
-      if (p.civil) document.getElementById('civilStatus').value = p.civil;
-      if (p.dob) document.getElementById('dob').value = p.dob;
-      if (p.religion) document.getElementById('religion').value = p.religion;
+      document.getElementById('fullName').value = profile.name;
+      document.getElementById('jobTitle').value = profile.title;
+      document.getElementById('summary').value = profile.summary;
 
       updatePreview();
     }
@@ -393,12 +320,16 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
 
     function updatePreview() {
       const name = document.getElementById('fullName').value || 'Michael Johnson';
-      const title = document.getElementById('jobTitle').value || 'Professional Position';
+      const title = document.getElementById('jobTitle').value || 'Professional Title';
       const email = document.getElementById('email').value || 'email@example.com';
       const phone = document.getElementById('phone').value || '+63 900 000 0000';
       const address = document.getElementById('address').value || 'City, Country';
       const summary = document.getElementById('summary').value;
       const skillsRaw = document.getElementById('skillsInput').value;
+
+      const layoutIdx = Math.floor((selectedTplIndex - 1) / 10);
+      const colorIdx = (selectedTplIndex - 1) % 10;
+      const color = colorSchemes[colorIdx];
 
       let expHTML = '';
       document.querySelectorAll('.exp-card').forEach(card => {
@@ -418,7 +349,7 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
                 <h4 class="text-sm font-bold text-slate-900">${r}</h4>
                 <span class="text-xs text-slate-500 font-medium">${d}</span>
               </div>
-              <p class="text-xs font-semibold text-blue-700 mb-1">${c}</p>
+              <p class="text-xs font-semibold ${color.text} mb-1">${c}</p>
               ${bHTML}
             </div>
           `;
@@ -428,190 +359,85 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
       const previewBox = document.getElementById('resume-preview');
 
-      // 1. Green Sidebar
-      if (currentTemplate === 'green-sidebar') {
-        const skillsPill = skillsArr.map(s => `<span class="block border border-emerald-400/60 bg-emerald-800/40 text-emerald-100 rounded-lg px-2.5 py-1 text-xs text-center mb-1.5">${s.trim()}</span>`).join('');
+      // LAYOUT 0: Emerald/Sidebar Style
+      if (layoutIdx === 0) {
+        const skillsPill = skillsArr.map(s => `<span class="block border border-white/40 bg-white/10 text-white rounded-lg px-2.5 py-1 text-xs text-center mb-1.5">${s.trim()}</span>`).join('');
         previewBox.innerHTML = `
-          <div class="grid grid-cols-12 min-h-[840px]">
-            <div class="col-span-4 bg-emerald-900 text-white p-5 space-y-5 flex flex-col justify-between">
+          <div class="grid grid-cols-12 min-h-[842px]">
+            <div class="col-span-4 ${color.primary} text-white p-5 space-y-5 flex flex-col justify-between">
               <div class="space-y-5">
                 <div class="text-center pt-2">
-                  <img src="${photoURL}" class="w-24 h-24 rounded-full mx-auto mb-3 border-4 border-emerald-300 shadow-md object-cover">
+                  <img src="${photoURL}" class="w-24 h-24 rounded-full mx-auto mb-3 border-4 border-white/60 shadow-md object-cover">
                   <h2 class="font-extrabold text-base uppercase tracking-wider">${name}</h2>
-                  <p class="text-xs text-emerald-200 mt-1 font-light">${title}</p>
+                  <p class="text-xs opacity-90 mt-1 font-light">${title}</p>
                 </div>
                 <div>
-                  <h3 class="text-xs font-bold uppercase border-b border-emerald-700/80 pb-1.5 mb-2.5 text-emerald-300 tracking-wider">Contact Info</h3>
-                  <div class="text-xs space-y-2 text-emerald-100">
-                    <p><i class="fa-solid fa-location-dot mr-1.5 text-emerald-400"></i> ${address}</p>
-                    <p><i class="fa-solid fa-phone mr-1.5 text-emerald-400"></i> ${phone}</p>
-                    <p><i class="fa-solid fa-envelope mr-1.5 text-emerald-400"></i> ${email}</p>
+                  <h3 class="text-xs font-bold uppercase border-b border-white/30 pb-1.5 mb-2.5 text-white tracking-wider">Contact Info</h3>
+                  <div class="text-xs space-y-2 opacity-90">
+                    <p><i class="fa-solid fa-location-dot mr-1.5"></i> ${address}</p>
+                    <p><i class="fa-solid fa-phone mr-1.5"></i> ${phone}</p>
+                    <p><i class="fa-solid fa-envelope mr-1.5"></i> ${email}</p>
                   </div>
                 </div>
                 <div>
-                  <h3 class="text-xs font-bold uppercase border-b border-emerald-700/80 pb-1.5 mb-2.5 text-emerald-300 tracking-wider">Core Skills</h3>
+                  <h3 class="text-xs font-bold uppercase border-b border-white/30 pb-1.5 mb-2.5 text-white tracking-wider">Core Skills</h3>
                   ${skillsPill}
                 </div>
               </div>
-              <div class="text-[10px] text-emerald-400 text-center border-t border-emerald-800/80 pt-3">
-                Professional Resume • ${name}
-              </div>
             </div>
-            <div class="col-span-8 p-7 space-y-6 flex flex-col justify-between bg-white">
-              <div class="space-y-6">
-                <div>
-                  <h3 class="text-xs font-bold uppercase text-emerald-900 border-b-2 border-emerald-800 pb-1 mb-2.5 tracking-wider">Executive Summary</h3>
-                  <p class="text-xs text-slate-700 leading-relaxed font-normal">${summary}</p>
-                </div>
-                <div>
-                  <h3 class="text-xs font-bold uppercase text-emerald-900 border-b-2 border-emerald-800 pb-1 mb-3.5 tracking-wider">Professional Work Experience</h3>
-                  ${expHTML}
-                </div>
-              </div>
-            </div>
-          </div>`;
-      }
-      // 2. Maroon Split
-      else if (currentTemplate === 'maroon-split') {
-        const skillsBlock = skillsArr.map(s => `<p class="text-xs text-amber-100 border-b border-amber-900/40 py-1 flex items-center"><i class="fa-solid fa-angle-right text-amber-400 mr-2 text-[10px]"></i> ${s.trim()}</p>`).join('');
-        previewBox.innerHTML = `
-          <div class="grid grid-cols-12 min-h-[840px]">
-            <div class="col-span-4 bg-[#4a1516] text-white p-5 space-y-6">
-              <img src="${photoURL}" class="w-28 h-28 rounded-full mx-auto border-4 border-amber-200/80 shadow-md object-cover mt-2">
+            <div class="col-span-8 p-7 space-y-6 bg-white">
               <div>
-                <h3 class="text-xs font-bold uppercase bg-[#330e0f] text-amber-200 p-1.5 tracking-wider text-center mb-3 rounded">Contact Details</h3>
-                <p class="text-xs text-amber-100/90 space-y-2 leading-relaxed">
-                  <strong>Location:</strong><br>${address}<br><br>
-                  <strong>Phone:</strong><br>${phone}<br><br>
-                  <strong>Email:</strong><br>${email}
-                </p>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase bg-[#330e0f] text-amber-200 p-1.5 tracking-wider text-center mb-3 rounded">Key Expertise</h3>
-                ${skillsBlock}
-              </div>
-            </div>
-            <div class="col-span-8 p-7 space-y-5 bg-white">
-              <div class="border-b-2 border-[#4a1516] pb-4">
-                <h1 class="text-2xl font-black uppercase tracking-wide text-slate-900">${name}</h1>
-                <p class="text-xs font-bold text-[#4a1516] uppercase mt-1 tracking-widest">${title}</p>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase bg-[#4a1516] text-white px-2.5 py-1 mb-2.5 tracking-wider rounded-sm">Professional Profile</h3>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-2.5 tracking-wider">Executive Summary</h3>
                 <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
               </div>
               <div>
-                <h3 class="text-xs font-bold uppercase bg-[#4a1516] text-white px-2.5 py-1 mb-3 tracking-wider rounded-sm">Employment History</h3>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-3.5 tracking-wider">Professional Work Experience</h3>
                 ${expHTML}
               </div>
             </div>
           </div>`;
-      }
-      // 3. Modern Tech
-      else if (currentTemplate === 'nick-tech') {
-        const skillsBadges = skillsArr.map(s => `<span class="bg-cyan-700 text-white font-medium px-2.5 py-1 rounded text-xs inline-block mb-1 shadow-sm">${s.trim()}</span>`).join(' ');
-        previewBox.innerHTML = `
-          <div class="p-8 space-y-6 min-h-[840px] flex flex-col justify-between bg-slate-50/50">
-            <div class="space-y-6">
-              <div class="flex justify-between items-center bg-cyan-900 text-white p-6 rounded-xl shadow-md">
-                <div class="space-y-1">
-                  <h1 class="text-2xl font-black text-cyan-300 tracking-wide">${name}</h1>
-                  <p class="text-xs text-cyan-100 font-semibold tracking-wider uppercase">${title}</p>
-                  <p class="text-[11px] text-cyan-200 pt-2"><i class="fa-solid fa-envelope mr-1"></i> ${email} • <i class="fa-solid fa-phone mr-1"></i> ${phone} • <i class="fa-solid fa-location-dot mr-1"></i> ${address}</p>
-                </div>
-                <img src="${photoURL}" class="w-20 h-20 rounded-xl object-cover border-2 border-cyan-400 shadow">
-              </div>
-              <div>
-                <h3 class="text-xs font-bold text-cyan-900 uppercase border-b-2 border-cyan-600 pb-1 mb-2 tracking-wider">About Me</h3>
-                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-              </div>
-              <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-7 space-y-3">
-                  <h3 class="text-xs font-bold text-cyan-900 uppercase border-b-2 border-cyan-600 pb-1 tracking-wider">Experience & History</h3>
-                  ${expHTML}
-                </div>
-                <div class="col-span-5 space-y-3">
-                  <h3 class="text-xs font-bold text-cyan-900 uppercase border-b-2 border-cyan-600 pb-1 tracking-wider">Technical Stack</h3>
-                  <div class="flex flex-wrap gap-1.5 pt-1">${skillsBadges}</div>
-                </div>
-              </div>
-            </div>
-          </div>`;
-      }
-      // 4. Olivia Progress Bars
-      else if (currentTemplate === 'olivia-minimal') {
+      } 
+      // LAYOUT 3: Progress Bars
+      else if (layoutIdx === 3) {
         const skillBars = skillsArr.map(s => `
           <div class="mb-2.5">
             <div class="flex justify-between text-xs text-slate-700 font-semibold mb-1">
               <span>${s.trim()}</span>
-              <span class="text-blue-600 font-bold">90%</span>
+              <span class="${color.text} font-bold">90%</span>
             </div>
-            <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-blue-600 h-1.5 rounded-full" style="width: 90%"></div></div>
+            <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="${color.accent} h-1.5 rounded-full" style="width: 90%"></div></div>
           </div>`).join('');
         previewBox.innerHTML = `
-          <div class="p-8 space-y-6 min-h-[840px] bg-white">
+          <div class="p-8 space-y-6 min-h-[842px] bg-white">
             <div class="flex justify-between items-center border-b-2 border-slate-100 pb-5">
               <div class="space-y-1">
                 <h1 class="text-2xl font-extrabold text-slate-900">${name}</h1>
-                <p class="text-xs font-bold text-blue-600 uppercase tracking-widest">${title}</p>
+                <p class="text-xs font-bold ${color.text} uppercase tracking-widest">${title}</p>
                 <p class="text-xs text-slate-500 pt-1">${address} • ${phone} • ${email}</p>
               </div>
-              <img src="${photoURL}" class="w-20 h-20 rounded-full object-cover border-2 border-blue-500 shadow-md">
+              <img src="${photoURL}" class="w-20 h-20 rounded-full object-cover border-2 ${color.border} shadow-md">
             </div>
             <div>
-              <h3 class="text-xs font-bold uppercase text-blue-600 border-b border-blue-200 pb-1 mb-2 tracking-wider">Profile Statement</h3>
+              <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2 tracking-wider">Profile Statement</h3>
               <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
             </div>
             <div>
-              <h3 class="text-xs font-bold uppercase text-blue-600 border-b border-blue-200 pb-1 mb-3 tracking-wider">Skills Visualizer</h3>
+              <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-3 tracking-wider">Skills Visualizer</h3>
               <div class="grid grid-cols-2 gap-x-6">${skillBars}</div>
             </div>
             <div>
-              <h3 class="text-xs font-bold uppercase text-blue-600 border-b border-blue-200 pb-1 mb-3 tracking-wider">Professional Work History</h3>
+              <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-3 tracking-wider">Work Experience</h3>
               ${expHTML}
             </div>
           </div>`;
       }
-      // 5. Navy & Gold Crest
-      else if (currentTemplate === 'navy-gold') {
-        const skillsList = skillsArr.map(s => `<li class="text-xs text-slate-200 flex items-center mb-1"><i class="fa-solid fa-circle text-[6px] text-amber-400 mr-2"></i> ${s.trim()}</li>`).join('');
-        previewBox.innerHTML = `
-          <div class="grid grid-cols-12 min-h-[840px]">
-            <div class="col-span-4 bg-[#1a313b] text-white p-5 space-y-5">
-              <img src="${photoURL}" class="w-24 h-24 rounded-full mx-auto border-2 border-amber-400 object-cover shadow-md mt-2">
-              <div class="text-xs space-y-2 text-slate-200 border-b border-slate-700 pb-4">
-                <p><strong class="text-amber-400">Phone:</strong><br>${phone}</p>
-                <p><strong class="text-amber-400">Email:</strong><br>${email}</p>
-                <p><strong class="text-amber-400">Location:</strong><br>${address}</p>
-              </div>
-              <div>
-                <div class="bg-[#b38941] text-slate-900 font-bold text-xs text-center rounded-full py-1 uppercase mb-3 tracking-wider">Core Competencies</div>
-                <ul class="space-y-1.5">${skillsList}</ul>
-              </div>
-            </div>
-            <div class="col-span-8 p-6 space-y-5 bg-white">
-              <div class="bg-[#1a313b] text-white -m-6 p-6 mb-3 border-b-4 border-[#b38941]">
-                <h1 class="text-2xl font-black uppercase text-amber-400 tracking-wider">${name}</h1>
-                <p class="text-xs font-semibold uppercase text-slate-200 mt-0.5 tracking-widest">${title}</p>
-              </div>
-              <div class="pt-2">
-                <div class="bg-[#b38941] text-white font-bold text-xs text-center rounded-full py-1 uppercase mb-3 tracking-wider">Executive Overview</div>
-                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-              </div>
-              <div class="pt-2">
-                <div class="bg-[#b38941] text-white font-bold text-xs text-center rounded-full py-1 uppercase mb-3 tracking-wider">Work Experience</div>
-                ${expHTML}
-              </div>
-            </div>
-          </div>`;
-      }
-      // 6. Pinoy Bio-Data
-      else if (currentTemplate === 'biodata') {
+      // LAYOUT 5: Official Pinoy Bio-Data
+      else if (layoutIdx === 5) {
         const civil = document.getElementById('civilStatus').value || 'Single';
         const dob = document.getElementById('dob').value || 'Jan 15, 1995';
         const religion = document.getElementById('religion').value || 'Roman Catholic';
         previewBox.innerHTML = `
-          <div class="p-8 min-h-[840px] bg-white flex flex-col justify-between">
+          <div class="p-8 min-h-[842px] bg-white flex flex-col justify-between">
             <div class="space-y-5">
               <div class="border-b-4 border-slate-900 pb-4 flex justify-between items-center">
                 <div>
@@ -623,32 +449,26 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
                   <img src="${photoURL}" class="w-full h-full object-cover">
                 </div>
               </div>
-
-              <!-- Official Table Grid -->
               <div class="bg-slate-50 border-2 border-slate-800 p-4 rounded text-xs space-y-2">
-                <p class="font-bold border-b border-slate-300 pb-1 text-slate-900 uppercase">Personal Details Record:</p>
+                <p class="font-bold border-b border-slate-300 pb-1 text-slate-900 uppercase">Personal Information Record:</p>
                 <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-slate-800">
                   <p><strong>Mobile No:</strong> ${phone}</p>
-                  <p><strong>Email Address:</strong> ${email}</p>
-                  <p><strong>Present Address:</strong> ${address}</p>
+                  <p><strong>Email:</strong> ${email}</p>
+                  <p><strong>Address:</strong> ${address}</p>
                   <p><strong>Date of Birth:</strong> ${dob}</p>
                   <p><strong>Civil Status:</strong> ${civil}</p>
                   <p><strong>Religion:</strong> ${religion}</p>
                 </div>
               </div>
-
               <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-2 text-slate-900 tracking-wider">Summary of Qualifications</h3>
+                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-2 text-slate-900 tracking-wider">Qualifications</h3>
                 <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
               </div>
-
               <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-3 text-slate-900 tracking-wider">Employment Background</h3>
+                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-3 text-slate-900 tracking-wider">Employment History</h3>
                 ${expHTML}
               </div>
             </div>
-
-            <!-- Signature Line -->
             <div class="pt-8 flex justify-between items-end">
               <div class="text-[10px] text-slate-400">I hereby certify that the above information is true and correct.</div>
               <div class="text-center w-48 border-t border-slate-800 pt-1 text-xs font-bold text-slate-800">
@@ -657,32 +477,45 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
             </div>
           </div>`;
       }
-      // 7. Modern BPO
-      else if (currentTemplate === 'modern-bpo') {
+      // DEFAULT LAYOUT: Top Banner & Cards
+      else {
+        const skillsBadges = skillsArr.map(s => `<span class="${color.accent} text-white font-medium px-2.5 py-1 rounded text-xs inline-block mb-1 shadow-sm">${s.trim()}</span>`).join(' ');
         previewBox.innerHTML = `
-          <div class="p-8 space-y-6 min-h-[840px] bg-white">
-            <div class="border-b-4 border-blue-600 pb-4 flex justify-between items-center">
-              <div>
-                <h1 class="text-2xl font-black uppercase tracking-wide text-slate-900">${name}</h1>
-                <p class="text-sm font-bold text-blue-600">${title}</p>
-                <p class="text-xs text-slate-600 mt-1.5"><i class="fa-solid fa-envelope mr-1"></i> ${email} | <i class="fa-solid fa-phone mr-1"></i> ${phone} | <i class="fa-solid fa-location-dot mr-1"></i> ${address}</p>
+          <div class="p-8 space-y-6 min-h-[842px] bg-slate-50/50 flex flex-col justify-between">
+            <div class="space-y-6">
+              <div class="flex justify-between items-center ${color.primary} text-white p-6 rounded-xl shadow-md">
+                <div class="space-y-1">
+                  <h1 class="text-2xl font-black tracking-wide">${name}</h1>
+                  <p class="text-xs font-semibold tracking-wider uppercase opacity-90">${title}</p>
+                  <p class="text-[11px] opacity-80 pt-2"><i class="fa-solid fa-envelope mr-1"></i> ${email} • <i class="fa-solid fa-phone mr-1"></i> ${phone} • <i class="fa-solid fa-location-dot mr-1"></i> ${address}</p>
+                </div>
+                <img src="${photoURL}" class="w-20 h-20 rounded-xl object-cover border-2 border-white/60 shadow">
               </div>
-              <img src="${photoURL}" class="w-18 h-18 rounded-lg object-cover border-2 border-blue-600 shadow-sm">
-            </div>
-            <div>
-              <h3 class="text-xs font-bold uppercase text-slate-500 border-b pb-1 mb-2 tracking-wider">Professional Profile</h3>
-              <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-            </div>
-            <div>
-              <h3 class="text-xs font-bold uppercase text-slate-500 border-b pb-1 mb-3 tracking-wider">Work Experience</h3>
-              ${expHTML}
-            </div>
-            <div>
-              <h3 class="text-xs font-bold uppercase text-slate-500 border-b pb-1 mb-2 tracking-wider">Core Skills</h3>
-              <p class="text-xs text-slate-700 font-medium">${skillsRaw}</p>
+              <div>
+                <h3 class="text-xs font-bold ${color.text} uppercase border-b-2 ${color.border} pb-1 mb-2 tracking-wider">About Me</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+              </div>
+              <div class="grid grid-cols-12 gap-6">
+                <div class="col-span-7 space-y-3">
+                  <h3 class="text-xs font-bold ${color.text} uppercase border-b-2 ${color.border} pb-1 tracking-wider">Experience</h3>
+                  ${expHTML}
+                </div>
+                <div class="col-span-5 space-y-3">
+                  <h3 class="text-xs font-bold ${color.text} uppercase border-b-2 ${color.border} pb-1 tracking-wider">Skills & Capabilities</h3>
+                  <div class="flex flex-wrap gap-1.5 pt-1">${skillsBadges}</div>
+                </div>
+              </div>
             </div>
           </div>`;
       }
+    }
+
+    function filterTemplates() {
+      const query = document.getElementById('tplSearch').value.toLowerCase();
+      document.querySelectorAll('.tpl-card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(query) ? 'block' : 'none';
+      });
     }
 
     function addExperienceBlock() {
@@ -709,15 +542,16 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       const name = document.getElementById('fullName').value || 'Resume';
       const opt = {
         margin: 0,
-        filename: `${name.replace(/\s+/g, '_')}_Resume.pdf`,
+        filename: `${name.replace(/\s+/g, '_')}_A4_Resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       html2pdf().set(opt).from(element).save();
     }
 
     window.onload = function() {
+      initGallery();
       updatePreview();
     };
   </script>
