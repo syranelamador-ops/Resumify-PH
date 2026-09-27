@@ -17,15 +17,16 @@
     .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     
-    /* Strict Physical A4 Sizing (210mm x 297mm) */
+    /* Strict Physical A4 Capping (210mm x 296.5mm prevents blank 2nd page overflow) */
     .a4-paper {
       width: 210mm;
-      min-height: 297mm;
-      height: 297mm;
+      height: 296.5mm;
+      max-height: 296.5mm;
       background: white;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
       margin: 0 auto;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -169,7 +170,7 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
         
         <div class="flex justify-between items-center mb-3 w-[210mm]">
           <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Full A4 Canvas (210mm x 297mm)
+            <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Single-Page A4 Canvas
           </span>
           <span id="active-tpl-badge" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full border border-emerald-300 shadow-sm">
             Template #1
@@ -209,15 +210,15 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
   <script>
     let selectedTplIndex = 1;
 
-    // Headshots array to assign realistic profile photos
+    // Headshots array
     const profilePhotos = [
-      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=300',
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
-      'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300',
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300',
-      'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=300'
+      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400',
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400',
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400',
+      'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400',
+      'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400'
     ];
 
     let photoURL = profilePhotos[0];
@@ -345,7 +346,7 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
             bHTML = `<ul class="list-disc list-inside text-xs text-slate-700 space-y-1 mt-1 font-normal">${arr.map(item => `<li>${item}</li>`).join('')}</ul>`;
           }
           expHTML += `
-            <div class="mb-4">
+            <div class="mb-3">
               <div class="flex justify-between items-baseline">
                 <h4 class="text-sm font-bold text-slate-900">${r}</h4>
                 <span class="text-xs text-slate-500 font-medium">${d}</span>
@@ -360,16 +361,16 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
       const previewBox = document.getElementById('resume-preview');
 
-      // LAYOUT 0: Emerald/Sidebar Style (Fully Stretched A4 Height)
+      // LAYOUT 0: Emerald/Sidebar Style (Photo size: w-36 h-36)
       if (layoutIdx === 0) {
         const skillsPill = skillsArr.map(s => `<span class="block border border-white/40 bg-white/10 text-white rounded-lg px-2.5 py-1 text-xs text-center mb-1.5">${s.trim()}</span>`).join('');
         previewBox.innerHTML = `
-          <div class="grid grid-cols-12 h-full min-h-[297mm]">
+          <div class="grid grid-cols-12 h-full">
             <div class="col-span-4 ${color.primary} text-white p-5 space-y-5 flex flex-col justify-between h-full">
               <div class="space-y-5">
                 <div class="text-center pt-2">
-                  <img src="${photoURL}" class="w-24 h-24 rounded-full mx-auto mb-3 border-4 border-white/60 shadow-md object-cover">
-                  <h2 class="font-extrabold text-base uppercase tracking-wider">${name}</h2>
+                  <img src="${photoURL}" class="w-36 h-36 rounded-full mx-auto mb-3 border-4 border-white/70 shadow-lg object-cover">
+                  <h2 class="font-extrabold text-lg uppercase tracking-wider">${name}</h2>
                   <p class="text-xs opacity-90 mt-1 font-light">${title}</p>
                 </div>
                 <div>
@@ -386,73 +387,75 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
                 </div>
               </div>
             </div>
-            <div class="col-span-8 p-7 space-y-6 bg-white h-full">
+            <div class="col-span-8 p-7 space-y-5 bg-white h-full">
               <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-2.5 tracking-wider">Executive Summary</h3>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-2 tracking-wider">Executive Summary</h3>
                 <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
               </div>
               <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-3.5 tracking-wider">Professional Work Experience</h3>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-3 tracking-wider">Professional Work Experience</h3>
                 ${expHTML}
               </div>
             </div>
           </div>`;
       } 
-      // LAYOUT 3: Progress Bars
+      // LAYOUT 3: Progress Bars (Photo size: w-32 h-32)
       else if (layoutIdx === 3) {
         const skillBars = skillsArr.map(s => `
-          <div class="mb-2.5">
-            <div class="flex justify-between text-xs text-slate-700 font-semibold mb-1">
+          <div class="mb-2">
+            <div class="flex justify-between text-xs text-slate-700 font-semibold mb-0.5">
               <span>${s.trim()}</span>
               <span class="${color.text} font-bold">90%</span>
             </div>
             <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="${color.accent} h-1.5 rounded-full" style="width: 90%"></div></div>
           </div>`).join('');
         previewBox.innerHTML = `
-          <div class="p-8 space-y-6 h-full min-h-[297mm] bg-white">
-            <div class="flex justify-between items-center border-b-2 border-slate-100 pb-5">
-              <div class="space-y-1">
-                <h1 class="text-2xl font-extrabold text-slate-900">${name}</h1>
-                <p class="text-xs font-bold ${color.text} uppercase tracking-widest">${title}</p>
-                <p class="text-xs text-slate-500 pt-1">${address} • ${phone} • ${email}</p>
+          <div class="p-8 space-y-5 h-full bg-white flex flex-col justify-between">
+            <div class="space-y-5">
+              <div class="flex justify-between items-center border-b-2 border-slate-100 pb-4">
+                <div class="space-y-1">
+                  <h1 class="text-2xl font-extrabold text-slate-900">${name}</h1>
+                  <p class="text-xs font-bold ${color.text} uppercase tracking-widest">${title}</p>
+                  <p class="text-xs text-slate-500 pt-1">${address} • ${phone} • ${email}</p>
+                </div>
+                <img src="${photoURL}" class="w-32 h-32 rounded-full object-cover border-4 ${color.border} shadow-md flex-shrink-0">
               </div>
-              <img src="${photoURL}" class="w-20 h-20 rounded-full object-cover border-2 ${color.border} shadow-md">
-            </div>
-            <div>
-              <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2 tracking-wider">Profile Statement</h3>
-              <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-            </div>
-            <div>
-              <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-3 tracking-wider">Skills Visualizer</h3>
-              <div class="grid grid-cols-2 gap-x-6">${skillBars}</div>
-            </div>
-            <div>
-              <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-3 tracking-wider">Work Experience</h3>
-              ${expHTML}
+              <div>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2 tracking-wider">Profile Statement</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2 tracking-wider">Skills Visualizer</h3>
+                <div class="grid grid-cols-2 gap-x-6">${skillBars}</div>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-3 tracking-wider">Work Experience</h3>
+                ${expHTML}
+              </div>
             </div>
           </div>`;
       }
-      // LAYOUT 5: Official Pinoy Bio-Data
+      // LAYOUT 5: Official Pinoy Bio-Data (Photo size: w-32 h-36)
       else if (layoutIdx === 5) {
         const civil = document.getElementById('civilStatus').value || 'Single';
         const dob = document.getElementById('dob').value || 'Jan 15, 1995';
         const religion = document.getElementById('religion').value || 'Roman Catholic';
         previewBox.innerHTML = `
-          <div class="p-8 h-full min-h-[297mm] bg-white flex flex-col justify-between">
-            <div class="space-y-5">
-              <div class="border-b-4 border-slate-900 pb-4 flex justify-between items-center">
+          <div class="p-8 h-full bg-white flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="border-b-4 border-slate-900 pb-3 flex justify-between items-center">
                 <div>
                   <h1 class="text-2xl font-black uppercase tracking-widest text-slate-900">PERSONAL BIO-DATA</h1>
                   <h2 class="text-lg font-bold text-slate-800 mt-1">${name}</h2>
                   <p class="text-xs font-bold text-blue-800 uppercase tracking-wider">${title}</p>
                 </div>
-                <div class="w-24 h-24 border-2 border-slate-900 p-1 bg-white shadow-sm flex items-center justify-center">
+                <div class="w-32 h-36 border-2 border-slate-900 p-1 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
                   <img src="${photoURL}" class="w-full h-full object-cover">
                 </div>
               </div>
-              <div class="bg-slate-50 border-2 border-slate-800 p-4 rounded text-xs space-y-2">
+              <div class="bg-slate-50 border-2 border-slate-800 p-3 rounded text-xs space-y-1.5">
                 <p class="font-bold border-b border-slate-300 pb-1 text-slate-900 uppercase">Personal Information Record:</p>
-                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-slate-800">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-slate-800">
                   <p><strong>Mobile No:</strong> ${phone}</p>
                   <p><strong>Email:</strong> ${email}</p>
                   <p><strong>Address:</strong> ${address}</p>
@@ -462,15 +465,15 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
                 </div>
               </div>
               <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-2 text-slate-900 tracking-wider">Qualifications</h3>
+                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-1.5 text-slate-900 tracking-wider">Qualifications</h3>
                 <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
               </div>
               <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-3 text-slate-900 tracking-wider">Employment History</h3>
+                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-2 text-slate-900 tracking-wider">Employment History</h3>
                 ${expHTML}
               </div>
             </div>
-            <div class="pt-8 flex justify-between items-end">
+            <div class="pt-4 flex justify-between items-end">
               <div class="text-[10px] text-slate-400">I hereby certify that the above information is true and correct.</div>
               <div class="text-center w-48 border-t border-slate-800 pt-1 text-xs font-bold text-slate-800">
                 Applicant Signature
@@ -478,19 +481,19 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
             </div>
           </div>`;
       }
-      // DEFAULT LAYOUT: Top Banner & Cards
+      // DEFAULT LAYOUT: Top Banner & Cards (Photo size: w-32 h-32)
       else {
         const skillsBadges = skillsArr.map(s => `<span class="${color.accent} text-white font-medium px-2.5 py-1 rounded text-xs inline-block mb-1 shadow-sm">${s.trim()}</span>`).join(' ');
         previewBox.innerHTML = `
-          <div class="p-8 space-y-6 h-full min-h-[297mm] bg-slate-50/50 flex flex-col justify-between">
-            <div class="space-y-6">
+          <div class="p-8 space-y-5 h-full bg-slate-50/50 flex flex-col justify-between">
+            <div class="space-y-5">
               <div class="flex justify-between items-center ${color.primary} text-white p-6 rounded-xl shadow-md">
-                <div class="space-y-1">
+                <div class="space-y-1 pr-4">
                   <h1 class="text-2xl font-black tracking-wide">${name}</h1>
                   <p class="text-xs font-semibold tracking-wider uppercase opacity-90">${title}</p>
                   <p class="text-[11px] opacity-80 pt-2"><i class="fa-solid fa-envelope mr-1"></i> ${email} • <i class="fa-solid fa-phone mr-1"></i> ${phone} • <i class="fa-solid fa-location-dot mr-1"></i> ${address}</p>
                 </div>
-                <img src="${photoURL}" class="w-20 h-20 rounded-xl object-cover border-2 border-white/60 shadow">
+                <img src="${photoURL}" class="w-32 h-32 rounded-xl object-cover border-4 border-white/70 shadow-lg flex-shrink-0">
               </div>
               <div>
                 <h3 class="text-xs font-bold ${color.text} uppercase border-b-2 ${color.border} pb-1 mb-2 tracking-wider">About Me</h3>
@@ -547,7 +550,8 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
         filename: `${name.replace(/\s+/g, '_')}_A4_Resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: 'avoid-all' }
       };
       
       html2pdf().set(opt).from(element).save();
