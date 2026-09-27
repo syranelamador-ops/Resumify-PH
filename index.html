@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resumify PH - Resume & Bio-Data Builder</title>
+  <title>Resumify PH - Resume & Bio-Data Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -32,11 +32,32 @@
           <i class="fa-solid fa-gift mr-1"></i> FREE BETA
         </span>
         <button onclick="triggerDownload()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg text-sm transition flex items-center shadow-md">
-          <i class="fa-solid fa-download mr-2"></i> Download Resume
+          <i class="fa-solid fa-download mr-2"></i> Download PDF
         </button>
       </div>
     </div>
   </header>
+
+  <!-- Template Selector Bar -->
+  <div class="bg-white border-b border-slate-200 py-3 shadow-sm sticky top-[57px] z-40">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <span class="text-xs font-bold text-slate-600 uppercase tracking-wider flex items-center">
+        <i class="fa-solid fa-palette text-blue-600 mr-2"></i> Select Template (10 Styles):
+      </span>
+      <div class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto sm:overflow-visible">
+        <button onclick="switchTemplate('modern')" id="btn-modern" class="tpl-btn bg-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg transition shadow-sm">1. Modern BPO</button>
+        <button onclick="switchTemplate('biodata')" id="btn-biodata" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">2. Pinoy Bio-Data</button>
+        <button onclick="switchTemplate('executive')" id="btn-executive" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">3. Executive</button>
+        <button onclick="switchTemplate('minimal')" id="btn-minimal" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">4. Minimalist</button>
+        <button onclick="switchTemplate('tech')" id="btn-tech" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">5. Tech / VA</button>
+        <button onclick="switchTemplate('creative')" id="btn-creative" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">6. Creative Studio</button>
+        <button onclick="switchTemplate('healthcare')" id="btn-healthcare" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">7. Medical / Nursing</button>
+        <button onclick="switchTemplate('trades')" id="btn-trades" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">8. Skilled Trades</button>
+        <button onclick="switchTemplate('academic')" id="btn-academic" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">9. Fresh Grad</button>
+        <button onclick="switchTemplate('hospitality')" id="btn-hospitality" class="tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition">10. Retail / Hotel</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Main Workspace -->
   <main class="max-w-7xl mx-auto px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
@@ -52,23 +73,46 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
-            <input type="text" id="fullName" value="Juan Dela Cruz" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <input type="text" id="fullName" value="Juan Dela Cruz" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Target Job Title</label>
-            <input type="text" id="jobTitle" value="Customer Service Representative" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <input type="text" id="jobTitle" value="Customer Service Representative" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
-            <input type="email" id="email" value="juan.delacruz@gmail.com" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <input type="email" id="email" value="juan.delacruz@gmail.com" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Phone Number</label>
-            <input type="text" id="phone" value="+63 917 123 4567" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <input type="text" id="phone" value="+63 917 123 4567" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div class="sm:col-span-2">
             <label class="block text-xs font-semibold text-slate-600 mb-1">Location (City, Province)</label>
-            <input type="text" id="address" value="Quezon City, Metro Manila" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <input type="text" id="address" value="Quezon City, Metro Manila" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+          </div>
+        </div>
+
+        <!-- Extra Bio-Data / Photo Fields -->
+        <div id="biodata-extra-fields" class="mt-4 pt-4 border-t border-slate-200 hidden">
+          <p class="text-xs font-bold text-amber-700 mb-2">Extended Details & Photo Options:</p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600">Civil Status</label>
+              <input type="text" id="civilStatus" value="Single" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600">Date of Birth</label>
+              <input type="text" id="dob" value="Jan 15, 1998" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600">Religion</label>
+              <input type="text" id="religion" value="Roman Catholic" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
+            </div>
+            <div class="col-span-2 sm:col-span-3">
+              <label class="block text-[11px] font-semibold text-slate-600">Profile / 2x2 Photo Upload</label>
+              <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)" class="text-xs w-full p-1 border border-slate-300 rounded">
+            </div>
           </div>
         </div>
       </div>
@@ -83,49 +127,46 @@
             <i class="fa-solid fa-wand-magic-sparkles mr-1 text-indigo-500"></i> AI Polish
           </button>
         </div>
-        <textarea id="summary" rows="4" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">Dedicated and results-driven Customer Service Representative with 3+ years of experience handling inbound call resolution, technical troubleshooting, and account management for US telecommunications clients. Proven track record of maintaining a 95%+ Customer Satisfaction (CSAT) score.</textarea>
+        <textarea id="summary" rows="3" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">Dedicated and results-driven Customer Service Representative with 3+ years of experience in BPO voice and non-voice operations. CSAT rating consistently above 95%.</textarea>
       </div>
 
-      <!-- Work Experience (Dynamic) -->
+      <!-- Work Experience Section -->
       <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
         <div class="flex justify-between items-center mb-4">
           <h2 class="font-bold text-slate-800 text-lg flex items-center">
             <i class="fa-solid fa-briefcase text-blue-600 mr-2"></i> Work Experience
           </h2>
-          <button onclick="addExperienceBlock()" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-3 py-1.5 rounded-lg border border-blue-200 transition">
+          <button onclick="addExperienceBlock()" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-3 py-1.5 rounded-lg border border-blue-200">
             <i class="fa-solid fa-plus mr-1"></i> Add Experience
           </button>
         </div>
 
         <div id="experience-container" class="space-y-4">
-          <!-- Default Experience Entry 1 -->
-          <div class="exp-card border border-slate-200 p-4 rounded-lg bg-slate-50 relative space-y-3">
+          <div class="exp-card border border-slate-200 p-4 rounded-lg bg-slate-50 space-y-3">
             <div class="grid grid-cols-2 gap-2">
               <input type="text" class="exp-company text-sm p-2 border border-slate-300 rounded" value="Concentrix Philippines" placeholder="Company Name" oninput="updatePreview()">
               <input type="text" class="exp-role text-sm p-2 border border-slate-300 rounded" value="Senior CSR Agent" placeholder="Role / Position" oninput="updatePreview()">
             </div>
             <input type="text" class="exp-dates text-sm p-2 border border-slate-300 rounded w-full" value="2021 - Present" placeholder="Dates (e.g. 2021 - Present)" oninput="updatePreview()">
             <textarea class="exp-bullets text-sm p-2 border border-slate-300 rounded w-full" rows="3" placeholder="Key responsibilities (1 per line)" oninput="updatePreview()">Managed over 60+ customer inquiries daily via phone and live chat.
-Resolved complex billing inquiries and escalated technical issues promptly.
-Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
+Resolved complex billing inquiries and escalated technical issues promptly.</textarea>
           </div>
         </div>
       </div>
 
       <!-- Skills Section -->
       <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="font-bold text-slate-800 text-lg mb-3 flex items-center">
+        <h2 class="font-bold text-slate-800 text-lg mb-2 flex items-center">
           <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Expertise
         </h2>
-        <input type="text" id="skillsInput" value="Customer Service, Inbound Calls, Zendesk, Technical Support, Escalation Management, Active Listening" oninput="updatePreview()" placeholder="Separate skills with commas" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        <p class="text-[11px] text-slate-400 mt-1">Separate skills with commas (e.g. Communication, MS Excel, CRM)</p>
+        <input type="text" id="skillsInput" value="Customer Support, Technical Troubleshooting, Zendesk, Inbound Calls, Active Listening" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded">
       </div>
 
     </div>
 
-    <!-- Right Column: Live Resume Paper Preview -->
+    <!-- Right Column: Live Document Preview -->
     <div class="lg:col-span-6 flex flex-col items-center">
-      <div class="sticky top-20 w-full max-w-[595px]">
+      <div class="sticky top-28 w-full max-w-[595px]">
         
         <div class="flex justify-between items-center mb-3">
           <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">
@@ -136,38 +177,9 @@ Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
           </span>
         </div>
 
-        <!-- A4 Paper Box -->
+        <!-- Live Document Paper Area -->
         <div id="resume-preview" class="bg-white shadow-xl rounded-sm p-8 border border-slate-200 min-h-[750px] relative text-slate-800">
-          
-          <!-- Header -->
-          <div class="border-b-2 border-slate-800 pb-4 mb-5">
-            <h1 id="pv-name" class="text-2xl font-bold uppercase tracking-wide text-slate-900">Juan Dela Cruz</h1>
-            <p id="pv-title" class="text-md font-semibold text-blue-700 mt-0.5">Customer Service Representative</p>
-            <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600 mt-2">
-              <span><i class="fa-solid fa-envelope mr-1"></i> <span id="pv-email">juan.delacruz@gmail.com</span></span>
-              <span><i class="fa-solid fa-phone mr-1"></i> <span id="pv-phone">+63 917 123 4567</span></span>
-              <span><i class="fa-solid fa-location-dot mr-1"></i> <span id="pv-address">Quezon City, Metro Manila</span></span>
-            </div>
-          </div>
-
-          <!-- Summary Section -->
-          <div class="mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Professional Summary</h3>
-            <p id="pv-summary" class="text-xs leading-relaxed text-slate-700"></p>
-          </div>
-
-          <!-- Experience Section -->
-          <div class="mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Work Experience</h3>
-            <div id="pv-experience-list" class="space-y-3"></div>
-          </div>
-
-          <!-- Skills Section -->
-          <div class="mb-5">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Skills</h3>
-            <div id="pv-skills-list" class="flex flex-wrap gap-1.5 text-xs text-slate-700"></div>
-          </div>
-
+          <!-- Dynamically populated by JS based on current template -->
         </div>
 
       </div>
@@ -176,60 +188,332 @@ Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
   </main>
 
   <script>
-    function updatePreview() {
-      // Header Info
-      document.getElementById('pv-name').innerText = document.getElementById('fullName').value || 'Your Name';
-      document.getElementById('pv-title').innerText = document.getElementById('jobTitle').value || 'Target Job Title';
-      document.getElementById('pv-email').innerText = document.getElementById('email').value || 'email@domain.com';
-      document.getElementById('pv-phone').innerText = document.getElementById('phone').value || '+63 900 000 0000';
-      document.getElementById('pv-address').innerText = document.getElementById('address').value || 'City, Province';
-      document.getElementById('pv-summary').innerText = document.getElementById('summary').value;
+    let currentTemplate = 'modern';
+    let photoURL = '';
 
-      // Work Experience List
-      const expContainer = document.getElementById('pv-experience-list');
-      expContainer.innerHTML = '';
+    function switchTemplate(tpl) {
+      currentTemplate = tpl;
+      document.querySelectorAll('.tpl-btn').forEach(btn => {
+        btn.className = 'tpl-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-lg transition';
+      });
+      document.getElementById(`btn-${tpl}`).className = 'tpl-btn bg-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg transition shadow-sm';
       
-      const expCards = document.querySelectorAll('.exp-card');
-      expCards.forEach(card => {
-        const company = card.querySelector('.exp-company').value;
-        const role = card.querySelector('.exp-role').value;
-        const dates = card.querySelector('.exp-dates').value;
-        const bulletsText = card.querySelector('.exp-bullets').value;
+      const bioDataFields = document.getElementById('biodata-extra-fields');
+      if (tpl === 'biodata' || tpl === 'creative' || tpl === 'hospitality') {
+        bioDataFields.classList.remove('hidden');
+      } else {
+        bioDataFields.classList.add('hidden');
+      }
 
-        if (company || role) {
-          const item = document.createElement('div');
-          
-          let bulletsHTML = '';
-          if (bulletsText.trim() !== '') {
-            const arr = bulletsText.split('\n').filter(b => b.trim() !== '');
-            bulletsHTML = '<ul class="list-disc list-inside text-xs text-slate-700 space-y-0.5 pl-1 mt-1">' + 
-              arr.map(b => `<li>${b}</li>`).join('') + '</ul>';
+      updatePreview();
+    }
+
+    function loadPhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          photoURL = e.target.result;
+          updatePreview();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function updatePreview() {
+      const name = document.getElementById('fullName').value || 'Your Name';
+      const title = document.getElementById('jobTitle').value || 'Target Position';
+      const email = document.getElementById('email').value || 'email@domain.com';
+      const phone = document.getElementById('phone').value || '+63 900 000 0000';
+      const address = document.getElementById('address').value || 'City, Province';
+      const summary = document.getElementById('summary').value;
+      const skillsRaw = document.getElementById('skillsInput').value;
+
+      let expHTML = '';
+      document.querySelectorAll('.exp-card').forEach(card => {
+        const c = card.querySelector('.exp-company').value;
+        const r = card.querySelector('.exp-role').value;
+        const d = card.querySelector('.exp-dates').value;
+        const b = card.querySelector('.exp-bullets').value;
+        if (c || r) {
+          let bHTML = '';
+          if (b.trim() !== '') {
+            const arr = b.split('\n').filter(x => x.trim() !== '');
+            bHTML = `<ul class="list-disc list-inside text-xs text-slate-700 space-y-0.5 mt-1">${arr.map(item => `<li>${item}</li>`).join('')}</ul>`;
           }
-
-          item.innerHTML = `
-            <div class="flex justify-between items-baseline">
-              <h4 class="text-xs font-bold text-slate-800">${role || 'Position'}</h4>
-              <span class="text-[11px] text-slate-500 font-medium">${dates || ''}</span>
+          expHTML += `
+            <div class="mb-3">
+              <div class="flex justify-between items-baseline">
+                <h4 class="text-xs font-bold text-slate-800">${r}</h4>
+                <span class="text-[11px] text-slate-500 font-medium">${d}</span>
+              </div>
+              <p class="text-xs font-semibold text-blue-800">${c}</p>
+              ${bHTML}
             </div>
-            <p class="text-xs font-semibold text-blue-800">${company || ''}</p>
-            ${bulletsHTML}
           `;
-          expContainer.appendChild(item);
         }
       });
 
-      // Skills List
-      const skillsContainer = document.getElementById('pv-skills-list');
-      skillsContainer.innerHTML = '';
-      const skillsRaw = document.getElementById('skillsInput').value;
+      let skillsHTML = '';
       if (skillsRaw) {
-        const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
-        skillsArr.forEach(skill => {
-          const span = document.createElement('span');
-          span.className = 'bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 rounded text-[11px] font-medium';
-          span.innerText = skill.trim();
-          skillsContainer.appendChild(span);
-        });
+        const arr = skillsRaw.split(',').filter(s => s.trim() !== '');
+        skillsHTML = arr.map(s => `<span class="bg-slate-100 border border-slate-300 text-slate-800 px-2 py-0.5 rounded text-[11px] font-medium">${s.trim()}</span>`).join(' ');
+      }
+
+      const previewBox = document.getElementById('resume-preview');
+
+      // 1. Modern BPO
+      if (currentTemplate === 'modern') {
+        previewBox.innerHTML = `
+          <div class="border-b-2 border-slate-800 pb-4 mb-5">
+            <h1 class="text-2xl font-bold uppercase text-slate-900">${name}</h1>
+            <p class="text-md font-semibold text-blue-700 mt-0.5">${title}</p>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600 mt-2">
+              <span><i class="fa-solid fa-envelope mr-1"></i> ${email}</span>
+              <span><i class="fa-solid fa-phone mr-1"></i> ${phone}</span>
+              <span><i class="fa-solid fa-location-dot mr-1"></i> ${address}</span>
+            </div>
+          </div>
+          <div class="mb-5">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Professional Summary</h3>
+            <p class="text-xs leading-relaxed text-slate-700">${summary}</p>
+          </div>
+          <div class="mb-5">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Work Experience</h3>
+            ${expHTML}
+          </div>
+          <div class="mb-5">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 border-b border-slate-200 pb-1 mb-2">Skills & Expertise</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      } 
+      // 2. Pinoy Bio-Data
+      else if (currentTemplate === 'biodata') {
+        const civil = document.getElementById('civilStatus').value;
+        const dob = document.getElementById('dob').value;
+        const religion = document.getElementById('religion').value;
+        const imgDisplay = photoURL ? `<img src="${photoURL}" class="w-full h-full object-cover">` : `<span class="text-[10px] text-slate-400 font-bold">2x2 PHOTO</span>`;
+
+        previewBox.innerHTML = `
+          <div class="text-center border-b-2 border-slate-900 pb-3 mb-4 flex justify-between items-center">
+            <div class="text-left">
+              <h1 class="text-xl font-black uppercase text-slate-900 tracking-wider">PERSONAL BIO-DATA</h1>
+              <h2 class="text-lg font-bold text-slate-800 mt-1">${name}</h2>
+              <p class="text-xs text-slate-600">${title}</p>
+            </div>
+            <div class="w-24 h-24 border-2 border-slate-400 flex items-center justify-center text-center bg-slate-50">
+              ${imgDisplay}
+            </div>
+          </div>
+          <div class="mb-4 bg-slate-50 p-3 rounded border border-slate-200">
+            <h3 class="text-xs font-bold uppercase text-slate-700 mb-2 border-b border-slate-300 pb-1">Personal Info</h3>
+            <div class="grid grid-cols-2 text-xs space-y-1 text-slate-700">
+              <p><strong>Mobile:</strong> ${phone}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Address:</strong> ${address}</p>
+              <p><strong>Date of Birth:</strong> ${dob}</p>
+              <p><strong>Civil Status:</strong> ${civil}</p>
+              <p><strong>Religion:</strong> ${religion}</p>
+            </div>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold uppercase text-slate-800 border-b border-slate-400 pb-1 mb-2">Employment History</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase text-slate-800 border-b border-slate-400 pb-1 mb-2">Skills</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      } 
+      // 3. Executive Corporate
+      else if (currentTemplate === 'executive') {
+        previewBox.innerHTML = `
+          <div class="bg-slate-900 text-white -m-8 p-6 mb-6">
+            <h1 class="text-2xl font-black tracking-wide">${name}</h1>
+            <p class="text-sm font-medium text-blue-400 mt-1">${title}</p>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-300 mt-3">
+              <span><i class="fa-solid fa-envelope text-blue-400 mr-1"></i> ${email}</span>
+              <span><i class="fa-solid fa-phone text-blue-400 mr-1"></i> ${phone}</span>
+              <span><i class="fa-solid fa-location-dot text-blue-400 mr-1"></i> ${address}</span>
+            </div>
+          </div>
+          <div class="pt-2 mb-5">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 mb-2">About Me</h3>
+            <p class="text-xs leading-relaxed text-slate-700">${summary}</p>
+          </div>
+          <div class="mb-5">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 mb-2">Work Experience</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 mb-2">Core Competencies</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      }
+      // 4. Minimalist
+      else if (currentTemplate === 'minimal') {
+        previewBox.innerHTML = `
+          <div class="text-center pb-4 mb-4 border-b border-slate-200">
+            <h1 class="text-2xl font-light tracking-widest uppercase text-slate-900">${name}</h1>
+            <p class="text-xs tracking-widest text-slate-500 uppercase mt-1">${title}</p>
+            <p class="text-[11px] text-slate-400 mt-2">${email} • ${phone} • ${address}</p>
+          </div>
+          <div class="mb-4">
+            <p class="text-xs leading-relaxed text-slate-600 italic text-center">${summary}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-1 mb-3">Experience</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-1 mb-3">Skills</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      }
+      // 5. Tech / VA
+      else if (currentTemplate === 'tech') {
+        previewBox.innerHTML = `
+          <div class="border-l-4 border-indigo-600 pl-4 mb-5">
+            <h1 class="text-2xl font-black text-slate-900">${name}</h1>
+            <p class="text-sm font-bold text-indigo-600">${title}</p>
+            <div class="text-xs text-slate-500 mt-1 flex flex-wrap gap-3">
+              <span>${email}</span> • <span>${phone}</span> • <span>${address}</span>
+            </div>
+          </div>
+          <div class="bg-indigo-50/50 p-3 rounded mb-5 text-xs text-slate-700 leading-relaxed border border-indigo-100">
+            ${summary}
+          </div>
+          <div class="mb-5">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-900 mb-2">Technical & Work Experience</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-900 mb-2">Tech Stack & Tools</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      }
+      // 6. Creative Studio
+      else if (currentTemplate === 'creative') {
+        const imgDisplay = photoURL ? `<img src="${photoURL}" class="w-16 h-16 rounded-full object-cover border-2 border-pink-500">` : '';
+        previewBox.innerHTML = `
+          <div class="flex justify-between items-center bg-gradient-to-r from-purple-600 to-pink-500 text-white -m-8 p-6 mb-6">
+            <div>
+              <h1 class="text-2xl font-black tracking-wide">${name}</h1>
+              <p class="text-xs font-semibold text-pink-200 mt-0.5">${title}</p>
+              <p class="text-[10px] text-purple-100 mt-2">${email} | ${phone} | ${address}</p>
+            </div>
+            ${imgDisplay}
+          </div>
+          <div class="pt-2 mb-4">
+            <h3 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-1">About Me</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-2">Experience Highlights</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-2">Creative & Soft Skills</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      }
+      // 7. Healthcare / Nursing
+      else if (currentTemplate === 'healthcare') {
+        previewBox.innerHTML = `
+          <div class="border-b-2 border-emerald-600 pb-3 mb-4">
+            <h1 class="text-2xl font-bold text-emerald-900">${name}</h1>
+            <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">${title}</p>
+            <p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-hospital text-emerald-600 mr-1"></i> ${email} | ${phone} | ${address}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold text-emerald-800 uppercase border-b border-emerald-200 pb-1 mb-2">Clinical Profile</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold text-emerald-800 uppercase border-b border-emerald-200 pb-1 mb-2">Hospital & Clinical Experience</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-emerald-800 uppercase border-b border-emerald-200 pb-1 mb-2">Medical Skills & Competencies</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      }
+      // 8. Skilled Trades
+      else if (currentTemplate === 'trades') {
+        previewBox.innerHTML = `
+          <div class="bg-amber-500 text-slate-900 -m-8 p-5 mb-5 font-bold">
+            <h1 class="text-2xl uppercase tracking-wider">${name}</h1>
+            <p class="text-xs uppercase text-slate-800">${title}</p>
+            <div class="text-[11px] font-normal text-slate-900 mt-1">${phone} • ${email} • ${address}</div>
+          </div>
+          <div class="pt-2 mb-4">
+            <h3 class="text-xs font-black uppercase text-slate-800 border-b-2 border-slate-800 pb-1 mb-2">Profile Overview</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-black uppercase text-slate-800 border-b-2 border-slate-800 pb-1 mb-2">Work & Project History</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-black uppercase text-slate-800 border-b-2 border-slate-800 pb-1 mb-2">Certifications & Trade Skills</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      }
+      // 9. Fresh Grad / Academic
+      else if (currentTemplate === 'academic') {
+        previewBox.innerHTML = `
+          <div class="text-center border-b-2 border-slate-300 pb-3 mb-4">
+            <h1 class="text-xl font-bold text-slate-900">${name}</h1>
+            <p class="text-xs font-semibold text-slate-600">${title}</p>
+            <p class="text-[11px] text-slate-500 mt-1">${email} | ${phone} | ${address}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase border-b border-slate-300 pb-1 mb-1">Career Objective</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold text-slate-800 uppercase border-b border-slate-300 pb-1 mb-2">Internships & Student Experience</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-slate-800 uppercase border-b border-slate-300 pb-1 mb-2">Academic Skills & Tools</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
+      }
+      // 10. Hospitality / Retail
+      else if (currentTemplate === 'hospitality') {
+        const imgDisplay = photoURL ? `<img src="${photoURL}" class="w-16 h-16 rounded object-cover border border-slate-300">` : '';
+        previewBox.innerHTML = `
+          <div class="flex justify-between items-center border-b-2 border-teal-600 pb-3 mb-4">
+            <div>
+              <h1 class="text-xl font-bold text-teal-900 uppercase">${name}</h1>
+              <p class="text-xs font-semibold text-teal-600">${title}</p>
+              <p class="text-[11px] text-slate-600 mt-1">${phone} | ${email} | ${address}</p>
+            </div>
+            ${imgDisplay}
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold text-teal-800 uppercase border-b border-teal-200 pb-1 mb-1">Service Profile</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+          </div>
+          <div class="mb-4">
+            <h3 class="text-xs font-bold text-teal-800 uppercase border-b border-teal-200 pb-1 mb-2">Hospitality & Service Experience</h3>
+            ${expHTML}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-teal-800 uppercase border-b border-teal-200 pb-1 mb-2">Key Competencies</h3>
+            <div class="flex flex-wrap gap-1.5">${skillsHTML}</div>
+          </div>
+        `;
       }
     }
 
@@ -238,7 +522,7 @@ Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
       const div = document.createElement('div');
       div.className = 'exp-card border border-slate-200 p-4 rounded-lg bg-slate-50 relative space-y-3';
       div.innerHTML = `
-        <button onclick="this.parentElement.remove(); updatePreview();" class="absolute top-2 right-2 text-xs text-red-500 hover:text-red-700 font-bold px-2 py-1">
+        <button onclick="this.parentElement.remove(); updatePreview();" class="absolute top-2 right-2 text-xs text-red-500 font-bold px-2 py-1">
           <i class="fa-solid fa-trash mr-1"></i> Remove
         </button>
         <div class="grid grid-cols-2 gap-2 pt-2">
@@ -253,21 +537,20 @@ Awarded Top Performing Customer Specialist for Q3 2023.</textarea>
     }
 
     function aiPolishSummary() {
-      const summaryElem = document.getElementById('summary');
-      summaryElem.value = "Accomplished Customer Service Professional with a strong track record of delivering exceptional client support, driving high CSAT ratings, and managing account resolutions in fast-paced environments. Proficient in CRM platforms and communication tools.";
+      document.getElementById('summary').value = "Accomplished Customer Service Professional with a strong track record of delivering exceptional client support, driving high CSAT ratings, and managing account resolutions in fast-paced environments.";
       updatePreview();
-      alert("Summary polished with professional phrasing!");
+      alert("Summary polished!");
     }
 
     function triggerDownload() {
       const element = document.getElementById('resume-preview');
       const name = document.getElementById('fullName').value || 'Resume';
       const opt = {
-        margin:       0.5,
-        filename:     `${name.replace(/\s+/g, '_')}_Resume.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        margin: 0.4,
+        filename: `${name.replace(/\s+/g, '_')}_Resume.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
       html2pdf().set(opt).from(element).save();
     }
