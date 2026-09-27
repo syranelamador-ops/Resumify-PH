@@ -22,8 +22,8 @@
     /* Strict Pure A4 Dimensions */
     .a4-paper {
       width: 210mm;
-      height: 296.5mm;
-      min-height: 296.5mm;
+      height: 297mm;
+      min-height: 297mm;
       background: white;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
@@ -923,7 +923,19 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
     }
 
     function triggerDownload() {
-      const element = document.getElementById('resume-preview');
+      const original = document.getElementById('resume-preview');
+      
+      // Clone element to strip preview transforms without breaking screen preview
+      const clone = original.cloneNode(true);
+      clone.classList.remove('a4-screen-scaled');
+      clone.style.transform = 'none';
+      clone.style.margin = '0';
+      clone.style.position = 'fixed';
+      clone.style.left = '-9999px';
+      clone.style.top = '0';
+      
+      document.body.appendChild(clone);
+
       const opt = {
         margin:       0,
         filename:     'Resume_Resumify_A4.pdf',
@@ -932,7 +944,9 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save();
+      html2pdf().set(opt).from(clone).save().then(() => {
+        document.body.removeChild(clone);
+      });
     }
 
     // Initialize on load
