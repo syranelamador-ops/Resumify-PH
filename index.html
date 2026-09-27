@@ -11,13 +11,13 @@
     @media print {
       body * { visibility: hidden; }
       #resume-preview, #resume-preview * { visibility: visible; }
-      #resume-preview { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      #resume-preview { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; transform: none !important; }
     }
     .custom-scroll::-webkit-scrollbar { width: 6px; }
     .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     
-    /* Strict Physical A4 Capping (210mm x 296.5mm prevents blank 2nd page overflow) */
+    /* Strict A4 Dimensions */
     .a4-paper {
       width: 210mm;
       height: 296.5mm;
@@ -27,6 +27,31 @@
       box-sizing: border-box;
       margin: 0 auto;
       overflow: hidden;
+      transform-origin: top center;
+    }
+
+    /* Screen-Fitting Auto Scale for Preview Container */
+    .canvas-wrapper {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+
+    /* Auto Scale Preview Page to Fit Screen Perfectly */
+    @media (max-width: 1536px) {
+      .a4-paper-scaled {
+        transform: scale(0.72);
+        margin-bottom: -80mm; /* Pulls up bottom whitespace caused by CSS scale */
+      }
+    }
+    @media (max-width: 1280px) {
+      .a4-paper-scaled {
+        transform: scale(0.58);
+        margin-bottom: -120mm;
+      }
     }
   </style>
 </head>
@@ -51,39 +76,39 @@
   </header>
 
   <!-- Main 3-Column Workspace -->
-  <main class="max-w-[1600px] mx-auto px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
+  <main class="max-w-[1600px] mx-auto px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-5 w-full">
     
     <!-- LEFT COLUMN: Form Editor (4 cols) -->
-    <div class="lg:col-span-4 space-y-6">
+    <div class="lg:col-span-4 space-y-5">
       
       <!-- Personal Details -->
-      <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="font-bold text-slate-800 text-base mb-4 flex items-center justify-between">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="font-bold text-slate-800 text-sm mb-3 flex items-center justify-between">
           <span class="flex items-center"><i class="fa-solid fa-user text-blue-600 mr-2"></i> Personal Details</span>
           <span class="text-[10px] text-slate-400 uppercase font-semibold">Live Editable</span>
         </h2>
-        <div class="space-y-3">
+        <div class="space-y-2.5">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
-            <input type="text" id="fullName" value="Michael Johnson" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="fullName" value="Elena Rostova" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Target Job Title</label>
-            <input type="text" id="jobTitle" value="Senior Sales & Operations Manager" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="jobTitle" value="Executive Director of Marketing" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Email</label>
-              <input type="email" id="email" value="michael.j@example.com" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+              <input type="email" id="email" value="michael.j@example.com" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Phone</label>
-              <input type="text" id="phone" value="+63 917 888 2345" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+              <input type="text" id="phone" value="+63 917 888 2345" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
             </div>
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Location</label>
-            <input type="text" id="address" value="Makati City, Metro Manila" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="address" value="Makati City, Metro Manila" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Profile Photo</label>
@@ -92,94 +117,97 @@
         </div>
 
         <!-- Bio-Data Extra Fields -->
-        <div id="biodata-extra-fields" class="mt-4 pt-4 border-t border-slate-200">
+        <div id="biodata-extra-fields" class="mt-3 pt-3 border-t border-slate-200">
           <p class="text-xs font-bold text-amber-800 mb-2">Pinoy Bio-Data Details:</p>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="block text-[11px] font-semibold text-slate-600">Civil Status</label>
-              <input type="text" id="civilStatus" value="Married" oninput="updatePreview()" class="w-full text-sm p-1.5 border border-slate-300 rounded">
+              <input type="text" id="civilStatus" value="Married" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
             </div>
             <div>
               <label class="block text-[11px] font-semibold text-slate-600">Date of Birth</label>
-              <input type="text" id="dob" value="August 14, 1990" oninput="updatePreview()" class="w-full text-sm p-1.5 border border-slate-300 rounded">
+              <input type="text" id="dob" value="August 14, 1990" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
             </div>
             <div class="col-span-2">
               <label class="block text-[11px] font-semibold text-slate-600">Religion</label>
-              <input type="text" id="religion" value="Roman Catholic" oninput="updatePreview()" class="w-full text-sm p-1.5 border border-slate-300 rounded">
+              <input type="text" id="religion" value="Roman Catholic" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
             </div>
           </div>
         </div>
       </div>
 
       <!-- Professional Summary -->
-      <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="font-bold text-slate-800 text-base mb-2 flex items-center">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="font-bold text-slate-800 text-sm mb-2 flex items-center">
           <i class="fa-solid fa-pen-nib text-blue-600 mr-2"></i> Professional Summary
         </h2>
-        <textarea id="summary" rows="4" oninput="updatePreview()" class="w-full text-sm p-2.5 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">A results-driven Senior Manager with over 8 years of executive leadership in commercial enterprise sales, strategic operations, and key partner management. Skilled in scaling operations, leading multi-functional teams, and consistently surpassing revenue targets in competitive markets.</textarea>
+        <textarea id="summary" rows="3" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">Visionary Brand Strategist and Marketing Executive with 10+ years driving omnichannel campaigns across global FMCG brands.</textarea>
       </div>
 
       <!-- Experience -->
-      <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="font-bold text-slate-800 text-base flex items-center">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <div class="flex justify-between items-center mb-3">
+          <h2 class="font-bold text-slate-800 text-sm flex items-center">
             <i class="fa-solid fa-briefcase text-blue-600 mr-2"></i> Work Experience
           </h2>
-          <button onclick="addExperienceBlock()" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded border border-blue-200">
+          <button onclick="addExperienceBlock()" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-2 py-1 rounded border border-blue-200">
             <i class="fa-solid fa-plus mr-1"></i> Add Position
           </button>
         </div>
 
-        <div id="experience-container" class="space-y-4">
-          <div class="exp-card border border-slate-200 p-3 rounded-lg bg-slate-50 space-y-2">
+        <div id="experience-container" class="space-y-3">
+          <div class="exp-card border border-slate-200 p-2.5 rounded-lg bg-slate-50 space-y-1.5">
             <div class="grid grid-cols-2 gap-2">
-              <input type="text" class="exp-company text-sm p-1.5 border border-slate-300 rounded" value="Global Apex Logistics" placeholder="Company" oninput="updatePreview()">
-              <input type="text" class="exp-role text-sm p-1.5 border border-slate-300 rounded" value="Senior Operations Manager" placeholder="Role" oninput="updatePreview()">
+              <input type="text" class="exp-company text-xs p-1 border border-slate-300 rounded" value="Global Apex Logistics" placeholder="Company" oninput="updatePreview()">
+              <input type="text" class="exp-role text-xs p-1 border border-slate-300 rounded" value="Senior Operations Manager" placeholder="Role" oninput="updatePreview()">
             </div>
-            <input type="text" class="exp-dates text-sm p-1.5 border border-slate-300 rounded w-full" value="2021 - Present" placeholder="Dates" oninput="updatePreview()">
-            <textarea class="exp-bullets text-sm p-1.5 border border-slate-300 rounded w-full" rows="3" placeholder="Responsibilities" oninput="updatePreview()">Directly managed standard operations for 45 enterprise accounts across Southeast Asia.
+            <input type="text" class="exp-dates text-xs p-1 border border-slate-300 rounded w-full" value="2021 - Present" placeholder="Dates" oninput="updatePreview()">
+            <textarea class="exp-bullets text-xs p-1 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities" oninput="updatePreview()">Directly managed standard operations for 45 enterprise accounts across Southeast Asia.
 Boosted total regional quarterly profit margin by 28% through supply chain optimization.
 Mentored and led an agile high-performing workforce of 14 account managers.</textarea>
           </div>
 
-          <div class="exp-card border border-slate-200 p-3 rounded-lg bg-slate-50 space-y-2">
+          <div class="exp-card border border-slate-200 p-2.5 rounded-lg bg-slate-50 space-y-1.5">
             <div class="grid grid-cols-2 gap-2">
-              <input type="text" class="exp-company text-sm p-1.5 border border-slate-300 rounded" value="Metro Commercial Inc." placeholder="Company" oninput="updatePreview()">
-              <input type="text" class="exp-role text-sm p-1.5 border border-slate-300 rounded" value="Account Lead Associate" placeholder="Role" oninput="updatePreview()">
+              <input type="text" class="exp-company text-xs p-1 border border-slate-300 rounded" value="Metro Commercial Inc." placeholder="Company" oninput="updatePreview()">
+              <input type="text" class="exp-role text-xs p-1 border border-slate-300 rounded" value="Account Lead Associate" placeholder="Role" oninput="updatePreview()">
             </div>
-            <input type="text" class="exp-dates text-sm p-1.5 border border-slate-300 rounded w-full" value="2017 - 2021" placeholder="Dates" oninput="updatePreview()">
-            <textarea class="exp-bullets text-sm p-1.5 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities" oninput="updatePreview()">Expanded client retention rates to 94% through personalized CRM strategies.
+            <input type="text" class="exp-dates text-xs p-1 border border-slate-300 rounded w-full" value="2017 - 2021" placeholder="Dates" oninput="updatePreview()">
+            <textarea class="exp-bullets text-xs p-1 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities" oninput="updatePreview()">Expanded client retention rates to 94% through personalized CRM strategies.
 Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
           </div>
         </div>
       </div>
 
       <!-- Skills -->
-      <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="font-bold text-slate-800 text-base mb-2 flex items-center">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="font-bold text-slate-800 text-sm mb-2 flex items-center">
           <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Expertise
         </h2>
-        <input type="text" id="skillsInput" value="Strategic Planning, Revenue Expansion, Client Acquisition, Agile Leadership, Data Analytics, Commercial Negotiation" oninput="updatePreview()" class="w-full text-sm p-2 border border-slate-300 rounded">
+        <input type="text" id="skillsInput" value="Strategic Planning, Revenue Expansion, Client Acquisition, Agile Leadership, Data Analytics, Commercial Negotiation" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded">
       </div>
 
     </div>
 
-    <!-- MIDDLE COLUMN: Live Preview Canvas (5 cols) -->
-    <div class="lg:col-span-5 flex flex-col items-center overflow-x-auto">
+    <!-- MIDDLE COLUMN: Scaled Screen-Fitted Canvas (5 cols) -->
+    <div class="lg:col-span-5 flex flex-col items-center">
       <div class="sticky top-20 w-full flex flex-col items-center">
         
-        <div class="flex justify-between items-center mb-3 w-[210mm]">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center">
-            <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Single-Page A4 Canvas
+        <div class="flex justify-between items-center mb-2 w-full px-2">
+          <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center">
+            <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Live Canvas Preview
           </span>
-          <span id="active-tpl-badge" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full border border-emerald-300 shadow-sm">
-            Template #1
+          <span id="active-tpl-badge" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full border border-emerald-300 shadow-sm">
+            Template #2
           </span>
         </div>
 
-        <!-- Live Document Paper -->
-        <div id="resume-preview" class="a4-paper rounded border border-slate-300 overflow-hidden text-slate-800">
-          <!-- Rendered dynamically -->
+        <!-- Wrapper for center alignment and screen scaling -->
+        <div class="canvas-wrapper">
+          <!-- Scaled Document Paper -->
+          <div id="resume-preview" class="a4-paper a4-paper-scaled rounded border border-slate-300 text-slate-800">
+            <!-- Rendered dynamically -->
+          </div>
         </div>
 
       </div>
@@ -208,22 +236,17 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
   </main>
 
   <script>
-    let selectedTplIndex = 1;
+    let selectedTplIndex = 2;
 
-    // Headshots array
     const profilePhotos = [
-      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400',
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400',
+      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400',
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400',
-      'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400',
-      'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400'
+      'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400'
     ];
 
     let photoURL = profilePhotos[0];
 
-    // Color Palettes
     const colorSchemes = [
       { name: 'Emerald', primary: 'bg-emerald-900', text: 'text-emerald-900', border: 'border-emerald-800', accent: 'bg-emerald-600', light: 'bg-emerald-50' },
       { name: 'Maroon', primary: 'bg-rose-950', text: 'text-rose-950', border: 'border-rose-900', accent: 'bg-rose-700', light: 'bg-rose-50' },
@@ -237,22 +260,15 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       { name: 'Classic BioData', primary: 'bg-slate-900', text: 'text-slate-900', border: 'border-slate-900', accent: 'bg-slate-800', light: 'bg-slate-50' }
     ];
 
-    // Layout Models
     const layoutNames = [
       'Emerald Sidebar', 'Executive Split', 'Tech Stack Pills', 
       'Progress Bars', 'Gold Ribbon Crest', 'Official Pinoy Bio-Data', 
       'Modern BPO Header', 'Minimal Top Banner', 'Compact Grid', 'Bordered Frame'
     ];
 
-    // Preset Profiles
     const presetProfiles = [
-      { name: "Michael Johnson", title: "Senior Sales & Operations Manager", summary: "A results-driven Senior Manager with over 8 years of executive leadership in commercial enterprise sales, strategic operations, and key partner management." },
       { name: "Elena Rostova", title: "Executive Director of Marketing", summary: "Visionary Brand Strategist and Marketing Executive with 10+ years driving omnichannel campaigns across global FMCG brands." },
-      { name: "Nicholas Koe", title: "Lead Full-Stack Software Engineer", summary: "Innovative Full-Stack Engineer with 7 years of expertise building scalable cloud applications, high-throughput microservices, and web applications." },
-      { name: "Olivia Martinez", title: "Senior UI/UX & Product Designer", summary: "Detail-oriented Product Designer creating intuitive user experiences for Fintech and E-commerce platforms. Specialized in design systems and interactive prototyping." },
-      { name: "Larry Tibbetts", title: "Chief Financial & Investment Analyst", summary: "Senior Financial Consultant with extensive background in portfolio risk evaluation, corporate valuations, and capital allocation." },
-      { name: "Juan De La Cruz", title: "Administrative Support Officer", summary: "Reliable Administrative Assistant with 4+ years of dedicated service in records management, office logistics, and correspondence processing." },
-      { name: "Samantha Raye", title: "BPO Operations Team Lead", summary: "Dynamic Call Center Team Lead with 6+ years managing high-volume international US sales & customer care accounts." }
+      { name: "Michael Johnson", title: "Senior Sales & Operations Manager", summary: "A results-driven Senior Manager with over 8 years of executive leadership in commercial enterprise sales, strategic operations, and key partner management." }
     ];
 
     function initGallery() {
@@ -264,13 +280,13 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
         for (let c = 0; c < 10; c++) {
           const color = colorSchemes[c];
           const layout = layoutNames[l];
-          const isFirst = count === 1;
+          const isSelected = count === selectedTplIndex;
 
           html += `
-            <div onclick="switchTemplate(${count})" id="tpl-card-${count}" class="tpl-card cursor-pointer p-2.5 rounded-lg border transition hover:border-blue-400 ${isFirst ? 'border-2 border-emerald-600 bg-emerald-50/50 shadow-sm' : 'border-slate-200 bg-slate-50'}">
+            <div onclick="switchTemplate(${count})" id="tpl-card-${count}" class="tpl-card cursor-pointer p-2.5 rounded-lg border transition hover:border-blue-400 ${isSelected ? 'border-2 border-emerald-600 bg-emerald-50/50 shadow-sm' : 'border-slate-200 bg-slate-50'}">
               <div class="flex justify-between items-center">
                 <span class="font-bold text-xs text-slate-800">#${count}. ${color.name} ${layout}</span>
-                ${isFirst ? `<span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>` : ''}
+                ${isSelected ? `<span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>` : ''}
               </div>
               <p class="text-[10px] text-slate-500 mt-0.5">Style: ${layout} • ${color.name} Palette</p>
             </div>
@@ -298,13 +314,6 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
         }
       });
 
-      const profile = presetProfiles[(index - 1) % presetProfiles.length];
-      photoURL = profilePhotos[(index - 1) % profilePhotos.length];
-
-      document.getElementById('fullName').value = profile.name;
-      document.getElementById('jobTitle').value = profile.title;
-      document.getElementById('summary').value = profile.summary;
-
       updatePreview();
     }
 
@@ -321,7 +330,7 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
     }
 
     function updatePreview() {
-      const name = document.getElementById('fullName').value || 'Michael Johnson';
+      const name = document.getElementById('fullName').value || 'Elena Rostova';
       const title = document.getElementById('jobTitle').value || 'Professional Title';
       const email = document.getElementById('email').value || 'email@example.com';
       const phone = document.getElementById('phone').value || '+63 900 000 0000';
@@ -361,7 +370,7 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
       const previewBox = document.getElementById('resume-preview');
 
-      // LAYOUT 0: Emerald/Sidebar Style (Photo size: w-36 h-36)
+      // LAYOUT 0: Emerald/Sidebar Style
       if (layoutIdx === 0) {
         const skillsPill = skillsArr.map(s => `<span class="block border border-white/40 bg-white/10 text-white rounded-lg px-2.5 py-1 text-xs text-center mb-1.5">${s.trim()}</span>`).join('');
         previewBox.innerHTML = `
@@ -399,89 +408,7 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
             </div>
           </div>`;
       } 
-      // LAYOUT 3: Progress Bars (Photo size: w-32 h-32)
-      else if (layoutIdx === 3) {
-        const skillBars = skillsArr.map(s => `
-          <div class="mb-2">
-            <div class="flex justify-between text-xs text-slate-700 font-semibold mb-0.5">
-              <span>${s.trim()}</span>
-              <span class="${color.text} font-bold">90%</span>
-            </div>
-            <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="${color.accent} h-1.5 rounded-full" style="width: 90%"></div></div>
-          </div>`).join('');
-        previewBox.innerHTML = `
-          <div class="p-8 space-y-5 h-full bg-white flex flex-col justify-between">
-            <div class="space-y-5">
-              <div class="flex justify-between items-center border-b-2 border-slate-100 pb-4">
-                <div class="space-y-1">
-                  <h1 class="text-2xl font-extrabold text-slate-900">${name}</h1>
-                  <p class="text-xs font-bold ${color.text} uppercase tracking-widest">${title}</p>
-                  <p class="text-xs text-slate-500 pt-1">${address} • ${phone} • ${email}</p>
-                </div>
-                <img src="${photoURL}" class="w-32 h-32 rounded-full object-cover border-4 ${color.border} shadow-md flex-shrink-0">
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2 tracking-wider">Profile Statement</h3>
-                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2 tracking-wider">Skills Visualizer</h3>
-                <div class="grid grid-cols-2 gap-x-6">${skillBars}</div>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-3 tracking-wider">Work Experience</h3>
-                ${expHTML}
-              </div>
-            </div>
-          </div>`;
-      }
-      // LAYOUT 5: Official Pinoy Bio-Data (Photo size: w-32 h-36)
-      else if (layoutIdx === 5) {
-        const civil = document.getElementById('civilStatus').value || 'Single';
-        const dob = document.getElementById('dob').value || 'Jan 15, 1995';
-        const religion = document.getElementById('religion').value || 'Roman Catholic';
-        previewBox.innerHTML = `
-          <div class="p-8 h-full bg-white flex flex-col justify-between">
-            <div class="space-y-4">
-              <div class="border-b-4 border-slate-900 pb-3 flex justify-between items-center">
-                <div>
-                  <h1 class="text-2xl font-black uppercase tracking-widest text-slate-900">PERSONAL BIO-DATA</h1>
-                  <h2 class="text-lg font-bold text-slate-800 mt-1">${name}</h2>
-                  <p class="text-xs font-bold text-blue-800 uppercase tracking-wider">${title}</p>
-                </div>
-                <div class="w-32 h-36 border-2 border-slate-900 p-1 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
-                  <img src="${photoURL}" class="w-full h-full object-cover">
-                </div>
-              </div>
-              <div class="bg-slate-50 border-2 border-slate-800 p-3 rounded text-xs space-y-1.5">
-                <p class="font-bold border-b border-slate-300 pb-1 text-slate-900 uppercase">Personal Information Record:</p>
-                <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-slate-800">
-                  <p><strong>Mobile No:</strong> ${phone}</p>
-                  <p><strong>Email:</strong> ${email}</p>
-                  <p><strong>Address:</strong> ${address}</p>
-                  <p><strong>Date of Birth:</strong> ${dob}</p>
-                  <p><strong>Civil Status:</strong> ${civil}</p>
-                  <p><strong>Religion:</strong> ${religion}</p>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-1.5 text-slate-900 tracking-wider">Qualifications</h3>
-                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-800 pb-1 mb-2 text-slate-900 tracking-wider">Employment History</h3>
-                ${expHTML}
-              </div>
-            </div>
-            <div class="pt-4 flex justify-between items-end">
-              <div class="text-[10px] text-slate-400">I hereby certify that the above information is true and correct.</div>
-              <div class="text-center w-48 border-t border-slate-800 pt-1 text-xs font-bold text-slate-800">
-                Applicant Signature
-              </div>
-            </div>
-          </div>`;
-      }
-      // DEFAULT LAYOUT: Top Banner & Cards (Photo size: w-32 h-32)
+      // DEFAULT LAYOUT
       else {
         const skillsBadges = skillsArr.map(s => `<span class="${color.accent} text-white font-medium px-2.5 py-1 rounded text-xs inline-block mb-1 shadow-sm">${s.trim()}</span>`).join(' ');
         previewBox.innerHTML = `
@@ -525,17 +452,17 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
     function addExperienceBlock() {
       const container = document.getElementById('experience-container');
       const div = document.createElement('div');
-      div.className = 'exp-card border border-slate-200 p-3 rounded-lg bg-slate-50 relative space-y-2';
+      div.className = 'exp-card border border-slate-200 p-2.5 rounded-lg bg-slate-50 relative space-y-1.5';
       div.innerHTML = `
         <button onclick="this.parentElement.remove(); updatePreview();" class="absolute top-1 right-2 text-xs text-red-500 font-bold px-1 py-0.5">
           <i class="fa-solid fa-trash mr-1"></i> Remove
         </button>
         <div class="grid grid-cols-2 gap-2 pt-2">
-          <input type="text" class="exp-company text-sm p-1.5 border border-slate-300 rounded" placeholder="Company Name" oninput="updatePreview()">
-          <input type="text" class="exp-role text-sm p-1.5 border border-slate-300 rounded" placeholder="Role" oninput="updatePreview()">
+          <input type="text" class="exp-company text-xs p-1 border border-slate-300 rounded" placeholder="Company Name" oninput="updatePreview()">
+          <input type="text" class="exp-role text-xs p-1 border border-slate-300 rounded" placeholder="Role" oninput="updatePreview()">
         </div>
-        <input type="text" class="exp-dates text-sm p-1.5 border border-slate-300 rounded w-full" placeholder="Dates" oninput="updatePreview()">
-        <textarea class="exp-bullets text-sm p-1.5 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities (1 per line)" oninput="updatePreview()"></textarea>
+        <input type="text" class="exp-dates text-xs p-1 border border-slate-300 rounded w-full" placeholder="Dates" oninput="updatePreview()">
+        <textarea class="exp-bullets text-xs p-1 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities (1 per line)" oninput="updatePreview()"></textarea>
       `;
       container.appendChild(div);
       updatePreview();
