@@ -11,13 +11,15 @@
     @media print {
       body * { visibility: hidden; }
       #resume-preview, #resume-preview * { visibility: visible; }
-      #resume-preview { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; transform: none !important; }
+      #resume-preview { 
+        position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; transform: none !important; 
+      }
     }
     .custom-scroll::-webkit-scrollbar { width: 6px; }
     .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     
-    /* Strict A4 Dimensions */
+    /* Strict Pure A4 Dimensions */
     .a4-paper {
       width: 210mm;
       height: 296.5mm;
@@ -27,33 +29,29 @@
       box-sizing: border-box;
       margin: 0 auto;
       overflow: hidden;
-      transform-origin: top center;
+      flex-shrink: 0;
     }
 
-    .canvas-wrapper {
+    /* Screen Preview Container: Fitted nicely to center column */
+    .preview-viewport {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding-bottom: 3rem;
+      padding-bottom: 2rem;
     }
 
-    /* Zoomed-in Scaling for middle canvas */
-    .a4-paper-scaled {
-      transform: scale(0.85);
-      margin-bottom: -40mm;
+    /* Screen Scale Only */
+    .a4-screen-scaled {
+      transform: scale(0.62);
+      transform-origin: top center;
+      margin-bottom: -110mm; /* Pulls up bottom space caused by CSS scale */
     }
 
-    @media (max-width: 1536px) {
-      .a4-paper-scaled {
-        transform: scale(0.80);
-        margin-bottom: -55mm;
-      }
-    }
-    @media (max-width: 1280px) {
-      .a4-paper-scaled {
-        transform: scale(0.68);
-        margin-bottom: -90mm;
+    @media (min-width: 1536px) {
+      .a4-screen-scaled {
+        transform: scale(0.72);
+        margin-bottom: -80mm;
       }
     }
   </style>
@@ -194,8 +192,8 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
 
     </div>
 
-    <!-- MIDDLE COLUMN: Scaled Zoomed Canvas with Scrollbar (5 cols) -->
-    <div class="lg:col-span-5 flex flex-col items-center max-h-[calc(100vh-100px)] overflow-y-auto custom-scroll pr-2">
+    <!-- MIDDLE COLUMN: Fitted Screen Canvas (5 cols) -->
+    <div class="lg:col-span-5 flex flex-col items-center max-h-[calc(100vh-100px)] overflow-y-auto custom-scroll pr-1">
       <div class="w-full flex flex-col items-center">
         
         <div class="flex justify-between items-center mb-2 w-full px-2 sticky top-0 bg-slate-100 py-2 z-10">
@@ -207,9 +205,9 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
           </span>
         </div>
 
-        <!-- Wrapper for center alignment and zoomed scale -->
-        <div class="canvas-wrapper">
-          <div id="resume-preview" class="a4-paper a4-paper-scaled rounded border border-slate-300 text-slate-800">
+        <!-- Wrapper for canvas -->
+        <div class="preview-viewport">
+          <div id="resume-preview" class="a4-paper a4-screen-scaled rounded border border-slate-300 text-slate-800">
             <!-- Rendered dynamically -->
           </div>
         </div>
@@ -228,7 +226,7 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
         </div>
         
         <!-- Search Input -->
-        <input type="text" id="tplSearch" onkeyup="filterTemplates()" placeholder="Search template name or number..." class="w-full text-xs p-2 mb-3 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
+        <input type="text" id="tplSearch" onkeyup="filterTemplates()" placeholder="Search template..." class="w-full text-xs p-2 mb-3 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
 
         <!-- Scrollable Template Container -->
         <div id="template-gallery" class="custom-scroll overflow-y-auto space-y-2 pr-1 flex-1">
@@ -782,6 +780,9 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
       const element = document.getElementById('resume-preview');
       const name = document.getElementById('fullName').value || 'Resume';
       
+      // Temporarily remove CSS scaling class so PDF engine captures 100% full scale A4
+      element.classList.remove('a4-screen-scaled');
+
       const opt = {
         margin: 0,
         filename: `${name.replace(/\s+/g, '_')}_A4_Resume.pdf`,
@@ -790,8 +791,13 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         pagebreak: { mode: 'avoid-all' }
       };
-      
-      html2pdf().set(opt).from(element).save();
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        // Re-apply preview scaling right after download generates
+        element.classList.add('a4-screen-scaled');
+      }).catch(() => {
+        element.classList.add('a4-screen-scaled');
+      });
     }
 
     window.onload = function() {
