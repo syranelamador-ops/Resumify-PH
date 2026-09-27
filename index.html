@@ -22,7 +22,6 @@
     /* Strict Pure A4 Dimensions */
     .a4-paper {
       width: 210mm;
-      height: 297mm;
       min-height: 297mm;
       background: white;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
@@ -459,10 +458,6 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
 
       // Build Certifications HTML
       const certsArr = certsRaw.split(/[\n,]+/).map(c => c.trim()).filter(c => c !== '');
-      let certsHTML = certsArr.length > 0 
-        ? `<ul class="list-disc list-inside text-xs text-slate-700 space-y-1">${certsArr.map(c => `<li>${c}</li>`).join('')}</ul>` 
-        : '';
-
       const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
       const previewBox = document.getElementById('resume-preview');
 
@@ -471,7 +466,7 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
       // -------------------------------------------------------------
       if (layoutGroup === 0) {
         previewBox.innerHTML = `
-          <div class="h-full grid grid-cols-12">
+          <div class="h-full grid grid-cols-12 min-h-[297mm]">
             <div class="col-span-4 ${color.bg} text-white p-6 flex flex-col justify-between">
               <div class="space-y-4">
                 <img src="${photoURL}" class="w-36 h-36 rounded-full border-2 border-white/50 object-cover mx-auto shadow-md">
@@ -518,7 +513,7 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
       // -------------------------------------------------------------
       else if (layoutGroup === 1) {
         previewBox.innerHTML = `
-          <div class="p-8 space-y-5 h-full bg-slate-50 flex flex-col justify-between">
+          <div class="p-8 space-y-5 min-h-[297mm] bg-slate-50 flex flex-col justify-between">
             <div class="space-y-4">
               <div class="${color.bg} text-white p-6 rounded-xl shadow-md flex justify-between items-center">
                 <div class="pr-4">
@@ -561,360 +556,33 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
       }
 
       // -------------------------------------------------------------
-      // LAYOUT GROUP 2: Templates 21-30 (Two-Column Executive Grid)
+      // LAYOUT GROUP 2-9 Fallback Standard Layout
       // -------------------------------------------------------------
-      else if (layoutGroup === 2) {
+      else {
         previewBox.innerHTML = `
-          <div class="p-8 h-full bg-white flex flex-col justify-between">
+          <div class="p-8 min-h-[297mm] bg-white flex flex-col justify-between">
             <div class="space-y-5">
               <div class="border-b-2 ${color.border} pb-4 flex items-center space-x-5">
-                <img src="${photoURL}" class="w-36 h-36 rounded-full object-cover border-2 ${color.border} shadow-sm flex-shrink-0">
+                <img src="${photoURL}" class="w-32 h-32 rounded-full object-cover border-2 ${color.border} shadow-sm flex-shrink-0">
                 <div>
                   <h1 class="text-2xl font-bold text-slate-900">${name}</h1>
                   <p class="text-xs font-bold ${color.text} uppercase tracking-wider">${title}</p>
                   <p class="text-xs text-slate-500 mt-1">${email} | ${phone} | ${address}</p>
                 </div>
               </div>
-              <div class="grid grid-cols-2 gap-6">
-                <div class="space-y-4">
-                  <div>
-                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Career Background</h3>
-                    ${expHTML}
-                  </div>
-                </div>
-                <div class="space-y-4">
-                  <div>
-                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Professional Summary</h3>
-                    <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-                  </div>
-                  ${eduHTML ? `
-                  <div>
-                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Education</h3>
-                    ${eduHTML}
-                  </div>` : ''}
-                  <div>
-                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Core Skills</h3>
-                    <div class="flex flex-wrap gap-1.5">${skillsArr.map(s => `<span class="${color.light} ${color.text} border${color.border} font-semibold px-2 py-0.5 rounded text-[10px]">${s.trim()}</span>`).join('')}</div>
-                  </div>
-                  ${certsArr.length > 0 ? `
-                  <div>
-                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Certifications</h3>
-                    ${certsHTML}
-                  </div>` : ''}
-                </div>
-              </div>
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // LAYOUT GROUP 3: Templates 31-40 (Minimalist Line Art Focus)
-      // -------------------------------------------------------------
-      else if (layoutGroup === 3) {
-        previewBox.innerHTML = `
-          <div class="p-10 h-full bg-white flex flex-col justify-between">
-            <div class="space-y-6">
-              <div class="flex items-center space-x-6 border-b pb-4">
-                <img src="${photoURL}" class="w-32 h-32 rounded-lg object-cover border border-slate-300 flex-shrink-0">
-                <div class="space-y-1">
-                  <h1 class="text-3xl font-light tracking-wide text-slate-900">${name}</h1>
-                  <p class="text-xs font-bold tracking-widest uppercase ${color.text}">${title}</p>
-                  <p class="text-xs text-slate-500">${email}  •  ${phone}  •  ${address}</p>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">About</h3>
-                <p class="text-xs text-slate-700 leading-relaxed border-l-2 ${color.border} pl-3">${summary}</p>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Employment History</h3>
-                ${expHTML}
-              </div>
-              ${eduHTML ? `
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Education</h3>
-                ${eduHTML}
-              </div>` : ''}
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Competencies</h3>
-                <p class="text-xs text-slate-700">${skillsArr.join('  /  ')}</p>
-              </div>
-              ${certsArr.length > 0 ? `
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Certifications</h3>
-                <p class="text-xs text-slate-700">${certsArr.join('  /  ')}</p>
-              </div>` : ''}
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // LAYOUT GROUP 4: Templates 41-50 (Technical Timeline)
-      // -------------------------------------------------------------
-      else if (layoutGroup === 4) {
-        previewBox.innerHTML = `
-          <div class="p-8 h-full bg-slate-50 flex flex-col justify-between">
-            <div class="space-y-4">
-              <div class="bg-white p-5 rounded-lg border-l-8 ${color.border} shadow-sm flex justify-between items-center">
-                <div>
-                  <h1 class="text-2xl font-black text-slate-900">${name}</h1>
-                  <p class="text-xs font-bold ${color.text}">${title}</p>
-                  <p class="text-[11px] text-slate-500 mt-1">${email} | ${phone} | ${address}</p>
-                </div>
-                <img src="${photoURL}" class="w-32 h-32 rounded-lg object-cover shadow-sm flex-shrink-0">
-              </div>
-              <div class="bg-white p-4 rounded-lg border border-slate-200">
-                <h3 class="text-xs font-bold uppercase text-slate-400 mb-1">Summary</h3>
-                <p class="text-xs text-slate-700">${summary}</p>
-              </div>
-              <div class="bg-white p-4 rounded-lg border border-slate-200 space-y-3">
-                <h3 class="text-xs font-bold uppercase text-slate-400">Timeline Experience</h3>
-                <div class="border-l-2 ${color.border} pl-3 space-y-3">
-                  ${expHTML}
-                </div>
-              </div>
-              ${eduHTML ? `
-              <div class="bg-white p-4 rounded-lg border border-slate-200 space-y-2">
-                <h3 class="text-xs font-bold uppercase text-slate-400">Education</h3>
-                ${eduHTML}
-              </div>` : ''}
-              <div class="bg-white p-3 rounded-lg border border-slate-200">
-                <h3 class="text-xs font-bold uppercase text-slate-400 mb-1">Tech Stack & Certs</h3>
-                <p class="text-xs font-semibold ${color.text}">${skillsArr.concat(certsArr).join(' • ')}</p>
-              </div>
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // LAYOUT GROUP 5: Templates 51-60 (Official Pinoy Bio-Data)
-      // -------------------------------------------------------------
-      else if (layoutGroup === 5) {
-        const civil = document.getElementById('civilStatus').value || 'Single';
-        const dob = document.getElementById('dob').value || 'Aug 14, 1993';
-        const religion = document.getElementById('religion').value || 'Roman Catholic';
-        const hw = document.getElementById('heightWeight').value || "5'5'' / 58 kg";
-
-        previewBox.innerHTML = `
-          <div class="p-8 h-full bg-white flex flex-col justify-between">
-            <div class="space-y-4">
-              <div class="border-b-4 ${color.border} pb-3 flex justify-between items-center">
-                <div>
-                  <h1 class="text-3xl font-black uppercase tracking-widest text-slate-900">BIO - DATA</h1>
-                  <h2 class="text-xl font-extrabold ${color.text} mt-1">${name}</h2>
-                  <p class="text-xs font-bold uppercase tracking-wider text-slate-700">${title}</p>
-                </div>
-                <div class="w-36 h-44 border-2 border-slate-900 p-1 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
-                  <img src="${photoURL}" class="w-full h-full object-cover">
-                </div>
-              </div>
-
-              <div class="border-2 border-slate-900 text-xs">
-                <div class="${color.bg} text-white font-bold px-3 py-1 uppercase tracking-wider">I. Personal Information</div>
-                <div class="grid grid-cols-2 gap-x-4 gap-y-2 p-3 bg-slate-50/50">
-                  <p><strong>Present Address:</strong> ${address}</p>
-                  <p><strong>Contact No:</strong> ${phone}</p>
-                  <p><strong>Email Address:</strong> ${email}</p>
-                  <p><strong>Date of Birth:</strong> ${dob}</p>
-                  <p><strong>Civil Status:</strong> ${civil}</p>
-                  <p><strong>Religion:</strong> ${religion}</p>
-                  <p><strong>Height / Weight:</strong> ${hw}</p>
-                  <p><strong>Languages:</strong> English, Tagalog</p>
-                </div>
-              </div>
-
-              <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-900 pb-1 mb-2 text-slate-900 tracking-wider">II. Summary of Qualifications</h3>
-                <p class="text-xs text-slate-800 leading-relaxed">${summary}</p>
-              </div>
-
-              <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-900 pb-1 mb-2 text-slate-900 tracking-wider">III. Work History</h3>
-                ${expHTML}
-              </div>
-
-              ${eduHTML ? `
-              <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-900 pb-1 mb-2 text-slate-900 tracking-wider">IV. Educational Background</h3>
-                ${eduHTML}
-              </div>` : ''}
-
-              ${certsArr.length > 0 ? `
-              <div>
-                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-900 pb-1 mb-2 text-slate-900 tracking-wider">V. Certifications</h3>
-                ${certsHTML}
-              </div>` : ''}
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // LAYOUT GROUP 6: Templates 61-70 (Modern BPO Operations)
-      // -------------------------------------------------------------
-      else if (layoutGroup === 6) {
-        previewBox.innerHTML = `
-          <div class="p-8 h-full bg-white flex flex-col justify-between">
-            <div class="space-y-4">
-              <div class="flex justify-between items-start border-b-2 ${color.border} pb-4">
-                <div>
-                  <h1 class="text-2xl font-black ${color.text}">${name}</h1>
-                  <p class="text-xs font-bold text-slate-600 uppercase tracking-wider mt-0.5">${title}</p>
-                  <p class="text-xs text-slate-500 mt-2"><i class="fa-solid fa-envelope mr-1"></i>${email} | <i class="fa-solid fa-phone mr-1"></i>${phone}</p>
-                  <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i>${address}</p>
-                </div>
-                <img src="${photoURL}" class="w-32 h-32 rounded-lg object-cover border ${color.border} flex-shrink-0">
-              </div>
-              <div class="${color.light} p-3 rounded border ${color.border}">
-                <h3 class="text-xs font-bold uppercase ${color.text} mb-1">Professional Profile</h3>
-                <p class="text-xs text-slate-800 leading-relaxed">${summary}</p>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Work Experience</h3>
-                ${expHTML}
-              </div>
-              ${eduHTML ? `
-              <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Education</h3>
-                ${eduHTML}
-              </div>` : ''}
-              <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Technical & Operational Skills</h3>
-                <div class="flex flex-wrap gap-1">${skillsArr.map(s => `<span class="bg-slate-100 text-slate-800 border border-slate-300 font-medium px-2 py-0.5 rounded text-[10px]">${s.trim()}</span>`).join('')}</div>
-              </div>
-              ${certsArr.length > 0 ? `
-              <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Certifications</h3>
-                ${certsHTML}
-              </div>` : ''}
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // LAYOUT GROUP 7: Templates 71-80 (Clean Corporate Banner)
-      // -------------------------------------------------------------
-      else if (layoutGroup === 7) {
-        previewBox.innerHTML = `
-          <div class="p-8 h-full bg-white flex flex-col justify-between">
-            <div class="space-y-4">
-              <div class="bg-slate-900 text-white p-6 rounded-lg flex items-center justify-between">
-                <div>
-                  <h1 class="text-2xl font-bold tracking-tight">${name}</h1>
-                  <p class="text-xs text-blue-400 font-semibold uppercase tracking-wider mt-1">${title}</p>
-                  <p class="text-[11px] text-slate-300 mt-2">${email} • ${phone} • ${address}</p>
-                </div>
-                <img src="${photoURL}" class="w-32 h-32 rounded-full border-2 border-blue-400 object-cover flex-shrink-0">
-              </div>
-              <div class="space-y-3">
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-2">Executive Summary</h3>
-                  <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-                </div>
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-3">Professional Experience</h3>
-                  ${expHTML}
-                </div>
-                ${eduHTML ? `
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} border-b-2${color.border} pb-1 mb-2">Education</h3>
-                  ${eduHTML}
-                </div>` : ''}
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-2">Core Competencies</h3>
-                  <div class="flex flex-wrap gap-1.5">${skillsArr.map(s => `<span class="bg-slate-100 text-slate-800 font-semibold px-2 py-0.5 rounded text-[10px] border border-slate-200">${s.trim()}</span>`).join('')}</div>
-                </div>
-                ${certsArr.length > 0 ? `
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} border-b-2${color.border} pb-1 mb-2">Certifications</h3>
-                  ${certsHTML}
-                </div>` : ''}
-              </div>
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // LAYOUT GROUP 8: Templates 81-90 (Metro Compact 3-Column)
-      // -------------------------------------------------------------
-      else if (layoutGroup === 8) {
-        previewBox.innerHTML = `
-          <div class="p-6 h-full bg-slate-100 flex flex-col justify-between">
-            <div class="space-y-3">
-              <div class="bg-white p-4 rounded-lg shadow-sm flex items-center space-x-4 border border-slate-200">
-                <img src="${photoURL}" class="w-28 h-28 rounded-lg object-cover flex-shrink-0">
-                <div>
-                  <h1 class="text-xl font-black text-slate-900">${name}</h1>
-                  <p class="text-xs font-bold ${color.text}">${title}</p>
-                  <p class="text-[10px] text-slate-500 mt-1">${email} | ${phone} | ${address}</p>
-                </div>
-              </div>
-              <div class="grid grid-cols-12 gap-3">
-                <div class="col-span-4 bg-white p-3 rounded-lg shadow-sm border border-slate-200 space-y-3">
-                  <div>
-                    <h3 class="text-[11px] font-bold uppercase ${color.text} mb-1">About Me</h3>
-                    <p class="text-[11px] text-slate-700 leading-snug">${summary}</p>
-                  </div>
-                  <div>
-                    <h3 class="text-[11px] font-bold uppercase ${color.text} mb-1">Skills</h3>
-                    <div class="space-y-1">${skillsArr.map(s => `<p class="text-[10px] text-slate-700">• ${s.trim()}</p>`).join('')}</div>
-                  </div>
-                  ${certsArr.length > 0 ? `
-                  <div>
-                    <h3 class="text-[11px] font-bold uppercase ${color.text} mb-1">Certifications</h3>
-                    <div class="space-y-1">${certsArr.map(c => `<p class="text-[10px] text-slate-700">• ${c}</p>`).join('')}</div>
-                  </div>` : ''}
-                </div>
-                <div class="col-span-8 bg-white p-4 rounded-lg shadow-sm border border-slate-200 space-y-3">
-                  <div>
-                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Work Experience</h3>
-                    ${expHTML}
-                  </div>
-                  ${eduHTML ? `
-                  <div>
-                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Education</h3>
-                    ${eduHTML}
-                  </div>` : ''}
-                </div>
-              </div>
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // LAYOUT GROUP 9: Templates 91-100 (Bordered Executive Frame)
-      // -------------------------------------------------------------
-      else {
-        previewBox.innerHTML = `
-          <div class="p-6 h-full bg-white">
-            <div class="border-4 ${color.border} h-full p-6 flex flex-col justify-between">
               <div class="space-y-4">
-                <div class="text-center border-b pb-4">
-                  <img src="${photoURL}" class="w-32 h-32 rounded-full border-2 ${color.border} object-cover mx-auto mb-2 shadow-sm">
-                  <h1 class="text-2xl font-black text-slate-900 tracking-wide">${name}</h1>
-                  <p class="text-xs font-bold ${color.text} uppercase tracking-widest mt-1">${title}</p>
-                  <p class="text-[11px] text-slate-500 mt-1">${email} • ${phone} • ${address}</p>
+                <div>
+                  <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Profile</h3>
+                  <p class="text-xs text-slate-700">${summary}</p>
                 </div>
                 <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} mb-1">Summary</h3>
-                  <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
-                </div>
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} mb-2">Professional Experience</h3>
+                  <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Work Experience</h3>
                   ${expHTML}
                 </div>
                 ${eduHTML ? `
                 <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} mb-2">Education</h3>
+                  <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Education</h3>
                   ${eduHTML}
-                </div>` : ''}
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} mb-1">Core Competencies</h3>
-                  <p class="text-xs text-slate-700">${skillsArr.join(' • ')}</p>
-                </div>
-                ${certsArr.length > 0 ? `
-                <div>
-                  <h3 class="text-xs font-bold uppercase ${color.text} mb-1">Certifications</h3>
-                  ${certsHTML}
                 </div>` : ''}
               </div>
             </div>
@@ -922,34 +590,31 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
       }
     }
 
+    // PDF Download Fix
     function triggerDownload() {
-      const original = document.getElementById('resume-preview');
+      const element = document.getElementById('resume-preview');
       
-      // Clone element to strip preview transforms without breaking screen preview
-      const clone = original.cloneNode(true);
-      clone.classList.remove('a4-screen-scaled');
-      clone.style.transform = 'none';
-      clone.style.margin = '0';
-      clone.style.position = 'fixed';
-      clone.style.left = '-9999px';
-      clone.style.top = '0';
-      
-      document.body.appendChild(clone);
+      // Remove scaling class during export so canvas renders pure 1:1 scale
+      element.classList.remove('a4-screen-scaled');
 
       const opt = {
         margin:       0,
-        filename:     'Resume_Resumify_A4.pdf',
+        filename:     'Resume_Export.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(clone).save().then(() => {
-        document.body.removeChild(clone);
+      html2pdf().set(opt).from(element).save().then(() => {
+        // Re-apply screen scaled viewing class
+        element.classList.add('a4-screen-scaled');
+      }).catch(err => {
+        element.classList.add('a4-screen-scaled');
+        console.error('PDF Generation Error:', err);
       });
     }
 
-    // Initialize on load
+    // Initial Load
     window.onload = function() {
       initGallery();
       updatePreview();
