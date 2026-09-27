@@ -926,7 +926,7 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
 
       const opt = {
         margin:       0,
-        filename:     'Resume_Export.pdf',
+        filename:     `${document.getElementById('fullName').value || 'Resume'} - Resumify.PH.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
