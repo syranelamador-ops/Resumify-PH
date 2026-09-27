@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resumify PH - 100 A4 Resume & Bio-Data Generator</title>
+  <title>Resumify PH - 100 Unique A4 Resume & Bio-Data Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -30,7 +30,6 @@
       transform-origin: top center;
     }
 
-    /* Screen-Fitting Auto Scale for Preview Container */
     .canvas-wrapper {
       width: 100%;
       max-width: 100%;
@@ -40,17 +39,16 @@
       overflow: hidden;
     }
 
-    /* Auto Scale Preview Page to Fit Screen Perfectly */
     @media (max-width: 1536px) {
       .a4-paper-scaled {
-        transform: scale(0.72);
-        margin-bottom: -80mm; /* Pulls up bottom whitespace caused by CSS scale */
+        transform: scale(0.70);
+        margin-bottom: -85mm;
       }
     }
     @media (max-width: 1280px) {
       .a4-paper-scaled {
-        transform: scale(0.58);
-        margin-bottom: -120mm;
+        transform: scale(0.55);
+        margin-bottom: -130mm;
       }
     }
   </style>
@@ -64,7 +62,7 @@
         <div class="bg-blue-600 text-white font-black px-3 py-1 rounded-lg text-xl tracking-wider">100</div>
         <div>
           <h1 class="font-extrabold text-xl leading-none">Resumify<span class="text-blue-400">.ph</span></h1>
-          <p class="text-xs text-slate-400">100 Premium A4 Resume & Bio-Data Designs</p>
+          <p class="text-xs text-slate-400">100 Dynamic A4 Layouts & Colors</p>
         </div>
       </div>
       <div class="flex items-center space-x-3">
@@ -85,7 +83,6 @@
       <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
         <h2 class="font-bold text-slate-800 text-sm mb-3 flex items-center justify-between">
           <span class="flex items-center"><i class="fa-solid fa-user text-blue-600 mr-2"></i> Personal Details</span>
-          <span class="text-[10px] text-slate-400 uppercase font-semibold">Live Editable</span>
         </h2>
         <div class="space-y-2.5">
           <div>
@@ -94,12 +91,12 @@
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Target Job Title</label>
-            <input type="text" id="jobTitle" value="Executive Director of Marketing" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="jobTitle" value="Customer Operations Manager" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Email</label>
-              <input type="email" id="email" value="michael.j@example.com" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+              <input type="email" id="email" value="elena.rostova@example.com" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Phone</label>
@@ -108,7 +105,7 @@
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Location</label>
-            <input type="text" id="address" value="Makati City, Metro Manila" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="address" value="Quezon City, Metro Manila" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Profile Photo</label>
@@ -118,19 +115,23 @@
 
         <!-- Bio-Data Extra Fields -->
         <div id="biodata-extra-fields" class="mt-3 pt-3 border-t border-slate-200">
-          <p class="text-xs font-bold text-amber-800 mb-2">Pinoy Bio-Data Details:</p>
+          <p class="text-xs font-bold text-amber-800 mb-2">Pinoy Bio-Data Fields (Template #51-60):</p>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="block text-[11px] font-semibold text-slate-600">Civil Status</label>
-              <input type="text" id="civilStatus" value="Married" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
+              <input type="text" id="civilStatus" value="Single" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
             </div>
             <div>
               <label class="block text-[11px] font-semibold text-slate-600">Date of Birth</label>
-              <input type="text" id="dob" value="August 14, 1990" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
+              <input type="text" id="dob" value="August 14, 1993" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
             </div>
-            <div class="col-span-2">
+            <div>
               <label class="block text-[11px] font-semibold text-slate-600">Religion</label>
               <input type="text" id="religion" value="Roman Catholic" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600">Height / Weight</label>
+              <input type="text" id="heightWeight" value="5'5'' / 58 kg" oninput="updatePreview()" class="w-full text-xs p-1.5 border border-slate-300 rounded">
             </div>
           </div>
         </div>
@@ -141,7 +142,7 @@
         <h2 class="font-bold text-slate-800 text-sm mb-2 flex items-center">
           <i class="fa-solid fa-pen-nib text-blue-600 mr-2"></i> Professional Summary
         </h2>
-        <textarea id="summary" rows="3" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">Visionary Brand Strategist and Marketing Executive with 10+ years driving omnichannel campaigns across global FMCG brands.</textarea>
+        <textarea id="summary" rows="3" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500">BPO Operations Team Lead with 7+ years managing Tier-3 US Telco and FinTech accounts. Specialized in CSAT enhancement, SLA management, and workforce scheduling.</textarea>
       </div>
 
       <!-- Experience -->
@@ -158,23 +159,22 @@
         <div id="experience-container" class="space-y-3">
           <div class="exp-card border border-slate-200 p-2.5 rounded-lg bg-slate-50 space-y-1.5">
             <div class="grid grid-cols-2 gap-2">
-              <input type="text" class="exp-company text-xs p-1 border border-slate-300 rounded" value="Global Apex Logistics" placeholder="Company" oninput="updatePreview()">
-              <input type="text" class="exp-role text-xs p-1 border border-slate-300 rounded" value="Senior Operations Manager" placeholder="Role" oninput="updatePreview()">
+              <input type="text" class="exp-company text-xs p-1 border border-slate-300 rounded" value="Concentric BPO Services" placeholder="Company" oninput="updatePreview()">
+              <input type="text" class="exp-role text-xs p-1 border border-slate-300 rounded" value="Team Lead - Technical Support" placeholder="Role" oninput="updatePreview()">
             </div>
             <input type="text" class="exp-dates text-xs p-1 border border-slate-300 rounded w-full" value="2021 - Present" placeholder="Dates" oninput="updatePreview()">
-            <textarea class="exp-bullets text-xs p-1 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities" oninput="updatePreview()">Directly managed standard operations for 45 enterprise accounts across Southeast Asia.
-Boosted total regional quarterly profit margin by 28% through supply chain optimization.
-Mentored and led an agile high-performing workforce of 14 account managers.</textarea>
+            <textarea class="exp-bullets text-xs p-1 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities" oninput="updatePreview()">Maintained 96.5% CSAT score across 25 customer support agents.
+Reduced First Contact Resolution (FCR) turnaround time by 32% using CRM workflows.</textarea>
           </div>
 
           <div class="exp-card border border-slate-200 p-2.5 rounded-lg bg-slate-50 space-y-1.5">
             <div class="grid grid-cols-2 gap-2">
-              <input type="text" class="exp-company text-xs p-1 border border-slate-300 rounded" value="Metro Commercial Inc." placeholder="Company" oninput="updatePreview()">
-              <input type="text" class="exp-role text-xs p-1 border border-slate-300 rounded" value="Account Lead Associate" placeholder="Role" oninput="updatePreview()">
+              <input type="text" class="exp-company text-xs p-1 border border-slate-300 rounded" value="Teleperformance PH" placeholder="Company" oninput="updatePreview()">
+              <input type="text" class="exp-role text-xs p-1 border border-slate-300 rounded" value="Senior Customer Care Agent" placeholder="Role" oninput="updatePreview()">
             </div>
-            <input type="text" class="exp-dates text-xs p-1 border border-slate-300 rounded w-full" value="2017 - 2021" placeholder="Dates" oninput="updatePreview()">
-            <textarea class="exp-bullets text-xs p-1 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities" oninput="updatePreview()">Expanded client retention rates to 94% through personalized CRM strategies.
-Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
+            <input type="text" class="exp-dates text-xs p-1 border border-slate-300 rounded w-full" value="2018 - 2021" placeholder="Dates" oninput="updatePreview()">
+            <textarea class="exp-bullets text-xs p-1 border border-slate-300 rounded w-full" rows="2" placeholder="Responsibilities" oninput="updatePreview()">Awarded Agent of the Quarter twice for exceeding escalation containment goals.
+Handled inbound billing and tech inquiries for North American telecom clients.</textarea>
           </div>
         </div>
       </div>
@@ -182,9 +182,9 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       <!-- Skills -->
       <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
         <h2 class="font-bold text-slate-800 text-sm mb-2 flex items-center">
-          <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Expertise
+          <i class="fa-solid fa-list-check text-blue-600 mr-2"></i> Skills & Tools
         </h2>
-        <input type="text" id="skillsInput" value="Strategic Planning, Revenue Expansion, Client Acquisition, Agile Leadership, Data Analytics, Commercial Negotiation" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded">
+        <input type="text" id="skillsInput" value="Zendesk, Salesforce CRM, Avaya, Escalation Handling, CSAT Optimization, SLA Compliance, Team Coaching" oninput="updatePreview()" class="w-full text-xs p-2 border border-slate-300 rounded">
       </div>
 
     </div>
@@ -198,13 +198,12 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
             <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Live Canvas Preview
           </span>
           <span id="active-tpl-badge" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full border border-emerald-300 shadow-sm">
-            Template #2
+            Template #1
           </span>
         </div>
 
         <!-- Wrapper for center alignment and screen scaling -->
         <div class="canvas-wrapper">
-          <!-- Scaled Document Paper -->
           <div id="resume-preview" class="a4-paper a4-paper-scaled rounded border border-slate-300 text-slate-800">
             <!-- Rendered dynamically -->
           </div>
@@ -220,11 +219,11 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
           <h2 class="font-bold text-slate-800 text-sm flex items-center">
             <i class="fa-solid fa-palette text-blue-600 mr-2"></i> Template Gallery
           </h2>
-          <span class="text-xs font-bold text-slate-400">100 Designs</span>
+          <span class="text-xs font-bold text-slate-400">100 Unique</span>
         </div>
         
         <!-- Search Input -->
-        <input type="text" id="tplSearch" onkeyup="filterTemplates()" placeholder="Search #, color, style..." class="w-full text-xs p-2 mb-3 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
+        <input type="text" id="tplSearch" onkeyup="filterTemplates()" placeholder="Search template name or number..." class="w-full text-xs p-2 mb-3 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
 
         <!-- Scrollable Template Container -->
         <div id="template-gallery" class="custom-scroll overflow-y-auto space-y-2 pr-1 flex-1">
@@ -236,63 +235,63 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
   </main>
 
   <script>
-    let selectedTplIndex = 2;
+    let selectedTplIndex = 1;
 
     const profilePhotos = [
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400',
       'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400',
-      'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400'
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400'
     ];
 
     let photoURL = profilePhotos[0];
 
     const colorSchemes = [
-      { name: 'Emerald', primary: 'bg-emerald-900', text: 'text-emerald-900', border: 'border-emerald-800', accent: 'bg-emerald-600', light: 'bg-emerald-50' },
-      { name: 'Maroon', primary: 'bg-rose-950', text: 'text-rose-950', border: 'border-rose-900', accent: 'bg-rose-700', light: 'bg-rose-50' },
-      { name: 'Navy', primary: 'bg-slate-900', text: 'text-slate-900', border: 'border-slate-900', accent: 'bg-blue-600', light: 'bg-slate-100' },
-      { name: 'Cyan Tech', primary: 'bg-cyan-900', text: 'text-cyan-900', border: 'border-cyan-600', accent: 'bg-cyan-600', light: 'bg-cyan-50' },
-      { name: 'Indigo', primary: 'bg-indigo-900', text: 'text-indigo-900', border: 'border-indigo-800', accent: 'bg-indigo-600', light: 'bg-indigo-50' },
-      { name: 'Teal Crest', primary: 'bg-teal-900', text: 'text-teal-900', border: 'border-teal-800', accent: 'bg-teal-600', light: 'bg-teal-50' },
-      { name: 'Gold Navy', primary: 'bg-[#1a313b]', text: 'text-[#1a313b]', border: 'border-[#b38941]', accent: 'bg-[#b38941]', light: 'bg-amber-50' },
-      { name: 'Purple Luxe', primary: 'bg-purple-950', text: 'text-purple-950', border: 'border-purple-800', accent: 'bg-purple-700', light: 'bg-purple-50' },
-      { name: 'Slate Steel', primary: 'bg-slate-800', text: 'text-slate-800', border: 'border-slate-700', accent: 'bg-slate-600', light: 'bg-slate-100' },
-      { name: 'Classic BioData', primary: 'bg-slate-900', text: 'text-slate-900', border: 'border-slate-900', accent: 'bg-slate-800', light: 'bg-slate-50' }
+      { name: 'Emerald', bg: 'bg-emerald-900', text: 'text-emerald-900', border: 'border-emerald-800', accent: 'bg-emerald-600', light: 'bg-emerald-50' },
+      { name: 'Maroon', bg: 'bg-rose-950', text: 'text-rose-950', border: 'border-rose-900', accent: 'bg-rose-700', light: 'bg-rose-50' },
+      { name: 'Navy', bg: 'bg-slate-900', text: 'text-slate-900', border: 'border-slate-900', accent: 'bg-blue-600', light: 'bg-slate-100' },
+      { name: 'Cyan Tech', bg: 'bg-cyan-900', text: 'text-cyan-900', border: 'border-cyan-600', accent: 'bg-cyan-600', light: 'bg-cyan-50' },
+      { name: 'Indigo', bg: 'bg-indigo-900', text: 'text-indigo-900', border: 'border-indigo-800', accent: 'bg-indigo-600', light: 'bg-indigo-50' },
+      { name: 'Teal Crest', bg: 'bg-teal-900', text: 'text-teal-900', border: 'border-teal-800', accent: 'bg-teal-600', light: 'bg-teal-50' },
+      { name: 'Gold Navy', bg: 'bg-[#1a313b]', text: 'text-[#1a313b]', border: 'border-[#b38941]', accent: 'bg-[#b38941]', light: 'bg-amber-50' },
+      { name: 'Purple Luxe', bg: 'bg-purple-950', text: 'text-purple-950', border: 'border-purple-800', accent: 'bg-purple-700', light: 'bg-purple-50' },
+      { name: 'Slate Steel', bg: 'bg-slate-800', text: 'text-slate-800', border: 'border-slate-700', accent: 'bg-slate-600', light: 'bg-slate-100' },
+      { name: 'Charcoal Dark', bg: 'bg-neutral-900', text: 'text-neutral-900', border: 'border-neutral-800', accent: 'bg-neutral-700', light: 'bg-neutral-100' }
     ];
 
-    const layoutNames = [
-      'Emerald Sidebar', 'Executive Split', 'Tech Stack Pills', 
-      'Progress Bars', 'Gold Ribbon Crest', 'Official Pinoy Bio-Data', 
-      'Modern BPO Header', 'Minimal Top Banner', 'Compact Grid', 'Bordered Frame'
-    ];
-
-    const presetProfiles = [
-      { name: "Elena Rostova", title: "Executive Director of Marketing", summary: "Visionary Brand Strategist and Marketing Executive with 10+ years driving omnichannel campaigns across global FMCG brands." },
-      { name: "Michael Johnson", title: "Senior Sales & Operations Manager", summary: "A results-driven Senior Manager with over 8 years of executive leadership in commercial enterprise sales, strategic operations, and key partner management." }
+    const layoutTypes = [
+      'Split Sidebar Modern',       // 1 to 10
+      'Top Modern Banner',          // 11 to 20
+      'Two-Column Executive Grid',  // 21 to 30
+      'Minimalist Line Art',        // 31 to 40
+      'Technical Timeline',         // 41 to 50
+      'Official Pinoy Bio-Data',    // 51 to 60
+      'Modern BPO Operations',      // 61 to 70
+      'Clean Corporate Banner',     // 71 to 80
+      'Metro Compact 3-Column',     // 81 to 90
+      'Bordered Executive Frame'    // 91 to 100
     ];
 
     function initGallery() {
       const gallery = document.getElementById('template-gallery');
       let html = '';
-      let count = 1;
 
-      for (let l = 0; l < 10; l++) {
-        for (let c = 0; c < 10; c++) {
-          const color = colorSchemes[c];
-          const layout = layoutNames[l];
-          const isSelected = count === selectedTplIndex;
+      for (let i = 1; i <= 100; i++) {
+        const layoutIdx = Math.floor((i - 1) / 10);
+        const colorIdx = (i - 1) % 10;
+        
+        const layoutName = layoutTypes[layoutIdx];
+        const colorName = colorSchemes[colorIdx].name;
+        const isSelected = i === selectedTplIndex;
 
-          html += `
-            <div onclick="switchTemplate(${count})" id="tpl-card-${count}" class="tpl-card cursor-pointer p-2.5 rounded-lg border transition hover:border-blue-400 ${isSelected ? 'border-2 border-emerald-600 bg-emerald-50/50 shadow-sm' : 'border-slate-200 bg-slate-50'}">
-              <div class="flex justify-between items-center">
-                <span class="font-bold text-xs text-slate-800">#${count}. ${color.name} ${layout}</span>
-                ${isSelected ? `<span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>` : ''}
-              </div>
-              <p class="text-[10px] text-slate-500 mt-0.5">Style: ${layout} • ${color.name} Palette</p>
+        html += `
+          <div onclick="switchTemplate(${i})" id="tpl-card-${i}" class="tpl-card cursor-pointer p-2.5 rounded-lg border transition hover:border-blue-400 ${isSelected ? 'border-2 border-emerald-600 bg-emerald-50/50 shadow-sm' : 'border-slate-200 bg-slate-50'}">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-xs text-slate-800">#${i}. ${layoutName}</span>
+              ${isSelected ? `<span class="badge-active text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded">Active</span>` : ''}
             </div>
-          `;
-          count++;
-        }
+            <p class="text-[10px] text-slate-500 mt-0.5">Color: <span class="font-semibold text-slate-700">${colorName}</span></p>
+          </div>
+        `;
       }
       gallery.innerHTML = html;
     }
@@ -338,8 +337,8 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       const summary = document.getElementById('summary').value;
       const skillsRaw = document.getElementById('skillsInput').value;
 
-      const layoutIdx = Math.floor((selectedTplIndex - 1) / 10);
-      const colorIdx = (selectedTplIndex - 1) % 10;
+      const layoutGroup = Math.floor((selectedTplIndex - 1) / 10); // 0 to 9
+      const colorIdx = (selectedTplIndex - 1) % 10;               // 0 to 9
       const color = colorSchemes[colorIdx];
 
       let expHTML = '';
@@ -357,8 +356,8 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
           expHTML += `
             <div class="mb-3">
               <div class="flex justify-between items-baseline">
-                <h4 class="text-sm font-bold text-slate-900">${r}</h4>
-                <span class="text-xs text-slate-500 font-medium">${d}</span>
+                <h4 class="text-xs font-bold text-slate-900">${r}</h4>
+                <span class="text-[10px] text-slate-500 font-medium">${d}</span>
               </div>
               <p class="text-xs font-semibold ${color.text} mb-1">${c}</p>
               ${bHTML}
@@ -370,70 +369,376 @@ Coordinated quarterly trade shows resulting in 500+ corporate leads.</textarea>
       const skillsArr = skillsRaw.split(',').filter(s => s.trim() !== '');
       const previewBox = document.getElementById('resume-preview');
 
-      // LAYOUT 0: Emerald/Sidebar Style
-      if (layoutIdx === 0) {
-        const skillsPill = skillsArr.map(s => `<span class="block border border-white/40 bg-white/10 text-white rounded-lg px-2.5 py-1 text-xs text-center mb-1.5">${s.trim()}</span>`).join('');
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 0: Templates 1-10 (Split Sidebar Modern)
+      // -------------------------------------------------------------
+      if (layoutGroup === 0) {
         previewBox.innerHTML = `
-          <div class="grid grid-cols-12 h-full">
-            <div class="col-span-4 ${color.primary} text-white p-5 space-y-5 flex flex-col justify-between h-full">
-              <div class="space-y-5">
-                <div class="text-center pt-2">
-                  <img src="${photoURL}" class="w-36 h-36 rounded-full mx-auto mb-3 border-4 border-white/70 shadow-lg object-cover">
-                  <h2 class="font-extrabold text-lg uppercase tracking-wider">${name}</h2>
-                  <p class="text-xs opacity-90 mt-1 font-light">${title}</p>
+          <div class="h-full grid grid-cols-12">
+            <div class="col-span-4 ${color.bg} text-white p-6 flex flex-col justify-between">
+              <div class="space-y-4">
+                <img src="${photoURL}" class="w-28 h-28 rounded-full border-2 border-white/50 object-cover mx-auto">
+                <div class="text-center">
+                  <h1 class="text-lg font-black">${name}</h1>
+                  <p class="text-[11px] opacity-80 uppercase tracking-wider">${title}</p>
                 </div>
-                <div>
-                  <h3 class="text-xs font-bold uppercase border-b border-white/30 pb-1.5 mb-2.5 text-white tracking-wider">Contact Info</h3>
-                  <div class="text-xs space-y-2 opacity-90">
-                    <p><i class="fa-solid fa-location-dot mr-1.5"></i> ${address}</p>
-                    <p><i class="fa-solid fa-phone mr-1.5"></i> ${phone}</p>
-                    <p><i class="fa-solid fa-envelope mr-1.5"></i> ${email}</p>
-                  </div>
+                <div class="text-[10px] space-y-1.5 opacity-90 pt-4 border-t border-white/20">
+                  <p><i class="fa-solid fa-envelope mr-1"></i> ${email}</p>
+                  <p><i class="fa-solid fa-phone mr-1"></i> ${phone}</p>
+                  <p><i class="fa-solid fa-location-dot mr-1"></i> ${address}</p>
                 </div>
-                <div>
-                  <h3 class="text-xs font-bold uppercase border-b border-white/30 pb-1.5 mb-2.5 text-white tracking-wider">Core Skills</h3>
-                  ${skillsPill}
+                <div class="pt-4 border-t border-white/20">
+                  <h3 class="text-xs font-bold uppercase tracking-wider mb-2">Skills</h3>
+                  <div class="flex flex-wrap gap-1">${skillsArr.map(s => `<span class="bg-white/10 px-1.5 py-0.5 rounded text-[10px]">${s.trim()}</span>`).join('')}</div>
                 </div>
               </div>
             </div>
-            <div class="col-span-8 p-7 space-y-5 bg-white h-full">
+            <div class="col-span-8 p-6 space-y-4 bg-white">
               <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-2 tracking-wider">Executive Summary</h3>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b ${color.border} pb-1 mb-2">Profile</h3>
                 <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
               </div>
               <div>
-                <h3 class="text-xs font-bold uppercase ${color.text} border-b-2 ${color.border} pb-1 mb-3 tracking-wider">Professional Work Experience</h3>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b ${color.border} pb-1 mb-3">Work History</h3>
                 ${expHTML}
               </div>
             </div>
           </div>`;
-      } 
-      // DEFAULT LAYOUT
-      else {
-        const skillsBadges = skillsArr.map(s => `<span class="${color.accent} text-white font-medium px-2.5 py-1 rounded text-xs inline-block mb-1 shadow-sm">${s.trim()}</span>`).join(' ');
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 1: Templates 11-20 (Top Modern Banner)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 1) {
         previewBox.innerHTML = `
-          <div class="p-8 space-y-5 h-full bg-slate-50/50 flex flex-col justify-between">
-            <div class="space-y-5">
-              <div class="flex justify-between items-center ${color.primary} text-white p-6 rounded-xl shadow-md">
-                <div class="space-y-1 pr-4">
-                  <h1 class="text-2xl font-black tracking-wide">${name}</h1>
-                  <p class="text-xs font-semibold tracking-wider uppercase opacity-90">${title}</p>
-                  <p class="text-[11px] opacity-80 pt-2"><i class="fa-solid fa-envelope mr-1"></i> ${email} • <i class="fa-solid fa-phone mr-1"></i> ${phone} • <i class="fa-solid fa-location-dot mr-1"></i> ${address}</p>
+          <div class="p-8 space-y-5 h-full bg-slate-50 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="${color.bg} text-white p-6 rounded-xl shadow-md flex justify-between items-center">
+                <div>
+                  <h1 class="text-2xl font-black">${name}</h1>
+                  <p class="text-xs uppercase tracking-widest opacity-90">${title}</p>
+                  <p class="text-[11px] opacity-75 mt-2">${email} • ${phone} • ${address}</p>
                 </div>
-                <img src="${photoURL}" class="w-32 h-32 rounded-xl object-cover border-4 border-white/70 shadow-lg flex-shrink-0">
+                <img src="${photoURL}" class="w-24 h-24 rounded-lg object-cover border-2 border-white/80">
               </div>
-              <div>
-                <h3 class="text-xs font-bold ${color.text} uppercase border-b-2 ${color.border} pb-1 mb-2 tracking-wider">About Me</h3>
-                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+              <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xs font-bold uppercase ${color.text} mb-1">Executive Summary</h3>
+                <p class="text-xs text-slate-700">${summary}</p>
               </div>
-              <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-7 space-y-3">
-                  <h3 class="text-xs font-bold ${color.text} uppercase border-b-2 ${color.border} pb-1 tracking-wider">Experience</h3>
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-8 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                  <h3 class="text-xs font-bold uppercase ${color.text} mb-2">Experience</h3>
                   ${expHTML}
                 </div>
-                <div class="col-span-5 space-y-3">
-                  <h3 class="text-xs font-bold ${color.text} uppercase border-b-2 ${color.border} pb-1 tracking-wider">Skills & Capabilities</h3>
-                  <div class="flex flex-wrap gap-1.5 pt-1">${skillsBadges}</div>
+                <div class="col-span-4 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                  <h3 class="text-xs font-bold uppercase ${color.text} mb-2">Key Skills</h3>
+                  <div class="space-y-1">${skillsArr.map(s => `<p class="text-xs text-slate-700 font-medium">• ${s.trim()}</p>`).join('')}</div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 2: Templates 21-30 (Two-Column Executive Grid)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 2) {
+        previewBox.innerHTML = `
+          <div class="p-8 h-full bg-white flex flex-col justify-between">
+            <div class="space-y-5">
+              <div class="border-b-2 ${color.border} pb-4 flex items-center space-x-4">
+                <img src="${photoURL}" class="w-20 h-20 rounded-full object-cover border ${color.border}">
+                <div>
+                  <h1 class="text-2xl font-bold text-slate-900">${name}</h1>
+                  <p class="text-xs font-bold ${color.text} uppercase tracking-wider">${title}</p>
+                  <p class="text-xs text-slate-500">${email} | ${phone} | ${address}</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-6">
+                <div class="space-y-4">
+                  <div>
+                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Career Background</h3>
+                    ${expHTML}
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <div>
+                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Professional Summary</h3>
+                    <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+                  </div>
+                  <div>
+                    <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Core Skills</h3>
+                    <div class="flex flex-wrap gap-1.5">${skillsArr.map(s => `<span class="${color.light} ${color.text} border${color.border} font-semibold px-2 py-0.5 rounded text-[10px]">${s.trim()}</span>`).join('')}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 3: Templates 31-40 (Minimalist Line Art Focus)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 3) {
+        previewBox.innerHTML = `
+          <div class="p-10 h-full bg-white flex flex-col justify-between">
+            <div class="space-y-6">
+              <div class="text-center space-y-1 border-b pb-4">
+                <h1 class="text-3xl font-light tracking-wide text-slate-900">${name}</h1>
+                <p class="text-xs font-bold tracking-widest uppercase ${color.text}">${title}</p>
+                <p class="text-xs text-slate-500">${email}  •  ${phone}  •  ${address}</p>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">About</h3>
+                <p class="text-xs text-slate-700 leading-relaxed border-l-2 ${color.border} pl-3">${summary}</p>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Employment History</h3>
+                ${expHTML}
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Competencies</h3>
+                <p class="text-xs text-slate-700">${skillsArr.join('  /  ')}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 4: Templates 41-50 (Technical Timeline)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 4) {
+        previewBox.innerHTML = `
+          <div class="p-8 h-full bg-slate-50 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="bg-white p-5 rounded-lg border-l-8 ${color.border} shadow-sm flex justify-between items-center">
+                <div>
+                  <h1 class="text-2xl font-black text-slate-900">${name}</h1>
+                  <p class="text-xs font-bold ${color.text}">${title}</p>
+                  <p class="text-[11px] text-slate-500 mt-1">${email} | ${phone} | ${address}</p>
+                </div>
+                <img src="${photoURL}" class="w-20 h-20 rounded object-cover">
+              </div>
+              <div class="bg-white p-4 rounded-lg border border-slate-200">
+                <h3 class="text-xs font-bold uppercase text-slate-400 mb-1">Summary</h3>
+                <p class="text-xs text-slate-700">${summary}</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg border border-slate-200 space-y-3">
+                <h3 class="text-xs font-bold uppercase text-slate-400">Timeline Experience</h3>
+                <div class="border-l-2 ${color.border} pl-3 space-y-3">
+                  ${expHTML}
+                </div>
+              </div>
+              <div class="bg-white p-3 rounded-lg border border-slate-200">
+                <h3 class="text-xs font-bold uppercase text-slate-400 mb-1">Tech Stack</h3>
+                <p class="text-xs font-semibold ${color.text}">${skillsArr.join(' • ')}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 5: Templates 51-60 (Official Pinoy Bio-Data)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 5) {
+        const civil = document.getElementById('civilStatus').value || 'Single';
+        const dob = document.getElementById('dob').value || 'Aug 14, 1993';
+        const religion = document.getElementById('religion').value || 'Roman Catholic';
+        const hw = document.getElementById('heightWeight').value || "5'5'' / 58 kg";
+
+        previewBox.innerHTML = `
+          <div class="p-8 h-full bg-white flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="border-b-4 ${color.border} pb-3 flex justify-between items-center">
+                <div>
+                  <h1 class="text-3xl font-black uppercase tracking-widest text-slate-900">BIO - DATA</h1>
+                  <h2 class="text-xl font-extrabold ${color.text} mt-1">${name}</h2>
+                  <p class="text-xs font-bold uppercase tracking-wider text-slate-700">${title}</p>
+                </div>
+                <div class="w-32 h-36 border-2 border-slate-900 p-1 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                  <img src="${photoURL}" class="w-full h-full object-cover">
+                </div>
+              </div>
+
+              <div class="border-2 border-slate-900 text-xs">
+                <div class="${color.bg} text-white font-bold px-3 py-1 uppercase tracking-wider">I. Personal Information</div>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-2 p-3 bg-slate-50/50">
+                  <p><strong>Present Address:</strong> ${address}</p>
+                  <p><strong>Contact No:</strong> ${phone}</p>
+                  <p><strong>Email Address:</strong> ${email}</p>
+                  <p><strong>Date of Birth:</strong> ${dob}</p>
+                  <p><strong>Civil Status:</strong> ${civil}</p>
+                  <p><strong>Religion:</strong> ${religion}</p>
+                  <p><strong>Height / Weight:</strong> ${hw}</p>
+                  <p><strong>Languages:</strong> English, Tagalog</p>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-900 pb-1 mb-2 text-slate-900 tracking-wider">II. Summary of Qualifications</h3>
+                <p class="text-xs text-slate-800 leading-relaxed">${summary}</p>
+              </div>
+
+              <div>
+                <h3 class="text-xs font-bold uppercase border-b-2 border-slate-900 pb-1 mb-2 text-slate-900 tracking-wider">III. Work History</h3>
+                ${expHTML}
+              </div>
+            </div>
+
+            <div class="pt-6 flex justify-between items-end">
+              <p class="text-[10px] italic text-slate-500">I hereby certify that the information above is true and correct.</p>
+              <div class="text-center w-52 border-t-2 border-slate-900 pt-1 text-xs font-bold text-slate-900">
+                Applicant Signature
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 6: Templates 61-70 (Modern BPO Operations)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 6) {
+        previewBox.innerHTML = `
+          <div class="p-8 h-full bg-white flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center border-b-2 border-slate-200 pb-4">
+                <div class="space-y-1">
+                  <span class="${color.accent} text-white font-black text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">BPO Operations Specialist</span>
+                  <h1 class="text-2xl font-black text-slate-900">${name}</h1>
+                  <p class="text-xs font-bold ${color.text}">${title}</p>
+                  <p class="text-xs text-slate-500"><i class="fa-solid fa-envelope mr-1"></i> ${email} | <i class="fa-solid fa-phone mr-1"></i> ${phone}</p>
+                </div>
+                <img src="${photoURL}" class="w-28 h-28 rounded-lg object-cover border-2 border-slate-300">
+              </div>
+
+              <div class="grid grid-cols-3 gap-3 ${color.bg} text-white p-3 rounded-lg text-center">
+                <div>
+                  <p class="text-[10px] text-slate-300 uppercase font-semibold">CSAT Benchmark</p>
+                  <p class="text-base font-black text-emerald-400">96.5%</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-slate-300 uppercase font-semibold">KPI Status</p>
+                  <p class="text-base font-black text-blue-300">Exceeded</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-slate-300 uppercase font-semibold">Campaigns</p>
+                  <p class="text-base font-black text-amber-300">US Telco / FinTech</p>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-1.5">Executive Overview</h3>
+                <p class="text-xs text-slate-700">${summary}</p>
+              </div>
+
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-8">
+                  <h3 class="text-xs font-bold uppercase ${color.text} border-b pb-1 mb-2">Campaign Experience</h3>
+                  ${expHTML}
+                </div>
+                <div class="col-span-4 bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-2">
+                  <h3 class="text-xs font-bold uppercase text-slate-900 border-b pb-1">BPO Software Tools</h3>
+                  <div class="space-y-1">${skillsArr.map(s => `<span class="bg-white text-slate-800 border font-medium px-2 py-0.5 rounded text-[10px] block">${s.trim()}</span>`).join('')}</div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 7: Templates 71-80 (Clean Corporate Top Banner)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 7) {
+        previewBox.innerHTML = `
+          <div class="p-9 h-full bg-white flex flex-col justify-between">
+            <div class="space-y-5">
+              <div class="border-b border-slate-300 pb-4">
+                <h1 class="text-3xl font-extrabold ${color.text}">${name}</h1>
+                <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mt-0.5">${title}</p>
+                <p class="text-xs text-slate-600 mt-2">${email} • ${phone} • ${address}</p>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase text-slate-400 mb-1">Executive Summary</h3>
+                <p class="text-xs text-slate-700 leading-relaxed">${summary}</p>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase text-slate-400 mb-3">Professional Experience</h3>
+                ${expHTML}
+              </div>
+              <div>
+                <h3 class="text-xs font-bold uppercase text-slate-400 mb-2">Core Skills</h3>
+                <p class="text-xs font-semibold ${color.text}">${skillsArr.join(' | ')}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 8: Templates 81-90 (Metro Compact 3-Column)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 8) {
+        previewBox.innerHTML = `
+          <div class="p-6 h-full bg-slate-100 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                  <img src="${photoURL}" class="w-20 h-20 rounded-lg object-cover">
+                  <div>
+                    <h1 class="text-xl font-extrabold text-slate-900">${name}</h1>
+                    <p class="text-xs font-bold ${color.text}">${title}</p>
+                    <p class="text-[11px] text-slate-500">${address} | ${phone} | ${email}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-12 gap-3">
+                <div class="col-span-8 bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                  <h3 class="text-xs font-bold uppercase text-slate-900 border-b pb-1 mb-2">Experience</h3>
+                  ${expHTML}
+                </div>
+                <div class="col-span-4 space-y-3">
+                  <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-xs font-bold uppercase text-slate-900 border-b pb-1 mb-2">Profile</h3>
+                    <p class="text-[11px] text-slate-600">${summary}</p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-xs font-bold uppercase text-slate-900 border-b pb-1 mb-2">Capabilities</h3>
+                    <div class="flex flex-wrap gap-1">${skillsArr.map(s => `<span class="bg-slate-100 text-slate-800 text-[10px] font-medium px-1.5 py-0.5 rounded border">${s.trim()}</span>`).join('')}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // -------------------------------------------------------------
+      // LAYOUT GROUP 9: Templates 91-100 (Bordered Executive Frame)
+      // -------------------------------------------------------------
+      else if (layoutGroup === 9) {
+        previewBox.innerHTML = `
+          <div class="p-6 h-full bg-white">
+            <div class="border-double border-4 ${color.border} h-full p-6 flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="text-center space-y-1 border-b-2 ${color.border} pb-3">
+                  <img src="${photoURL}" class="w-24 h-24 rounded-full mx-auto border-2 ${color.border} object-cover">
+                  <h1 class="text-2xl font-black uppercase tracking-widest text-slate-900">${name}</h1>
+                  <p class="text-xs font-bold ${color.text} uppercase tracking-wider">${title}</p>
+                  <p class="text-xs text-slate-600">${address} • ${phone} • ${email}</p>
+                </div>
+
+                <div>
+                  <h3 class="text-xs font-bold uppercase border-b pb-1 mb-2 text-center text-slate-900">Summary Statement</h3>
+                  <p class="text-xs text-slate-700 text-center italic">${summary}</p>
+                </div>
+
+                <div>
+                  <h3 class="text-xs font-bold uppercase border-b pb-1 mb-2 text-slate-900">Career History</h3>
+                  ${expHTML}
+                </div>
+
+                <div>
+                  <h3 class="text-xs font-bold uppercase border-b pb-1 mb-2 text-slate-900">Core Skills</h3>
+                  <p class="text-xs text-slate-800 text-center">${skillsArr.join('   |   ')}</p>
                 </div>
               </div>
             </div>
