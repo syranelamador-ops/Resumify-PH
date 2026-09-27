@@ -932,7 +932,12 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save().then(() => {
+      html2pdf().set(opt).from(element).toPdf().get('pdf').then(pdf => {
+  if (pdf.internal.getNumberOfPages() > 1) {
+    pdf.deletePage(2);
+  }
+  return pdf.save();
+}).then(() => {
         // Re-apply screen scaled viewing class
         element.classList.add('a4-screen-scaled');
       }).catch(err => {
