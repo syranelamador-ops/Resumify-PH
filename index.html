@@ -21,7 +21,7 @@
     .a4-paper {
       width: 210mm;
       height: 296.5mm;
-      max-height: 296.5mm;
+      min-height: 296.5mm;
       background: white;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
@@ -32,23 +32,28 @@
 
     .canvas-wrapper {
       width: 100%;
-      max-width: 100%;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      overflow: hidden;
+      padding-bottom: 3rem;
+    }
+
+    /* Zoomed-in Scaling for middle canvas */
+    .a4-paper-scaled {
+      transform: scale(0.85);
+      margin-bottom: -40mm;
     }
 
     @media (max-width: 1536px) {
       .a4-paper-scaled {
-        transform: scale(0.70);
-        margin-bottom: -85mm;
+        transform: scale(0.80);
+        margin-bottom: -55mm;
       }
     }
     @media (max-width: 1280px) {
       .a4-paper-scaled {
-        transform: scale(0.55);
-        margin-bottom: -130mm;
+        transform: scale(0.68);
+        margin-bottom: -90mm;
       }
     }
   </style>
@@ -189,11 +194,11 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
 
     </div>
 
-    <!-- MIDDLE COLUMN: Scaled Screen-Fitted Canvas (5 cols) -->
-    <div class="lg:col-span-5 flex flex-col items-center">
-      <div class="sticky top-20 w-full flex flex-col items-center">
+    <!-- MIDDLE COLUMN: Scaled Zoomed Canvas with Scrollbar (5 cols) -->
+    <div class="lg:col-span-5 flex flex-col items-center max-h-[calc(100vh-100px)] overflow-y-auto custom-scroll pr-2">
+      <div class="w-full flex flex-col items-center">
         
-        <div class="flex justify-between items-center mb-2 w-full px-2">
+        <div class="flex justify-between items-center mb-2 w-full px-2 sticky top-0 bg-slate-100 py-2 z-10">
           <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center">
             <i class="fa-solid fa-file-invoice text-blue-600 mr-1.5"></i> Live Canvas Preview
           </span>
@@ -202,7 +207,7 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
           </span>
         </div>
 
-        <!-- Wrapper for center alignment and screen scaling -->
+        <!-- Wrapper for center alignment and zoomed scale -->
         <div class="canvas-wrapper">
           <div id="resume-preview" class="a4-paper a4-paper-scaled rounded border border-slate-300 text-slate-800">
             <!-- Rendered dynamically -->
@@ -337,8 +342,8 @@ Handled inbound billing and tech inquiries for North American telecom clients.</
       const summary = document.getElementById('summary').value;
       const skillsRaw = document.getElementById('skillsInput').value;
 
-      const layoutGroup = Math.floor((selectedTplIndex - 1) / 10); // 0 to 9
-      const colorIdx = (selectedTplIndex - 1) % 10;               // 0 to 9
+      const layoutGroup = Math.floor((selectedTplIndex - 1) / 10);
+      const colorIdx = (selectedTplIndex - 1) % 10;
       const color = colorSchemes[colorIdx];
 
       let expHTML = '';
